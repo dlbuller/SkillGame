@@ -6,6 +6,17 @@ A modern recreation of the 1955 **Bally Skill-Roll** coin-roll arcade game — r
 
 The player rolls a physical coin up the playfield; it rides the rails, skims the scoring holes, and drops into one to score. Advance through the levels without losing the coin to a gobble hole (or tilting) to win. A mini-PC drives the whole machine over four FT232H boards and shows the backglass, diagnostics and operator console on a touch monitor.
 
+![Game Status](docs/screenshots/game.png)
+
+## Screens
+
+| | |
+|---|---|
+| **Schematic** — interactive, clickable system diagram | **Diagnostics** — live switch + lamp maps, self-test |
+| ![Schematic](docs/screenshots/schem.png) | ![Diagnostics](docs/screenshots/diag.png) |
+| **Audits** — plays, wins, hits, high scores (the auditor gremlin) | **Service** — one-page operator console |
+| ![Audits](docs/screenshots/audit.png) | ![Service](docs/screenshots/service.png) |
+
 ## Layout
 
 | Folder | What it is |
@@ -36,6 +47,12 @@ The app runs on Windows (WPF, `net8.0-windows`, x64). It drives four **Adafruit 
 - **Power:** 3.3 V adapter → J1 (switch commons — the FT232H inputs are **not** 5 V-tolerant), 5 V adapter → J3 / LED± (lamps, WS2812b strip, coils).
 - **Fuses:** F1/F2 = T2A slow-blow (5×20 mm, Keystone 3517 clips) on the two solenoids; F3 = T3.5A slow-blow **inline** in the 5 V supply lead.
 - The full parts list with vendor links + prices and a step-by-step build guide are in `docs/`.
+
+| Board (3D render) | System hookup |
+|---|---|
+| ![Board front](docs/schematics/board_front.png) | ![Hookup](docs/schematics/hookup.png) |
+
+![Full schematic](docs/schematics/full.png)
 
 ## Credits
 
