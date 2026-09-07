@@ -1,0 +1,210 @@
+<UserControl x:Class="SkillGameWpf.MechanicBot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- A cute gremlin mechanic. Flat shapes, no drop shadows, so roaming stays cheap. Grab-able for a toss (his body pixels are the hit target; empty space around him passes clicks through). -->
+    <Canvas Width="64" Height="96" RenderTransformOrigin="0.5,1">
+        <Canvas.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="Flip" ScaleX="1"/>
+                <ScaleTransform x:Name="Squeeze" ScaleX="1" ScaleY="1"/>
+                <TranslateTransform x:Name="Bob"/>
+            </TransformGroup>
+        </Canvas.RenderTransform>
+
+        <Ellipse x:Name="Shadow" Canvas.Left="12" Canvas.Top="88" Width="40" Height="7" Fill="#33000000"/>
+
+        <!-- tombstone (only when ALL boards are gone); drawn behind him so he slumps in front of it -->
+        <Canvas x:Name="Tombstone" Visibility="Collapsed">
+            <Ellipse Canvas.Left="-8" Canvas.Top="82" Width="80" Height="16" Fill="#26301C"/>
+            <Border Canvas.Left="0" Canvas.Top="-46" Width="64" Height="130" CornerRadius="32,32,4,4" Background="#9198A2" BorderBrush="#666C75" BorderThickness="2"/>
+            <Border Canvas.Left="6" Canvas.Top="-40" Width="52" Height="120" CornerRadius="26,26,3,3" Background="#828A94"/>
+            <TextBlock Canvas.Left="6" Canvas.Top="-36" Width="52" Text="R.I.P" FontSize="13" FontWeight="Bold" Foreground="#474C55" TextAlignment="Center"/>
+            <Rectangle Canvas.Left="24" Canvas.Top="-18" Width="16" Height="2" Fill="#474C55"/>
+            <TextBlock x:Name="TombText" Canvas.Left="8" Canvas.Top="-12" Width="48" Text="" FontSize="7.5" FontWeight="Bold" Foreground="#474C55"
+                       TextAlignment="Center" TextWrapping="Wrap" LineHeight="9" LineStackingStrategy="BlockLineHeight"/>
+        </Canvas>
+
+        <!-- parachute (shown while floating down) -->
+        <Canvas x:Name="Parachute" Visibility="Collapsed">
+            <Path Fill="#D14B3C" Data="M -4,-6 C 0,-42 64,-42 68,-6 C 54,-20 46,-20 43,-6 C 41,-18 23,-18 21,-6 C 18,-20 10,-20 -4,-6 Z"/>
+            <Path Stroke="#C4CCD6" StrokeThickness="1.3" Data="M0,-6 L 20,30 M 32,-8 L 32,30 M 64,-6 L 44,30"/>
+        </Canvas>
+
+        <!-- everything below is the gremlin himself; LayRot tips him flat onto the ground when knocked out -->
+        <Canvas x:Name="BodyGroup">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform x:Name="LayRot" CenterX="32" CenterY="46"/>
+                    <TranslateTransform x:Name="LayShift"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+
+        <!-- legs -->
+        <Rectangle Canvas.Left="22" Canvas.Top="66" Width="8" Height="20" RadiusX="4" RadiusY="4" Fill="#3E7A2A" RenderTransformOrigin="0.5,0.05">
+            <Rectangle.RenderTransform><RotateTransform x:Name="LegLRot"/></Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Canvas.Left="34" Canvas.Top="66" Width="8" Height="20" RadiusX="4" RadiusY="4" Fill="#3E7A2A" RenderTransformOrigin="0.5,0.05">
+            <Rectangle.RenderTransform><RotateTransform x:Name="LegRRot"/></Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- lunch box (for the lunch break), sits beside him on the ledge -->
+        <Canvas x:Name="LunchBox" Visibility="Collapsed">
+            <Rectangle Canvas.Left="-20" Canvas.Top="66" Width="22" Height="16" RadiusX="3" RadiusY="3" Fill="#C0433A" Stroke="#7A2A24" StrokeThickness="1.5"/>
+            <Rectangle Canvas.Left="-20" Canvas.Top="72" Width="22" Height="3" Fill="#7A2A24"/>
+            <Path Canvas.Left="-14" Canvas.Top="60" Stroke="#8A8F98" StrokeThickness="2" Data="M0,6 Q5,-2 10,6"/>
+            <Rectangle Canvas.Left="-11" Canvas.Top="73" Width="4" Height="3" Fill="#E8C24A"/>
+        </Canvas>
+
+        <!-- left arm (behind the body edge) -->
+        <Rectangle Canvas.Left="11" Canvas.Top="39" Width="6" Height="18" RadiusX="3" RadiusY="3" Fill="#4E9331" RenderTransformOrigin="0.5,0.08">
+            <Rectangle.RenderTransform><RotateTransform x:Name="LArmRot" Angle="14"/></Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- body + belly -->
+        <Border Canvas.Left="16" Canvas.Top="34" Width="32" Height="36" CornerRadius="14" Background="#6DBE45" BorderBrush="#4E9331" BorderThickness="2"/>
+        <Ellipse Canvas.Left="23" Canvas.Top="44" Width="18" Height="20" Fill="#A6D98A"/>
+
+        <!-- tool belt -->
+        <Rectangle Canvas.Left="14" Canvas.Top="58" Width="36" Height="7" Fill="#4A3420"/>
+        <Rectangle Canvas.Left="29" Canvas.Top="57" Width="7" Height="9" RadiusX="1" RadiusY="1" Fill="#C9A227"/>
+        <Rectangle Canvas.Left="17" Canvas.Top="64" Width="6" Height="10" RadiusX="1" RadiusY="1" Fill="#7A5230"/>
+        <Path Canvas.Left="24" Canvas.Top="65" Fill="#C4CCD6" Data="M 0,2 L 4,0 L 4,3 L 2,4 L 4,5 L 4,8 L 0,6 Z"/>
+        <Rectangle Canvas.Left="42" Canvas.Top="64" Width="4" Height="9" Fill="#B7BEC8"/>
+
+        <!-- ears (pointy) -->
+        <Polygon Points="14,20 2,8 16,14" Fill="#6DBE45" Stroke="#4E9331" StrokeThickness="1.5"/>
+        <Polygon Points="50,20 62,8 48,14" Fill="#6DBE45" Stroke="#4E9331" StrokeThickness="1.5"/>
+
+        <!-- head -->
+        <Border Canvas.Left="14" Canvas.Top="6" Width="36" Height="30" CornerRadius="14" Background="#6DBE45" BorderBrush="#4E9331" BorderThickness="2"/>
+        <!-- a little hair tuft -->
+        <Path Canvas.Left="28" Canvas.Top="0" Fill="#4E9331" Data="M 0,7 L 3,0 L 5,6 L 8,1 L 9,7 Z"/>
+
+        <!-- hard hat (worn while climbing high) -->
+        <Canvas x:Name="HardHat" Visibility="Collapsed">
+            <Path Fill="#F2B01E" Stroke="#B8860B" StrokeThickness="1.5" Data="M 13,13 Q 32,-7 51,13 Z"/>
+            <Rectangle Canvas.Left="9" Canvas.Top="11" Width="46" Height="4.5" RadiusX="2" RadiusY="2" Fill="#F2B01E" Stroke="#B8860B" StrokeThickness="1"/>
+            <Rectangle Canvas.Left="30" Canvas.Top="-3" Width="4" Height="10" Fill="#D99A10"/>
+        </Canvas>
+
+        <!-- eyes (blink via ScaleY; pupils glance via shared translate) -->
+        <Ellipse x:Name="EyeLWhite" Canvas.Left="19" Canvas.Top="13" Width="12" Height="14" Fill="#F1F5EC" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><ScaleTransform x:Name="EyeLScale" ScaleY="1"/></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse x:Name="EyeRWhite" Canvas.Left="33" Canvas.Top="13" Width="12" Height="14" Fill="#F1F5EC" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><ScaleTransform x:Name="EyeRScale" ScaleY="1"/></Ellipse.RenderTransform>
+        </Ellipse>
+        <Canvas x:Name="Pupils">
+            <Canvas.RenderTransform><TranslateTransform x:Name="EyesLook"/></Canvas.RenderTransform>
+            <Ellipse x:Name="PupilL" Canvas.Left="23" Canvas.Top="18" Width="5" Height="6" Fill="#1A2230"/>
+            <Ellipse x:Name="PupilR" Canvas.Left="37" Canvas.Top="18" Width="5" Height="6" Fill="#1A2230"/>
+        </Canvas>
+        <!-- angry brows (mad, after being tossed) -->
+        <Canvas x:Name="Brows" Visibility="Collapsed">
+            <Rectangle Canvas.Left="19" Canvas.Top="10" Width="12" Height="2.6" Fill="#2A1712" RenderTransformOrigin="0.5,0.5"><Rectangle.RenderTransform><RotateTransform Angle="18"/></Rectangle.RenderTransform></Rectangle>
+            <Rectangle Canvas.Left="33" Canvas.Top="10" Width="12" Height="2.6" Fill="#2A1712" RenderTransformOrigin="0.5,0.5"><Rectangle.RenderTransform><RotateTransform Angle="-18"/></Rectangle.RenderTransform></Rectangle>
+        </Canvas>
+
+        <!-- X-X eyes for the knocked-out (all-boards-gone) pose -->
+        <Canvas x:Name="XEyes" Visibility="Collapsed">
+            <Path Data="M 21,15 L 29,23 M 29,15 L 21,23" Stroke="#1A2230" StrokeThickness="2.4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+            <Path Data="M 35,15 L 43,23 M 43,15 L 35,23" Stroke="#1A2230" StrokeThickness="2.4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+        </Canvas>
+
+        <!-- mouth (swapped per mood) + teeth -->
+        <Path x:Name="Mouth" Stroke="#2A1712" StrokeThickness="2.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+              Fill="#40160E" Data="M 24,29 Q 32,37 40,29 Z"/>
+        <Rectangle x:Name="ToothL" Canvas.Left="28" Canvas.Top="29" Width="3.5" Height="4" Fill="#F1F5EC"/>
+        <Rectangle x:Name="ToothR" Canvas.Left="33" Canvas.Top="29" Width="3.5" Height="4" Fill="#F1F5EC"/>
+
+        <!-- tool arm — one tool shown at a time -->
+        <Canvas Canvas.Left="46" Canvas.Top="42" RenderTransformOrigin="0,0">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform x:Name="ArmRot" Angle="20"/>
+                    <TranslateTransform x:Name="ArmSlide"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle Canvas.Left="0" Canvas.Top="-3" Width="18" Height="6" RadiusX="3" RadiusY="3" Fill="#4E9331"/>
+            <!-- wrench -->
+            <Path x:Name="WrenchTool" Canvas.Left="14" Canvas.Top="-8" Fill="#C4CCD6" Data="M 0,3 L 6,0 L 6,4 L 3,6 L 6,8 L 6,12 L 0,9 Z"/>
+            <!-- saw -->
+            <Canvas x:Name="SawTool" Visibility="Collapsed">
+                <Rectangle Canvas.Left="12" Canvas.Top="-4" Width="9" Height="8" RadiusX="2" RadiusY="2" Fill="#8A5A2B" Stroke="#5A3A1E" StrokeThickness="1"/>
+                <Polygon Points="20,-3 44,-3 44,2 20,4" Fill="#C4CCD6" Stroke="#8A8F98" StrokeThickness="0.5"/>
+                <Path Canvas.Left="20" Canvas.Top="2" Stroke="#8A8F98" StrokeThickness="0.9" Data="M0,0 l2,2 l2,-2 l2,2 l2,-2 l2,2 l2,-2 l2,2 l2,-2 l2,2 l2,-2 l2,2"/>
+            </Canvas>
+            <!-- screwdriver -->
+            <Canvas x:Name="DriverTool" Visibility="Collapsed">
+                <Rectangle Canvas.Left="12" Canvas.Top="-3.5" Width="9" Height="7" RadiusX="2" RadiusY="2" Fill="#E2493C"/>
+                <Rectangle Canvas.Left="21" Canvas.Top="-1.5" Width="12" Height="3" Fill="#C4CCD6"/>
+            </Canvas>
+            <!-- hammer -->
+            <Canvas x:Name="HammerTool" Visibility="Collapsed">
+                <Rectangle Canvas.Left="14" Canvas.Top="-1.5" Width="16" Height="3.5" Fill="#8A5A2B"/>
+                <Rectangle Canvas.Left="28" Canvas.Top="-7" Width="6" Height="14" RadiusX="1.5" RadiusY="1.5" Fill="#B7BEC8"/>
+            </Canvas>
+            <!-- squeegee (for washing) -->
+            <Canvas x:Name="SqueegeeTool" Visibility="Collapsed">
+                <Rectangle Canvas.Left="14" Canvas.Top="-1.5" Width="13" Height="3" Fill="#3A3F48"/>
+                <Rectangle Canvas.Left="25" Canvas.Top="-8" Width="4" Height="16" RadiusX="1" RadiusY="1" Fill="#5A6270"/>
+                <Rectangle Canvas.Left="27" Canvas.Top="-8" Width="3" Height="16" Fill="#8AE6FF"/>
+            </Canvas>
+            <!-- towel / rag (for washing) -->
+            <Canvas x:Name="TowelTool" Visibility="Collapsed">
+                <Rectangle Canvas.Left="15" Canvas.Top="-7" Width="17" Height="14" RadiusX="2" RadiusY="2" Fill="#F1E9D2" Stroke="#C9BE97" StrokeThickness="1"/>
+                <Rectangle Canvas.Left="15" Canvas.Top="-2.5" Width="17" Height="2" Fill="#C9BE97"/>
+                <Rectangle Canvas.Left="15" Canvas.Top="2.5" Width="17" Height="2" Fill="#C9BE97"/>
+            </Canvas>
+            <!-- sandwich (for the lunch break) -->
+            <Canvas x:Name="Sandwich" Visibility="Collapsed">
+                <Polygon Points="13,-8 27,-8 20,6" Fill="#F0D89A" Stroke="#C9A24E" StrokeThickness="1"/>
+                <Polygon Points="15,-4 25,-4 20,3" Fill="#7DB35A"/>
+                <Polygon Points="16,-6 24,-6 20,-1" Fill="#C6462F"/>
+            </Canvas>
+            <!-- can of pop (for washing the sandwich down) -->
+            <Canvas x:Name="PopCan" Visibility="Collapsed">
+                <Rectangle Canvas.Left="15" Canvas.Top="-9" Width="11" Height="18" RadiusX="2" RadiusY="2" Fill="#D14B3C" Stroke="#8A2A22" StrokeThickness="1"/>
+                <Rectangle Canvas.Left="15" Canvas.Top="-4" Width="11" Height="6" Fill="#EDE6D0"/>
+                <Rectangle Canvas.Left="16.5" Canvas.Top="-11" Width="8" Height="3" RadiusX="1" RadiusY="1" Fill="#B7BEC8"/>
+            </Canvas>
+        </Canvas>
+
+        <!-- work sparks -->
+        <Canvas x:Name="Sparks" Opacity="0">
+            <Ellipse Canvas.Left="60" Canvas.Top="36" Width="4" Height="4" Fill="#FFD860"/>
+            <Ellipse Canvas.Left="64" Canvas.Top="42" Width="3" Height="3" Fill="#FFF0A0"/>
+            <Ellipse Canvas.Left="61" Canvas.Top="48" Width="4" Height="4" Fill="#FFC030"/>
+        </Canvas>
+
+        <!-- knocked-out: stars and birds circling the head -->
+        <Canvas x:Name="Dizzy" Opacity="0" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform><RotateTransform x:Name="DizzyRot"/></Canvas.RenderTransform>
+            <TextBlock Canvas.Left="14" Canvas.Top="-6" Text="★" FontSize="12" Foreground="#FFD860"/>
+            <TextBlock Canvas.Left="30" Canvas.Top="-11" Text="✦" FontSize="10" Foreground="#8AE6FF"/>
+            <TextBlock Canvas.Left="44" Canvas.Top="-4" Text="★" FontSize="11" Foreground="#FFD860"/>
+            <Path Canvas.Left="6"  Canvas.Top="2"  Data="M0,4 Q3,0 6,4 Q9,0 12,4" Stroke="#20242C" StrokeThickness="1.6"/>
+            <Path Canvas.Left="46" Canvas.Top="-2" Data="M0,4 Q3,0 6,4 Q9,0 12,4" Stroke="#20242C" StrokeThickness="1.6"/>
+        </Canvas>
+        </Canvas>
+        <!-- /BodyGroup -->
+
+        <!-- alarm bubble: shown when he spots a real problem (e.g. a stuck switch) -->
+        <Canvas x:Name="Alarm" Visibility="Collapsed">
+            <Ellipse Canvas.Left="40" Canvas.Top="-16" Width="28" Height="28" Fill="#E2493C" Stroke="#FFFFFF" StrokeThickness="1.5">
+                <Ellipse.Effect><DropShadowEffect Color="#E2493C" BlurRadius="12" ShadowDepth="0" Opacity="0.9"/></Ellipse.Effect>
+            </Ellipse>
+            <TextBlock Canvas.Left="50" Canvas.Top="-16" Text="!" FontSize="21" FontWeight="Bold" Foreground="White"/>
+        </Canvas>
+
+        <!-- sad "boards missing" sign (shown when the hardware is down) -->
+        <Canvas x:Name="Sign" Visibility="Collapsed">
+            <Canvas.RenderTransform><RotateTransform x:Name="SignRot" CenterX="32" CenterY="74"/></Canvas.RenderTransform>
+            <Rectangle Canvas.Left="30" Canvas.Top="40" Width="4" Height="34" Fill="#8A5A2B"/>
+            <Border Canvas.Left="-6" Canvas.Top="34" Width="76" Height="28" CornerRadius="4" Background="#ECE3C8" BorderBrush="#8A5A2B" BorderThickness="2">
+                <TextBlock x:Name="SignText" Text="BOARDS MISSING" FontSize="8.5" FontWeight="Bold" Foreground="#5A3A1E"
+                           TextAlignment="Center" TextWrapping="Wrap" LineHeight="10" LineStackingStrategy="BlockLineHeight"/>
+            </Border>
+        </Canvas>
+    </Canvas>
+</UserControl>

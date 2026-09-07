@@ -1,0 +1,165 @@
+<UserControl x:Class="SkillGameWpf.ServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             FontFamily="{StaticResource UiFont}">
+    <Grid Margin="30,26,30,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="2,0,2,14">
+            <TextBlock Text="SERVICE" FontFamily="{StaticResource DisplayFont}" FontWeight="Bold" FontSize="34" Foreground="{DynamicResource GoldBrush}">
+                <TextBlock.Effect><DropShadowEffect Color="#E7A91D" BlurRadius="22" ShadowDepth="0" Opacity="0.45"/></TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="operator controls + live diagnostics, one page · no frills" Foreground="{StaticResource MutedBrush}" FontSize="13" Margin="2,-2,0,0"/>
+        </StackPanel>
+
+        <!-- Body: controls (left) · diagnostics (right) -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ===== CONTROLS ===== -->
+            <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,8,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="CONTROLS" Style="{StaticResource Caption}" Foreground="{StaticResource GreenBrush}" Margin="0,0,0,14"/>
+
+                    <Grid DockPanel.Dock="Bottom" Margin="0,16,0,0">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="SAVE" Style="{StaticResource GoldButton}" Height="46" Click="Save_Click"
+                                ToolTip="Write these settings to the machine (operator_settings.json)."/>
+                        <Button Grid.Column="2" Content="RESET TO DEFAULTS" Style="{StaticResource PillButton}" Height="46" Click="Reset_Click"
+                                ToolTip="Restore every setting to its factory default."/>
+                    </Grid>
+
+                    <StackPanel>
+                        <!-- Bench -->
+                        <Grid Margin="0,7" ToolTip="Ignore switch inputs (bench testing with nothing wired). Turn OFF once the harness is connected.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="BENCH MODE" Style="{StaticResource SetLabel}"/>
+                                <TextBlock Text="ignore switch inputs" Foreground="{StaticResource MutedBrush}" FontSize="11"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="BenchToggle" Style="{StaticResource ToggleSwitch}" Click="Bench_Click"/>
+                        </Grid>
+
+                        <!-- Tilt on/off -->
+                        <Grid Margin="0,7" ToolTip="Honor the tilt switch. Off = ignore a finicky tilt.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="TILT SWITCH" Style="{StaticResource SetLabel}"/>
+                            <CheckBox Grid.Column="1" x:Name="TiltToggle" Style="{StaticResource ToggleSwitch}" Click="Tilt_Click"/>
+                        </Grid>
+
+                        <!-- Tilts allowed -->
+                        <Grid Margin="0,7" ToolTip="Free tilt nudges before game over. 0 = the first tilt ends it; higher gives that many warnings first.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="TILTS ALLOWED" Style="{StaticResource SetLabel}"/>
+                            <Slider Grid.Column="1" x:Name="TiltsSlider" Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"
+                                    Style="{StaticResource NeonSlider}" Margin="12,0" ValueChanged="Tilts_Changed"/>
+                            <TextBlock Grid.Column="2" x:Name="TiltsVal" Style="{StaticResource SetValue}" Text="0"/>
+                        </Grid>
+
+                        <!-- Count-up speed -->
+                        <Grid Margin="0,7" ToolTip="How fast the score sweeps up to a hit's value. Lower = snappier.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="COUNT-UP" Style="{StaticResource SetLabel}"/>
+                            <Slider Grid.Column="1" x:Name="CountUp" Minimum="10" Maximum="300" Style="{StaticResource NeonSlider}" Margin="12,0" ValueChanged="CountUp_Changed"/>
+                            <TextBlock Grid.Column="2" x:Name="CountUpVal" Style="{StaticResource SetValue}" Text="60 ms"/>
+                        </Grid>
+
+                        <!-- Sound FX -->
+                        <Grid Margin="0,7" ToolTip="Scoring / UI sound effects.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="SOUND FX" Style="{StaticResource SetLabel}"/>
+                            <CheckBox Grid.Column="1" x:Name="SoundToggle" Style="{StaticResource ToggleSwitch}" Click="Sound_Click"/>
+                        </Grid>
+
+                        <!-- Brightness -->
+                        <Grid Margin="0,7" ToolTip="Screen dimming for the cabinet.">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="BRIGHTNESS" Style="{StaticResource SetLabel}"/>
+                            <Slider Grid.Column="1" x:Name="Brightness" Minimum="30" Maximum="100" Style="{StaticResource NeonSlider}" Margin="12,0" ValueChanged="Brightness_Changed"/>
+                            <TextBlock Grid.Column="2" x:Name="BrightnessVal" Style="{StaticResource SetValue}" Text="100%"/>
+                        </Grid>
+
+                        <Border Height="1" Background="#1EFFFFFF" Margin="0,14"/>
+                        <Button Content="▶  REPLAY TUTORIAL" Style="{StaticResource PillButton}" Height="54" FontSize="17" HorizontalAlignment="Stretch" Padding="18,0" Click="Tutorial_Click"
+                                ToolTip="Run the first-run guided tour again."/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- ===== DIAGNOSTICS ===== -->
+            <Border Grid.Column="1" Style="{StaticResource Card}" Margin="8,0,0,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="DIAGNOSTICS" Style="{StaticResource Caption}" Foreground="{StaticResource CyanBrush}" Margin="0,0,0,12"/>
+
+                    <!-- board presence + poll rate -->
+                    <Grid DockPanel.Dock="Top" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <StackPanel x:Name="BoardRow" Orientation="Horizontal"/>
+                        <TextBlock Grid.Column="1" x:Name="PollText" Text="≈— Hz" VerticalAlignment="Center"
+                                   FontFamily="{StaticResource DisplayFont}" FontSize="14" Foreground="{StaticResource CyanBrush}"/>
+                    </Grid>
+                    <TextBlock DockPanel.Dock="Top" x:Name="DevText" Text="FT232H — waiting…" Foreground="{StaticResource MutedBrush}" FontSize="11.5" Margin="0,0,0,8"/>
+
+                    <!-- stuck banner -->
+                    <Border DockPanel.Dock="Top" x:Name="StuckBanner" CornerRadius="8" Padding="10,7" Margin="0,0,0,10"
+                            Background="#142FE08C" BorderBrush="{StaticResource GreenBrush}" BorderThickness="1">
+                        <TextBlock x:Name="StuckText" Text="No stuck switches" Foreground="{StaticResource GreenBrush}" FontWeight="Bold" FontSize="13"/>
+                    </Border>
+
+                    <!-- actions -->
+                    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="8"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="8"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="8"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="RUN SELF-TEST" Style="{StaticResource GoldButton}" Height="44" Click="SelfTest_Click"/>
+                        <Button Grid.Column="2" x:Name="TestLampsBtn" Content="TEST LAMPS" Style="{StaticResource PillButton}" Height="44" Width="128" Click="TestLamps_Click"
+                                ToolTip="Walk every lamp/solenoid in turn so you can spot one that doesn't light on the cabinet. Click again to stop."/>
+                        <Button Grid.Column="4" x:Name="TestLedsBtn" Content="TEST LEDS" Style="{StaticResource PillButton}" Height="44" Width="116" Click="TestLeds_Click"
+                                ToolTip="Run a rainbow sweep on the WS2812b strip so you can confirm the SPI/LED lighting works. Click again to stop."/>
+                        <Button Grid.Column="6" Content="ALL OFF" Style="{StaticResource PillButton}" Height="44" Width="96" Click="AllOff_Click"/>
+                    </Grid>
+
+                    <!-- self-test report -->
+                    <Border DockPanel.Dock="Bottom" x:Name="ReportBox" Visibility="Collapsed" CornerRadius="8" Padding="10" Margin="0,10,0,0"
+                            Background="#0A0C12" BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                        <DockPanel>
+                            <Button DockPanel.Dock="Bottom" Content="SAVE REPORT" Style="{StaticResource PillButton}" Height="34"
+                                    HorizontalAlignment="Left" Margin="0,8,0,0" Click="SaveReport_Click"/>
+                            <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="ReportRows"/></ScrollViewer>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- live monitors fill the rest: switch inputs (left) + lamp/solenoid outputs (right); tiles stretch to fill, no scrolling -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" CornerRadius="8" Background="#0A0C12" BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1" Padding="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="SWITCH MONITOR · inputs" Style="{StaticResource Caption}" FontSize="11" Foreground="{StaticResource MutedBrush}" Margin="0,0,0,6"/>
+                                <UniformGrid x:Name="SwitchGrid" Columns="4"/>
+                            </DockPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" CornerRadius="8" Background="#0A0C12" BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1" Padding="8">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text="LAMP MONITOR · outputs" Style="{StaticResource Caption}" FontSize="11" Foreground="{StaticResource MutedBrush}" Margin="0,0,0,2"/>
+                                <TextBlock DockPanel.Dock="Top" Text="lit = driven ON · dark on the cabinet = check bulb/wiring · click to toggle"
+                                           Foreground="{StaticResource MutedBrush}" FontSize="10" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                                <UniformGrid x:Name="LampGrid" Columns="3"/>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <RootNamespace>SkillGameWpf</RootNamespace>
+    <AssemblyName>SkillGameWpf</AssemblyName>
+    <ApplicationIcon>skillgame.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <!-- Reuse the exact UI-independent game core from the existing project (single source of truth). -->
+  <ItemGroup>
+    <Compile Include="..\SkillGame Source\SkillGame\GameEngine.cs"      Link="Core\GameEngine.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\GameInterfaces.cs"  Link="Core\GameInterfaces.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\SwitchMap.cs"       Link="Core\SwitchMap.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\DemoGame.cs"        Link="Core\DemoGame.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\QuietHours.cs"      Link="Core\QuietHours.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\OperatorSettings.cs" Link="Core\OperatorSettings.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\AuditStore.cs"      Link="Core\AuditStore.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\Log.cs"             Link="Core\Log.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\StuckMonitor.cs"    Link="Core\StuckMonitor.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\CoinGate.cs"        Link="Core\CoinGate.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\SwitchRouter.cs"    Link="Core\SwitchRouter.cs" />
+
+    <!-- Hardware layer — WinForms-free, driven by the WPF HardwareCoordinator (single source of truth). -->
+    <Compile Include="..\SkillGame Source\SkillGame\FtHardware.cs"      Link="Core\FtHardware.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\LampController.cs"  Link="Core\LampController.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\LedEffects.cs"      Link="Core\LedEffects.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\LightFunctions.cs"  Link="Core\LightFunctions.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\AudioFunctions.cs"  Link="Core\AudioFunctions.cs" />
+    <Compile Include="..\SkillGame Source\SkillGame\PinActivity.cs"     Link="Core\PinActivity.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Iot.Device.Bindings" Version="4.1.0" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="NAudio.Core" Version="2.2.1" />
+    <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+    <PackageReference Include="System.Device.Gpio" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FTD2XX_NET">
+      <HintPath>..\SkillGame Source\dlls\FTD2XX_NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

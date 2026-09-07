@@ -1,0 +1,19 @@
+# ---- .NET build output ----
+bin/
+obj/
+.vs/
+*.user
+*.suo
+packages/
+
+# ---- KiCad ----
+*-backups/
+*-bak/
+_autosave-*
+fp-info-cache
+*.kicad_prl
+*.lck
+
+# ---- OS ----
+Thumbs.db
+.DS_Store

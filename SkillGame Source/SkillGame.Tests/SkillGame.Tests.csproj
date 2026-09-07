@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <AssemblyName>SkillGame.Tests</AssemblyName>
+    <RootNamespace>SkillGame.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+  </ItemGroup>
+
+  <!-- Link the UI-independent game core (BCL-only, no hardware/audio deps) so the rules are tested directly. -->
+  <ItemGroup>
+    <Compile Include="..\SkillGame\GameEngine.cs"       Link="Core\GameEngine.cs" />
+    <Compile Include="..\SkillGame\GameInterfaces.cs"   Link="Core\GameInterfaces.cs" />
+    <Compile Include="..\SkillGame\SwitchMap.cs"        Link="Core\SwitchMap.cs" />
+    <Compile Include="..\SkillGame\QuietHours.cs"       Link="Core\QuietHours.cs" />
+    <Compile Include="..\SkillGame\OperatorSettings.cs" Link="Core\OperatorSettings.cs" />
+    <Compile Include="..\SkillGame\DemoGame.cs"         Link="Core\DemoGame.cs" />
+    <Compile Include="..\SkillGame\Log.cs"              Link="Core\Log.cs" />
+    <Compile Include="..\SkillGame\StuckMonitor.cs"     Link="Core\StuckMonitor.cs" />
+    <Compile Include="..\SkillGame\CoinGate.cs"         Link="Core\CoinGate.cs" />
+    <Compile Include="..\SkillGame\SwitchRouter.cs"     Link="Core\SwitchRouter.cs" />
+  </ItemGroup>
+
+</Project>

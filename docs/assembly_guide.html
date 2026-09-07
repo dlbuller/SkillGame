@@ -1,0 +1,197 @@
+<!doctype html><html><head><meta charset="utf-8"><title>SkillGame Assembly Guide</title>
+<style>
+@page { size: Letter; margin: 14mm; }
+* { box-sizing: border-box; }
+body { font-family: "Segoe UI", Arial, sans-serif; color: #14161c; margin: 0; }
+.page { page-break-after: always; padding: 6mm 4mm; min-height: 245mm; position: relative; }
+.page:last-child { page-break-after: auto; }
+h1 { font-size: 40px; letter-spacing: 1px; margin: 0 0 4px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 3px; color: #8a8a98; margin: 0 0 24px; font-weight: 600; }
+.gold { color: #C8901A; }
+.step-head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.num { width: 54px; height: 54px; border-radius: 50%; background: #14161c; color: #fff; font-size: 28px; font-weight: 700;
+       display: flex; align-items: center; justify-content: center; flex: 0 0 54px; }
+.step-title { font-size: 26px; font-weight: 700; }
+.step-sub { font-size: 14px; color: #6b7280; margin-top: 2px; }
+img.diagram { max-width: 100%; max-height: 150mm; display: block; margin: 8px auto; border: 1px solid #e3e6ec; border-radius: 8px; background:#0b0d12; }
+ul.do { font-size: 15.5px; line-height: 1.7; padding-left: 22px; }
+ul.do li { margin-bottom: 5px; }
+.warn { background: #FFF4E0; border-left: 5px solid #E7A91D; padding: 10px 14px; border-radius: 6px; font-size: 14px; margin: 10px 0; }
+.warn b { color: #a06d00; }
+.tip { background:#EAF6FF; border-left:5px solid #33A0D0; padding:10px 14px; border-radius:6px; font-size:14px; margin:10px 0; }
+.cover { text-align:center; padding-top: 40mm; }
+.cover .badge { font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color:#8a8a98; }
+.cover img { max-width: 150mm; margin: 16px auto; border-radius:10px; border:1px solid #e3e6ec; }
+.motto { font-size: 18px; letter-spacing:6px; color:#C8901A; font-weight:700; margin-top: 10px; }
+table.parts { width:100%; border-collapse: collapse; font-size: 13.5px; }
+table.parts th { background:#14161c; color:#fff; text-align:left; padding:7px 9px; font-size:12px; text-transform:uppercase; letter-spacing:1px;}
+table.parts td { border-bottom:1px solid #e3e6ec; padding:6px 9px; vertical-align:top; }
+table.parts tr:nth-child(even) td { background:#f6f8fb; }
+.qty { font-weight:700; color:#C8901A; width:44px; }
+.sect td { background:#1E6E7E !important; color:#fff; font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:12px;}
+.foot { position:absolute; bottom:6mm; left:0; right:0; text-align:center; font-size:11px; color:#b0b4be; }
+.two { display:flex; gap:14px; align-items:flex-start; }
+.two > div { flex:1; }
+.tools { font-size:14.5px; line-height:1.8; }
+</style></head><body>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="badge">Assembly Guide</div>
+  <h1>SKILL<span class="gold">GAME</span></h1>
+  <div class="badge">A Tribute to the Game of Skill</div>
+  <img src="file:///C:/SkillGame/Schematics/board_front.png">
+  <div class="motto">ALL HUFF · NO BULL</div>
+  <div class="foot">WezeBull Games · build it once, build it right</div>
+</div>
+
+<!-- PARTS LIST -->
+<div class="page">
+  <h1>Parts <span class="gold">list</span></h1>
+  <h2>everything you need before you start</h2>
+  <table class="parts">
+    <tr><th class="qty">Qty</th><th>Part</th><th>What it's for</th></tr>
+    <tr class="sect"><td colspan="3">The board</td></tr>
+    <tr><td class="qty">4</td><td>Adafruit FT232H breakout</td><td>USB→GPIO controllers (U1–U4)</td></tr>
+    <tr><td class="qty">16</td><td>PN2222A transistor (TO-92)</td><td>lamp / reel drivers</td></tr>
+    <tr><td class="qty">2</td><td>TIP120 Darlington (TO-220)</td><td>solenoid drivers (Q7/Q8)</td></tr>
+    <tr><td class="qty">2</td><td>1N4004 diode</td><td>solenoid flyback (D1/D2)</td></tr>
+    <tr><td class="qty">28</td><td>10 kΩ resistor</td><td>switch pull-downs</td></tr>
+    <tr><td class="qty">16</td><td>1 kΩ resistor</td><td>transistor base</td></tr>
+    <tr><td class="qty">16</td><td>220 Ω resistor</td><td>LED-lamp current limit</td></tr>
+    <tr><td class="qty">2</td><td>2.2 kΩ resistor</td><td>TIP120 base</td></tr>
+    <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
+    <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
+    <tr><td class="qty">4</td><td>2-pin headers (J1/J3/J4/J5)</td><td>power in + solenoid out</td></tr>
+    <tr><td class="qty">~34</td><td>Playfield switches</td><td>28 inputs (S23 = 7 gobble holes)</td></tr>
+    <tr><td class="qty">1</td><td>WS2812b LED strip, 150 px</td><td>attract / distract shows</td></tr>
+    <tr><td class="qty">2</td><td>SparkFun Solenoid - 5V (Small)</td><td>coin-lock + winner-lock</td></tr>
+    <tr class="sect"><td colspan="3">The system</td></tr>
+    <tr><td class="qty">1</td><td>PELADN Ryzen 5 5600H mini-PC (16 GB / 512 GB)</td><td>runs SkillGame</td></tr>
+    <tr><td class="qty">1</td><td>QQU 15.6" portable touchscreen (with stand)</td><td>the display · 1080P IPS/HDR touch</td></tr>
+    <tr><td class="qty">1</td><td>4-port USB 2.0 hub</td><td>one port per FT232H</td></tr>
+    <tr><td class="qty">1</td><td>3.3 V wall adapter</td><td>switch / GPIO logic (J1)</td></tr>
+    <tr><td class="qty">1</td><td>5 V wall adapter (≥5 A)</td><td>lamps · LEDs · coils (J3 / LED±)</td></tr>
+  </table>
+  <div class="two" style="margin-top:16px;">
+    <div><h2 style="margin-bottom:8px;">Tools</h2>
+      <div class="tools">• Soldering iron + solder<br>• Flush cutters<br>• Small screwdriver<br>• Multimeter<br>• Wire + crimp/ferrules</div></div>
+    <div><div class="warn"><b>Before you power up:</b> the 3.3 V adapter goes to J1 (switch commons) and the 5 V to J3 / LED±. Never feed 5 V into J1 — the FT232H inputs are not 5 V-tolerant.</div></div>
+  </div>
+  <div class="foot">SkillGame Assembly Guide · page 1</div>
+</div>
+
+<!-- STEP 1 -->
+<div class="page">
+  <div class="step-head"><div class="num">1</div><div><div class="step-title">Meet the four boards</div><div class="step-sub">Adafruit FT232H — one per GPIO bank</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/ftdi.png">
+  <ul class="do">
+    <li>Each board runs in MPSSE mode over USB-C. D0–D3 are reserved (SPI/JTAG) — only GPIO4's D1 drives the LED strip.</li>
+    <li>Program each with its serial (GPIO1–GPIO4) so the software always binds the right board to the right job.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="page">
+  <div class="step-head"><div class="num">2</div><div><div class="step-title">Solder the drivers</div><div class="step-sub">resistors, then transistors — lowest parts first</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/driver.png">
+  <ul class="do">
+    <li>Resistors first (they lie flat): 10 kΩ pull-downs, 1 kΩ bases, 220 Ω lamp limits, 2.2 kΩ TIP120 bases.</li>
+    <li>Then the 16 PN2222A transistors (TO-92) — mind the flat/rounded face matches the silk.</li>
+    <li>Keep leads short; flush-cut the backs.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="page">
+  <div class="step-head"><div class="num">3</div><div><div class="step-title">Solenoid drivers + fuses</div><div class="step-sub">TIP120s, flyback diodes, F1/F2</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/sol.png" style="max-height:95mm;">
+  <div class="warn"><b>⚠ TIP120 orientation:</b> collector goes to the coil, emitter to ground. If you are using an <b>older board revision</b>, cross the collector (middle/tab) and emitter (right) leads on Q7 &amp; Q8 — a straight insert wires them backwards and the coils won't switch. The current KiCad files already have this fixed.</div>
+  <div class="two">
+    <div><ul class="do">
+      <li>Fit the two TIP120s (TO-220) and the 1N4004 flyback diodes — band matches the silk.</li>
+      <li>Install the Keystone 3517 clips and drop in the fuses (see next page).</li>
+    </ul></div>
+  </div>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- FUSES -->
+<div class="page">
+  <div class="step-head"><div class="num">3b</div><div><div class="step-title">Fuse it</div><div class="step-sub">F1 / F2 — 5 V solenoid feed</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/fuses.png" style="max-height:120mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="page">
+  <div class="step-head"><div class="num">4</div><div><div class="step-title">Headers &amp; sockets</div><div class="step-sub">J1–J5, the J2 lamp header, and the 4 FT232H sockets</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/board_front.png" style="max-height:120mm;">
+  <ul class="do">
+    <li>Solder the 2×20 header (J2) and the four 2-pin headers (J1/J3/J4/J5).</li>
+    <li>Fit the four FT232H sockets. Keep even spacing so the boards sit flat and don't touch — the footprints are laid out with clearance; don't skew them.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 5 -->
+<div class="page">
+  <div class="step-head"><div class="num">5</div><div><div class="step-title">Wire the switches</div><div class="step-sub">28 inputs → J1 commons, pulled to ground</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/matrix.png" style="max-height:120mm;">
+  <ul class="do">
+    <li>Every switch closes to the J1 3.3 V common; a 10 kΩ pull-down holds it LOW until then.</li>
+    <li>The 7 gobble holes all land on one switch (S23) — wire them in parallel.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 6 -->
+<div class="page">
+  <div class="step-head"><div class="num">6</div><div><div class="step-title">Lamps, coils &amp; LED strip</div><div class="step-sub">outputs off J2 / J4 / J5 / SPI</div></div></div>
+  <div class="two">
+    <div><img class="diagram" src="file:///C:/SkillGame/Schematics/lamps.png" style="max-height:80mm;"></div>
+    <div><img class="diagram" src="file:///C:/SkillGame/Schematics/strip.png" style="max-height:80mm;"></div>
+  </div>
+  <ul class="do">
+    <li>Score lamps and Winner/Game-Over/Tilt to the J2 header (each lamp = one odd pin + its 220 Ω return).</li>
+    <li>Coin-Lock → J5, Winner-Lock → J4. LED strip data → GPIO4 SPI (D1); power the strip from its own 5 V.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 7 -->
+<div class="page">
+  <div class="step-head"><div class="num">7</div><div><div class="step-title">Hook up the system</div><div class="step-sub">PC · hub · monitor · power</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/hookup.png" style="max-height:120mm;">
+  <ul class="do">
+    <li>Mini-PC → HDMI → monitor; Mini-PC → USB hub → the four FT232H boards.</li>
+    <li>3.3 V adapter → J1; 5 V adapter → J3 and LED±. Common all grounds.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 8 -->
+<div class="page">
+  <div class="step-head"><div class="num">8</div><div><div class="step-title">Power on &amp; self-test</div><div class="step-sub">let the software check your wiring</div></div></div>
+  <ul class="do" style="font-size:16.5px;">
+    <li>Launch SkillGame, open <b>Diagnostics</b>, and run <b>Self-Test</b> — it lights every lamp, pulses the coils and sweeps the LED strip.</li>
+    <li>Use the <b>Switch Monitor</b> to press each playfield switch and confirm it registers (and clears).</li>
+    <li>Any input stuck HIGH shows as a fault ring — check that switch's wiring and pull-down.</li>
+    <li>Green badge on Diagnostics = all boards present and healthy. You're done. <b>ALL HUFF · NO BULL.</b></li>
+  </ul>
+  <div class="tip">The board back is on the next page for reference, followed by the full schematic.</div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/board_back.png" style="max-height:95mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- SCHEMATIC -->
+<div class="page">
+  <h1>Full <span class="gold">schematic</span></h1>
+  <h2>reference</h2>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/full.png" style="max-height:210mm;">
+  <div class="foot">SkillGame · WezeBull Games</div>
+</div>
+
+</body></html>
