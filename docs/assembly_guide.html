@@ -66,7 +66,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
     <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
     <tr><td class="qty">4</td><td>2-pin headers (J1/J3/J4/J5)</td><td>power in + solenoid out</td></tr>
-    <tr><td class="qty">~34</td><td>Playfield switches</td><td>28 inputs (S23 = 7 gobble holes)</td></tr>
+    <tr><td class="qty">~34</td><td>Playfield microswitches (hinge lever)</td><td>28 inputs (S23 = 7 gobble) · lever pokes up through the slot</td></tr>
     <tr><td class="qty">1</td><td>WS2812b LED strip, 150 px</td><td>attract / distract shows</td></tr>
     <tr><td class="qty">20</td><td>#555 wedge LED bulb (6.3 V, non-polar)</td><td>16 lamps + a 2nd bulb on 100/200/300/400 (double bright)</td></tr>
     <tr><td class="qty">20</td><td>#555 / T10 wedge socket (twist-lock)</td><td>one per bulb; solder its leads to the J2 lamp lines</td></tr>
@@ -91,8 +91,11 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num">1</div><div><div class="step-title">Meet the four boards</div><div class="step-sub">Adafruit FT232H — one per GPIO bank</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/ftdi.png">
   <ul class="do">
-    <li>Each board runs in MPSSE mode over USB-C. D0–D3 are reserved (SPI/JTAG) — only GPIO4's D1 drives the LED strip.</li>
-    <li>Program each with its serial (GPIO1–GPIO4) so the software always binds the right board to the right job.</li>
+    <li>Four Adafruit FT232H breakouts, each in MPSSE mode over USB-C — the app talks to all four through the USB hub.</li>
+    <li><b>GPIO1 / GPIO2</b> read switches; <b>GPIO3</b> reads the top rows + tilt and drives the 100–400 reels, Winner, Game-Over and the two coil lines; <b>GPIO4</b> drives the 10–90 + Tilt lamps and clocks the LED strip.</li>
+    <li>Pins <b>D0–D3</b> are reserved (SPI/JTAG) — all switch/lamp I/O lives on <b>D4–D7</b> and <b>C0–C7</b>. Only GPIO4's D1 is used, for the LED strip.</li>
+    <li>Program each board with a unique FTDI serial (GPIO1–GPIO4) so the software binds the right board to the right job no matter which USB port it lands on.</li>
+    <li>The FT232H's own 3 V / 5 V pins stay unconnected — the boards are USB-powered.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
@@ -123,10 +126,28 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
-<!-- FUSES -->
+<!-- FUSES F1/F2 -->
 <div class="page">
-  <div class="step-head"><div class="num">3b</div><div><div class="step-title">Fuse it</div><div class="step-sub">F1 / F2 — 5 V solenoid feed</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/fuses.png" style="max-height:120mm;">
+  <div class="step-head"><div class="num">3b</div><div><div class="step-title">Fuse the solenoids</div><div class="step-sub">F1 / F2 — one per coil, on the board</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/fuses.png" style="max-height:96mm;">
+  <ul class="do">
+    <li>Solder the four <b>Keystone 3517</b> clips — two per fuse — at the F1 and F2 positions. They only go one way; the fuse snaps in across the pair.</li>
+    <li>Drop in the fuses: <b>F1</b> guards the Winner-Lock coil (J4), <b>F2</b> the Coin-Lock coil (J5). Both are <b>T2A slow-blow, 5×20 mm</b> (Littelfuse 0218002.MXP).</li>
+    <li>Slow-blow (T) rides out the coil's turn-on surge; it opens only on a real short. Any 250 V 5×20 mm part is fine on the 5 V rail.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- FUSE F3 (inline) -->
+<div class="page">
+  <div class="step-head"><div class="num">3c</div><div><div class="step-title">The inline main fuse</div><div class="step-sub">F3 — one fuse that guards the whole 5 V rail</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/f3.png" style="max-height:110mm;">
+  <ul class="do">
+    <li>F1/F2 only protect the coils. <b>F3 protects everything on 5 V</b> — lamps, LED strip and coils — right where the adapter feeds the board.</li>
+    <li>It isn't on the PCB: cut the <b>+5 V</b> wire coming from the adapter and splice the <b>inline holder</b> (uxcell 18 AWG, screw-terminal) into the break. Leave the ground/return wire whole.</li>
+    <li>Fit a <b>T3.5A slow-blow, 5×20 mm</b> fuse (Bussmann GDC-3.5A). Sized above the full lamp + strip + coil draw, below the adapter's limit.</li>
+  </ul>
+  <div class="tip">Rule of thumb: F3 ≈ your steady current + inrush headroom, and always below what the wiring can carry. 3.5 A suits a ≥5 A adapter here.</div>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
@@ -135,8 +156,10 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num">4</div><div><div class="step-title">Headers &amp; sockets</div><div class="step-sub">J1–J5, the J2 lamp header, and the 4 FT232H sockets</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/board_front.png" style="max-height:120mm;">
   <ul class="do">
-    <li>Solder the 2×20 header (J2) and the four 2-pin headers (J1/J3/J4/J5).</li>
-    <li>Fit the four FT232H sockets. Keep even spacing so the boards sit flat and don't touch — the footprints are laid out with clearance; don't skew them.</li>
+    <li>Solder the <b>2×20 header (J2)</b> — the lamp/output connector — and the four <b>2-pin headers</b>: J1 (3.3 V in), J3 (5 V in), J4 (Winner-Lock), J5 (Coin-Lock).</li>
+    <li>Tack one pin first, check the header sits flat and square, then solder the rest — a skewed 40-pin header is miserable to fix.</li>
+    <li>Fit the four FT232H sockets with even spacing so the boards sit flat and don't touch. The footprints already have clearance; don't skew them.</li>
+    <li>Note which socket is GPIO1–GPIO4 (silk) — it must match the serial you programmed into each board.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
@@ -146,24 +169,48 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num">5</div><div><div class="step-title">Wire the switches</div><div class="step-sub">28 inputs → J1 commons, pulled to ground</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/matrix.png" style="max-height:120mm;">
   <ul class="do">
-    <li>Every switch closes to the J1 3.3 V common; a 10 kΩ pull-down holds it LOW until then.</li>
-    <li>The 7 gobble holes all land on one switch (S23) — wire them in parallel.</li>
+    <li><b>28 inputs</b> across GPIO1–3 (D4–D7, C0–C7). One side of every playfield switch ties to the shared <b>J1 3.3 V common</b>; the other side goes to that switch's FT232H input pin.</li>
+    <li>An on-board <b>10 kΩ pull-down</b> holds each input LOW; closing the switch pulls it to 3.3 V (a real HIGH) and the software reads the hit.</li>
+    <li><b>Keep the common at 3.3 V — never 5 V.</b> The FT232H inputs are <b>not</b> 5 V-tolerant; 5 V on an input can kill the chip.</li>
+    <li>The <b>7 gobble holes</b> all report as one input (S23): wire their switches <b>in parallel</b> so any of them trips it.</li>
+    <li>Run it as a harness (see the last pages): one 3.3 V bus wire daisy-chained to every switch, plus one signal wire per switch back to the board.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
 <!-- STEP 6 -->
 <div class="page">
-  <div class="step-head"><div class="num">6</div><div><div class="step-title">Lamps, coils &amp; LED strip</div><div class="step-sub">outputs off J2 / J4 / J5 / SPI</div></div></div>
-  <div class="two">
-    <div><img class="diagram" src="file:///C:/SkillGame/Schematics/lamps.png" style="max-height:80mm;"></div>
-    <div><img class="diagram" src="file:///C:/SkillGame/Schematics/strip.png" style="max-height:80mm;"></div>
-  </div>
+  <div class="step-head"><div class="num">6</div><div><div class="step-title">The score lamps</div><div class="step-sub">off-board #555 wedge LED bulbs on J2</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/j2.png" style="max-height:96mm;">
   <ul class="do">
-    <li>Each score lamp + Winner/Game-Over/Tilt is an off-board <b>#555 wedge LED bulb</b> in a twist-lock socket, wired across its J2 pair (odd pin = switched by the transistor, even pin = +5 V through the 0 Ω link).</li>
-    <li><b>100 / 200 / 300 / 400</b> each get <b>two</b> bulbs in parallel on the same output — double brightness on the big holes.</li>
-    <li>The #555 bulbs are <b>non-polar</b>, so socket orientation doesn't matter.</li>
-    <li>Coin-Lock → J5, Winner-Lock → J4. LED strip data → GPIO4 SPI (D1); power the strip from its own 5 V.</li>
+    <li>Every score lamp — the tens <b>10–90</b>, the reels <b>100–400</b>, and <b>Winner / Game-Over / Tilt</b> — is a <b>#555 wedge LED bulb</b> in a twist-lock socket, off the board.</li>
+    <li>Each bulb plugs across one <b>J2 pin pair</b>. The <b>odd</b> pin (left, labelled with the lamp name) is switched by the transistor; the <b>even</b> pin (right) is +5 V through that lamp's 0 Ω link. The labels on J2 tell you which pair is which lamp.</li>
+    <li>Solder the socket's two leads to that pin pair. The #555 bulbs are <b>non-polar</b>, so which lead goes to which pin doesn't matter.</li>
+  </ul>
+  <div class="tip">Wire it as a harness (see the last pages): a 2×20 plug on J2, fanning out to all the sockets, is far tidier than 40 loose wires.</div>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 6b -->
+<div class="page">
+  <div class="step-head"><div class="num">6b</div><div><div class="step-title">Double up the big holes</div><div class="step-sub">100 / 200 / 300 / 400 — two bulbs each</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/dbl.png" style="max-height:100mm;">
+  <ul class="do">
+    <li>The four high-score holes each drive <b>two</b> #555 bulbs for extra punch. Wire the second bulb <b>in parallel</b> on the same J2 pair as the first.</li>
+    <li>Both bulbs' <b>+</b> leads land on the even (+5 V) pin; both other leads on the odd (switched) pin.</li>
+    <li>No extra resistor — each bulb self-limits, so both run at full brightness. The transistor easily drives two.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 6c -->
+<div class="page">
+  <div class="step-head"><div class="num">6c</div><div><div class="step-title">Coils &amp; the LED strip</div><div class="step-sub">solenoids off J4 / J5, strip off SPI</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/strip.png" style="max-height:88mm;">
+  <ul class="do">
+    <li><b>Coin-Lock → J5</b>, <b>Winner-Lock → J4</b>. These are the fused (F1/F2), TIP120-driven 5 V coils — keep the flyback diode across each coil.</li>
+    <li>LED strip <b>data → GPIO4's D1</b> (SPI MOSI). Data is one wire plus a common ground.</li>
+    <li>Power the strip from its <b>own 5 V feed</b> (LED+5 / LED−5), <b>not</b> J3, so its heavy draw can't sag the lamp/logic rail. Tie all grounds common.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
@@ -173,8 +220,11 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num">7</div><div><div class="step-title">Hook up the system</div><div class="step-sub">PC · hub · monitor · power</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/hookup.png" style="max-height:120mm;">
   <ul class="do">
-    <li>Mini-PC → HDMI → monitor; Mini-PC → USB hub → the four FT232H boards.</li>
-    <li>3.3 V adapter → J1; 5 V adapter → J3 and LED±. Common all grounds.</li>
+    <li><b>Mini-PC → HDMI → monitor</b> (the QQU 15.6" touch panel), and its USB-C touch lead back to the PC.</li>
+    <li><b>Mini-PC → USB hub → the four FT232H boards</b> — one hub port per board.</li>
+    <li><b>3.3 V adapter → J1</b> (switch commons). <b>5 V adapter → J3</b> (through the F3 inline fuse) and to the LED strip's own <b>LED± feed</b>.</li>
+    <li><b>Tie every ground together</b> — the 3.3 V return, the 5 V return, the LED strip and the boards all share one common ground, or nothing reads right.</li>
+    <li>Double-check J1 is 3.3 V and J3 is 5 V before powering on. They are not interchangeable.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
@@ -190,6 +240,58 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   </ul>
   <div class="tip">The board back is on the next page for reference, followed by the full schematic.</div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/board_back.png" style="max-height:95mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- HARNESS INTRO -->
+<div class="page">
+  <h1>Wiring <span class="gold">harnesses</span></h1>
+  <h2>the cables that join the playfield to the board</h2>
+  <ul class="do">
+    <li>The board only holds the transistors, resistors and connectors. The <b>lamps</b> (backglass) and <b>switches</b> (playfield) live off-board, so two harnesses connect them:</li>
+    <li><b>Lamp harness</b> — a 2×20 plug on J2 fans out to the 20 #555 wedge sockets.</li>
+    <li><b>Switch harness</b> — one 3.3 V common bus to every switch, plus a signal wire from each switch back to the board.</li>
+    <li>Plus the <b>inline fuse cable</b> (F3) spliced into the 5 V feed.</li>
+    <li>Each cable is shown three ways on the next pages: flat with every solder point, a 3D view, and <b>where every point lands on the real game</b>.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- LAMP HARNESS wiring -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#C8901A;">L</div><div><div class="step-title">Lamp harness — wiring</div><div class="step-sub">J2 plug → 20 #555 sockets, every solder point</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_harness.png" style="max-height:200mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- LAMP HARNESS 3d -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#C8901A;">L</div><div><div class="step-title">Lamp harness — 3D &amp; where it lands</div><div class="step-sub">the physical cable, and each bulb's spot on the backglass</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_harness_3d.png" style="max-height:95mm;">
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_playfield.png" style="max-height:120mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- SWITCH HARNESS wiring -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#1E6E7E;">S</div><div><div class="step-title">Switch harness — wiring</div><div class="step-sub">3.3 V bus + one signal per switch, every solder point</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_harness.png" style="max-height:176mm;">
+  <div class="warn"><b>Which switch?</b> The original Bally rollover-wire leaf switch (ASW-A1-152) is <b>discontinued</b>. Use a <b>mini snap-action microswitch with a hinge lever</b> — the lever pokes up through the playfield slot and the coin trips it (~$0.80 ea, in stock). Pinball-authentic alt: Action Pinball <b>SW-1A-120</b> ($8.39, in stock) with a rollover wireform. Best of all — reuse your machine's originals.</div>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- SWITCH HARNESS 3d -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#1E6E7E;">S</div><div><div class="step-title">Switch harness — 3D &amp; where it lands</div><div class="step-sub">the physical cable, and every switch's spot on the playfield</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_harness_3d.png" style="max-height:88mm;">
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_playfield.png" style="max-height:130mm;">
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- FUSE CABLE 3d -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#C15656;">F</div><div><div class="step-title">Inline fuse cable — 3D</div><div class="step-sub">F3 in the 5 V feed to J3</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/fuse_cable_3d.png" style="max-height:120mm;">
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 

@@ -82,6 +82,16 @@ Everything you need to source and assemble it is in [`docs/`](docs/):
 
 The KiCad 9 project (schematic + PCB) lives in [`hardware/`](hardware/) — ERC clean and DRC clean.
 
+## Wiring
+
+Two harnesses join the off-board lamps and switches to the control board — the guide draws each one flat (every solder point), in 3D, and **in place on the real game**, so you can see exactly how the wires snake to each lamp socket and switch. Switch positions are traced from the actual Skill-Roll playfield.
+
+| Switches on the playfield | Lamps on the backglass |
+|---|---|
+| ![Switch wiring](docs/schematics/switch_playfield.png) | ![Lamp wiring](docs/schematics/lamp_playfield.png) |
+
+> **Switches:** the original Bally rollover-wire leaf switch is discontinued — a mini snap-action microswitch with a hinge lever (pokes up through the playfield slot, tripped by the coin) is the cheap, in-stock replacement. See the BOM for the pinball-authentic alternative.
+
 ## Build &amp; run the app
 
 ```bash
