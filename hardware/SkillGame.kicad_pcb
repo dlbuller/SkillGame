@@ -1413,7 +1413,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -2715,7 +2715,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3709,7 +3709,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5365,7 +5365,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9025,7 +9025,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -11170,7 +11170,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12005,7 +12005,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13407,7 +13407,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18304,7 +18304,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18962,7 +18962,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -20484,7 +20484,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -22570,7 +22570,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -25798,7 +25798,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -26186,7 +26186,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -27178,7 +27178,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(uuid "50a15751-fd97-4a0c-9fd7-ab30cfed6c53")
@@ -27746,7 +27746,7 @@
 				)
 			)
 		)
-		(property "Value" "220 Ohm"
+		(property "Value" "0 R"
 			(at 2.54 1.92 0)
 			(layer "F.Fab")
 			(hide yes)

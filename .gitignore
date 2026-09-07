@@ -17,3 +17,8 @@ fp-info-cache
 # ---- OS ----
 Thumbs.db
 .DS_Store
+
+# ---- KiCad working files ----
+*.bak
+*-erc.rpt
+*-drc.rpt

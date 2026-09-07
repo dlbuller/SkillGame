@@ -19,9 +19,11 @@ ul.do li { margin-bottom: 5px; }
 .warn { background: #FFF4E0; border-left: 5px solid #E7A91D; padding: 10px 14px; border-radius: 6px; font-size: 14px; margin: 10px 0; }
 .warn b { color: #a06d00; }
 .tip { background:#EAF6FF; border-left:5px solid #33A0D0; padding:10px 14px; border-radius:6px; font-size:14px; margin:10px 0; }
-.cover { text-align:center; padding-top: 40mm; }
+.cover { text-align:center; padding-top: 16mm; }
 .cover .badge { font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color:#8a8a98; }
-.cover img { max-width: 150mm; margin: 16px auto; border-radius:10px; border:1px solid #e3e6ec; }
+.cover img.hero { max-width: 125mm; margin: 14px auto; border-radius:10px; border:1px solid #e3e6ec; display:block; }
+.cover img.logo { width:42mm; height:42mm; object-fit:cover; border-radius:16px; border:1px solid #2a2f3a;
+                  margin:0 auto 10px; display:block; box-shadow:0 6px 22px rgba(0,0,0,.28); }
 .motto { font-size: 18px; letter-spacing:6px; color:#C8901A; font-weight:700; margin-top: 10px; }
 table.parts { width:100%; border-collapse: collapse; font-size: 13.5px; }
 table.parts th { background:#14161c; color:#fff; text-align:left; padding:7px 9px; font-size:12px; text-transform:uppercase; letter-spacing:1px;}
@@ -37,10 +39,11 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
 
 <!-- COVER -->
 <div class="page cover">
+  <img class="logo" src="file:///C:/SkillGame/wheezingbull.png" alt="WezeBull Games">
   <div class="badge">Assembly Guide</div>
   <h1>SKILL<span class="gold">GAME</span></h1>
   <div class="badge">A Tribute to the Game of Skill</div>
-  <img src="file:///C:/SkillGame/Schematics/board_front.png">
+  <img class="hero" src="file:///C:/SkillGame/Schematics/board_front.png">
   <div class="motto">ALL HUFF · NO BULL</div>
   <div class="foot">WezeBull Games · build it once, build it right</div>
 </div>
@@ -58,15 +61,15 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">2</td><td>1N4004 diode</td><td>solenoid flyback (D1/D2)</td></tr>
     <tr><td class="qty">28</td><td>10 kΩ resistor</td><td>switch pull-downs</td></tr>
     <tr><td class="qty">16</td><td>1 kΩ resistor</td><td>transistor base</td></tr>
-    <tr><td class="qty">16</td><td>220 Ω resistor</td><td>LED-lamp current limit</td></tr>
+    <tr><td class="qty">16</td><td>0 Ω jumper (or solder bridge)</td><td>lamp links R30–R62 — the #555 bulb self-limits</td></tr>
     <tr><td class="qty">2</td><td>2.2 kΩ resistor</td><td>TIP120 base</td></tr>
     <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
     <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
     <tr><td class="qty">4</td><td>2-pin headers (J1/J3/J4/J5)</td><td>power in + solenoid out</td></tr>
     <tr><td class="qty">~34</td><td>Playfield switches</td><td>28 inputs (S23 = 7 gobble holes)</td></tr>
     <tr><td class="qty">1</td><td>WS2812b LED strip, 150 px</td><td>attract / distract shows</td></tr>
-    <tr><td class="qty">16</td><td>#555 wedge LED bulb (6.3 V, non-polar)</td><td>score lamps 10–400 + Winner/GO/Tilt</td></tr>
-    <tr><td class="qty">16</td><td>#555 / T10 wedge socket (pigtail)</td><td>hold the bulbs, wire to J2</td></tr>
+    <tr><td class="qty">20</td><td>#555 wedge LED bulb (6.3 V, non-polar)</td><td>16 lamps + a 2nd bulb on 100/200/300/400 (double bright)</td></tr>
+    <tr><td class="qty">20</td><td>#555 / T10 wedge socket (twist-lock)</td><td>one per bulb; solder its leads to the J2 lamp lines</td></tr>
     <tr><td class="qty">2</td><td>SparkFun Solenoid - 5V (Small)</td><td>coin-lock + winner-lock</td></tr>
     <tr class="sect"><td colspan="3">The system</td></tr>
     <tr><td class="qty">1</td><td>PELADN Ryzen 5 5600H mini-PC (16 GB / 512 GB)</td><td>runs SkillGame</td></tr>
@@ -99,7 +102,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num">2</div><div><div class="step-title">Solder the drivers</div><div class="step-sub">resistors, then transistors — lowest parts first</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/driver.png">
   <ul class="do">
-    <li>Resistors first (they lie flat): 10 kΩ pull-downs, 1 kΩ bases, 220 Ω lamp limits, 2.2 kΩ TIP120 bases.</li>
+    <li>Resistors first (they lie flat): 28× 10 kΩ pull-downs, 16× 1 kΩ bases, 2× 2.2 kΩ TIP120 bases. The 16 lamp positions (R30–R62) are <b>0 Ω links</b> — a jumper wire or solder bridge, since the #555 bulbs self-limit.</li>
     <li>Then the 16 PN2222A transistors (TO-92) — mind the flat/rounded face matches the silk.</li>
     <li>Keep leads short; flush-cut the backs.</li>
   </ul>
@@ -157,7 +160,9 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <div><img class="diagram" src="file:///C:/SkillGame/Schematics/strip.png" style="max-height:80mm;"></div>
   </div>
   <ul class="do">
-    <li>Score lamps and Winner/Game-Over/Tilt to the J2 header (each lamp = one odd pin + its 220 Ω return).</li>
+    <li>Each score lamp + Winner/Game-Over/Tilt is an off-board <b>#555 wedge LED bulb</b> in a twist-lock socket, wired across its J2 pair (odd pin = switched by the transistor, even pin = +5 V through the 0 Ω link).</li>
+    <li><b>100 / 200 / 300 / 400</b> each get <b>two</b> bulbs in parallel on the same output — double brightness on the big holes.</li>
+    <li>The #555 bulbs are <b>non-polar</b>, so socket orientation doesn't matter.</li>
     <li>Coin-Lock → J5, Winner-Lock → J4. LED strip data → GPIO4 SPI (D1); power the strip from its own 5 V.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>

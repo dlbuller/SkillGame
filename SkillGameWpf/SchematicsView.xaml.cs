@@ -88,7 +88,7 @@ namespace SkillGameWpf
             Add("driver", 820, 460, 230, 150, "OUTPUT DRIVERS", "on-board transistors\nPN2222A lamps · TIP120 coils", Outputs,
                 "The FT232H logic pins can't switch lamp or coil current directly, so each output drives a small transistor on the board. PN2222A NPN transistors switch the lamps/reels/indicators; two TIP120 Darlingtons (each with a 1N4004 flyback diode) drive the Win-Lock and Coin-Lock solenoids. Fuses protect the coil supply.");
             Add("lamps", 1150, 400, 240, 120, "SCORE LAMPS", "tens 10–90 · reels 100–400\nWinner · Game Over · Tilt", Outputs,
-                "The backglass score lamps: the tens 10–90, the hundreds reels 100–400, and the Winner, Game-Over and Tilt indicators. All switched through the relay/driver board from the GPIO3 and GPIO4 output pins as the score is tallied.");
+                "The backglass score lamps are off-board #555 wedge LED bulbs (6.3 V, non-polar) in twist-lock sockets — the tens 10–90, the hundreds reels 100–400, and the Winner, Game-Over and Tilt indicators. Each plugs across a J2 pin pair; the board's lamp positions (R30–R62) are 0 Ω links because the #555 self-limits, and running a 6.3 V bulb on the 5 V rail keeps it safely under-driven. The 100 / 200 / 300 / 400 holes each drive TWO bulbs in parallel for double brightness.");
             Add("sol", 1150, 545, 240, 120, "SOLENOIDS", "Coin-Lock · Win-Lock\n(holds the winning coin)", Outputs,
                 "Two small 5 V coils (SparkFun 'Solenoid - 5V Small') driven low-side by the TIP120 Darlingtons (Q7/Q8), each with a 1N4004 flyback diode across it and a fuse in its feed. The Win-Lock fires on a win to hold the coin at the bottom as proof you won, and releases on the next coin-up; the Coin-Lock manages the coin entry.\n\nFUSES — three, all 5×20 mm in Keystone 3517 holders:\n• F1 (Win-Lock, J4) and F2 (Coin-Lock, J5): T2A slow-blow each (Littelfuse 0218002.MXP) for the small 5 V solenoids.\n• F3 (T3.5A slow-blow) — an inline fuse in the 5 V supply lead into J3 — guards the whole lamp / LED / coil rail.\n• Slow-blow (T) rides out coil inrush; any 250 V 5×20 mm part clears 5 V fine.");
             Add("strip", 770, 645, 235, 110, "WS2812b STRIP", "150 NeoPixels · SPI MOSI @3 MHz\nattract / distract shows", Lighting,
@@ -628,7 +628,7 @@ namespace SkillGameWpf
             ("3 VDC", "input · J1", "CyanBrush", "LOGIC SUPPLY",
              "Feeds the switch-common rail. Every playfield switch closes to this 3.3 V, and a 10 kΩ pull-down holds each FT232H input LOW until a real closure. Keep it at 3.3 V — the FT232H inputs are not 5 V-tolerant.", "pwr_3v.png"),
             ("5 VDC", "input · J3 (fused)", "GoldBrush", "MAIN RAIL",
-             "The workhorse rail: the score lamps (each through a 220 Ω limit), the two solenoid coils (via fuses F1/F2 and the TIP120 drivers), and the board logic. Fuses protect the coil feed.", "pwr_5v.png"),
+             "The workhorse rail: the score lamps (off-board #555 wedge LED bulbs, self-limiting — board R = 0 Ω links), the two solenoid coils (via fuses F1/F2 and the TIP120 drivers), and the board logic. Fuses protect the coil feed.", "pwr_5v.png"),
             ("5 V", "input · LED+5 / LED−5", "TealBrush", "LED STRIP",
              "A dedicated 5 V feed for the 150-pixel WS2812b strip, so its heavy current draw can't sag the lamp and logic rail. Ties into the same common ground as everything else.", "pwr_led.png"),
         };
