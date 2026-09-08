@@ -93,18 +93,22 @@ namespace SkillGameWpf
                 "Two small 5 V coils (SparkFun 'Solenoid - 5V Small') driven low-side by the TIP120 Darlingtons (Q7/Q8), each with a 1N4004 flyback diode across it and a fuse in its feed. The Win-Lock fires on a win to hold the coin at the bottom as proof you won, and releases on the next coin-up; the Coin-Lock manages the coin entry.\n\nFUSES — three, all 5×20 mm in Keystone 3517 holders:\n• F1 (Win-Lock, J4) and F2 (Coin-Lock, J5): T2A slow-blow each (Littelfuse 0218002.MXP) for the small 5 V solenoids.\n• F3 (T3.5A slow-blow) — an inline fuse in the 5 V supply lead into J3 — guards the whole lamp / LED / coil rail.\n• Slow-blow (T) rides out coil inrush; any 250 V 5×20 mm part clears 5 V fine.");
             Add("strip", 770, 645, 235, 110, "WS2812b STRIP", "150 NeoPixels · SPI MOSI @3 MHz\nattract / distract shows", Lighting,
                 "150 addressable WS2812b NeoPixels on GPIO4's SPI MOSI line. The app renders each attract/distract pattern into a pixel buffer and streams the whole frame out at 3 MHz; the on-screen SKILLGAME header mirrors those same frames.");
-            Add("board", 1445, 694, 250, 108, "3D BOARD", "the assembled PCB\nclick to see front + back", Information,
-                "A 3D render of the assembled WezeBull Games board (KiCad). Click to open it large — use the FRONT / BACK button to flip between the component side and the solder side, and scroll to zoom / drag to pan.");
-            Add("full", 1445, 462, 250, 100, "FULL SCHEMATIC", "the whole sheet · scroll to zoom", Information,
-                "The complete KiCad schematic on one sheet — all four FT232H boards, the switch matrix, the PN2222A lamp drivers, the TIP120 solenoid drivers, the LED strip feed and the power inputs. Click to open it large; scroll to zoom and drag to pan.");
-            Add("bom", 1445, 110, 250, 108, "BILL OF MATERIALS", "every part + qty\nclick to view", Information,
+            Add("bom", 1445, 104, 250, 80, "BILL OF MATERIALS", "every part + qty", Information,
                 "The full bill of materials — every component on the board with quantities and what it does, plus the mini-PC, monitor, USB hub and power adapters. Board counts come straight from the KiCad project.");
-            Add("fuses", 1445, 230, 250, 100, "FUSES", "F1 · F2 · F3 ratings\n+ part numbers", Information,
+            Add("fuses", 1445, 192, 250, 80, "FUSES", "F1 · F2 · F3 ratings + part #s", Information,
                 "The board's fuses: which line each protects, the recommended rating, and a real part number sized for your 5 x 20 mm Keystone 3517 holders. Click for the full listing.");
-            Add("hookup", 1445, 342, 250, 108, "SYSTEM HOOKUP", "PC · hub · adapters\nmonitor · board", Information,
+            Add("hookup", 1445, 280, 250, 80, "SYSTEM HOOKUP", "PC · hub · monitor · power", Information,
                 "How everything physically connects: the mini-PC drives the QQU 15.6-inch touch monitor over HDMI and the four FT232H boards through a USB hub; the 3.3 V adapter feeds the switch commons (J1) and the 5 V adapter the lamps, LED strip and coils (J3 / LED±). Click for the full hookup drawing.");
-            Add("ftdi", 1445, 574, 250, 108, "FT232H BOARD", "Adafruit breakout\nclick for full pinout", Information,
+            Add("full", 1445, 368, 250, 80, "FULL SCHEMATIC", "the whole sheet · zoom", Information,
+                "The complete KiCad schematic on one sheet — all four FT232H boards, the switch matrix, the PN2222A lamp drivers, the TIP120 solenoid drivers, the LED strip feed and the power inputs. Click to open it large; scroll to zoom and drag to pan.");
+            Add("ftdi", 1445, 456, 250, 80, "FT232H BOARD", "Adafruit breakout pinout", Information,
                 "The Adafruit FT232H breakout — one for each of the four boards. It runs the FT232H in MPSSE mode over USB-C. D0–D3 are the SPI/JTAG pins and are reserved (GPIO4's D1/MOSI clocks the LED strip); all the general switch/lamp I/O lives on D4–D7 and C0–C7, with a shared GND tying it to the SkillGame board. Click to open the full pinout showing how every pin is wired here.");
+            Add("board", 1445, 544, 250, 80, "3D BOARD", "the assembled PCB · front/back", Information,
+                "A 3D render of the assembled WezeBull Games board (KiCad). Click to open it large — use the FRONT / BACK button to flip between the component side and the solder side, and scroll to zoom / drag to pan.");
+            Add("wiring_board", 1445, 632, 250, 80, "BOARD WIRING", "where every wire lands", Information,
+                "A labeled top view of the board: every connector called out — J1 (3.3 V in / switch common), J2 (2×20 lamp header), J3 (5 V in), J4 / J5 (the two coils), SPI + LED± (the strip), and the four GPIO1–4 sockets. Use it to find where each wire goes.");
+            Add("wiring_inputs", 1445, 720, 250, 80, "INPUT MAP", "each switch → its pin", Information,
+                "The switch-input pin map: every S0–S27 with its GPIO board and exact FT232H pin (D4–D7 / C0–C7) and what it scores. Each coin switch wires COM → the 3.3 V bus and NO → the pin shown; the 7 gobble switches parallel onto S23.");
             Add("power", 40, 720, 200, 150, "POWER", "3 V + 5 V + LED 5 V\nmultiple adapters in", Power,
                 "Power comes in at several points, not one supply: a 3 VDC input (J1), a 5 VDC input (J3) for the boards, lamps and coils, and a dedicated 5 V feed for the WS2812b LED strip (LED+5 / LED−5). All the inputs share a common ground, which also ties the switch pull-downs and the FT232H boards together. Fuses protect the higher-current rails.");
 
@@ -424,7 +428,7 @@ namespace SkillGameWpf
             // a thin divider, then quick-open buttons for the reference docs (tinted with the Information accent)
             ChipHost.Children.Add(new Border { Width = 1, Height = 26, Background = new SolidColorBrush(Color.FromArgb(0x40, 0xFF, 0xFF, 0xFF)), Margin = new Thickness(4, 0, 12, 8), VerticalAlignment = VerticalAlignment.Center });
             var infoBrush = new SolidColorBrush(Information);
-            foreach (var (label, key) in new[] { ("BOM", "bom"), ("FUSES", "fuses"), ("HOOKUP", "hookup"), ("SCHEMATIC", "full"), ("FT232H", "ftdi"), ("3D BOARD", "board") })
+            foreach (var (label, key) in new[] { ("BOM", "bom"), ("FUSES", "fuses"), ("HOOKUP", "hookup"), ("SCHEMATIC", "full"), ("FT232H", "ftdi"), ("3D BOARD", "board"), ("BOARD WIRING", "wiring_board"), ("INPUT MAP", "wiring_inputs") })
             {
                 string k = key;
                 var btn = new Button { Content = label, Style = (Style)FindResource("PillButton"), Height = 38, Margin = new Thickness(0, 0, 8, 8), MinWidth = 72, Foreground = infoBrush, BorderBrush = infoBrush };
