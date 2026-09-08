@@ -256,6 +256,26 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
+<!-- WIRING REFERENCE: labeled board -->
+<div class="page">
+  <h1>Wiring <span class="gold">reference</span></h1>
+  <h2>where every wire lands on the board</h2>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/wiring_board.png" style="max-height:130mm;">
+  <ul class="do">
+    <li>Every connector and GPIO socket is called out above. <b>J1</b> = 3.3 V in (switch common), <b>J2</b> = the 2×20 lamp header, <b>J3</b> = 5 V in, <b>J4/J5</b> = the two coils, <b>SPI + LED±</b> = the LED strip.</li>
+    <li>Switch signals land on the <b>GPIO board input pins</b> (next page); lamp wires land on <b>J2</b> (pin→lamp map is on the J2 page).</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- WIRING REFERENCE: switch inputs -->
+<div class="page">
+  <div class="step-head"><div class="num" style="background:#1E6E7E;">IN</div><div><div class="step-title">Switch-input pin map</div><div class="step-sub">which pin every switch wire goes to</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/wiring_inputs.png" style="max-height:150mm;">
+  <div class="tip">Each coin switch is a plain SPDT: <b>COM → the 3.3 V common bus</b> (fed by J1), <b>NO → the FT232H pin shown</b>. NC is unused. The 7 gobble switches all wire in parallel onto the one S23 pin (GPIO2 · C7).</div>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
 <!-- HARNESS INTRO -->
 <div class="page">
   <h1>Wiring <span class="gold">harnesses</span></h1>
