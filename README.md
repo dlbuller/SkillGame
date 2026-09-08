@@ -90,7 +90,7 @@ Two harnesses join the off-board lamps and switches to the control board — the
 |---|---|
 | ![Switch wiring](docs/schematics/switch_playfield.png) | ![Lamp wiring](docs/schematics/lamp_playfield.png) |
 
-> **Switches:** the original Bally rollover-wire leaf switch is discontinued — a mini snap-action microswitch with a hinge lever (pokes up through the playfield slot, tripped by the coin) is the cheap, in-stock replacement. See the BOM for the pinball-authentic alternative.
+> **Switches:** each hole uses an **arcade coin switch** — a snap-action switch with an 85 mm wire actuator that pokes up through a playfield slot; the rolling coin trips the wire (the long wire gives it a feather-light touch). It mounts hidden under the playfield and wires like any SPDT switch (~$3.99 ea, cheaper in packs).
 
 ## Build &amp; run the app
 

@@ -67,7 +67,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
     <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
     <tr><td class="qty">4</td><td>2-pin headers (J1/J3/J4/J5)</td><td>power in + solenoid out</td></tr>
-    <tr><td class="qty">~34</td><td>Playfield microswitches (hinge lever)</td><td>28 inputs (S23 = 7 gobble) · lever pokes up through the slot</td></tr>
+    <tr><td class="qty">~34</td><td>Arcade coin switch (85 mm wire actuator)</td><td>28 inputs (S23 = 7 gobble) · coin trips the wire in the slot</td></tr>
     <tr><td class="qty">1</td><td>WS2812b LED strip, 150 px</td><td>attract / distract shows</td></tr>
     <tr><td class="qty">20</td><td>#555 wedge LED bulb (6.3 V, non-polar)</td><td>16 lamps + a 2nd bulb on 100/200/300/400 (double bright)</td></tr>
     <tr><td class="qty">20</td><td>#555 / T10 wedge socket (twist-lock)</td><td>one per bulb; solder its leads to the J2 lamp lines</td></tr>
@@ -289,7 +289,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
 <div class="page">
   <div class="step-head"><div class="num" style="background:#1E6E7E;">S</div><div><div class="step-title">Switch harness — wiring</div><div class="step-sub">3.3 V bus + one signal per switch, every solder point</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_harness.png" style="max-height:176mm;">
-  <div class="warn"><b>Which switch?</b> The original Bally rollover-wire leaf switch (ASW-A1-152) is <b>discontinued</b>. Use a <b>mini snap-action microswitch with a hinge lever</b> — the lever pokes up through the playfield slot and the coin trips it (~$0.80 ea, in stock). Pinball-authentic alt: Action Pinball <b>SW-1A-120</b> ($8.39, in stock) with a rollover wireform. Best of all — reuse your machine's originals.</div>
+  <div class="warn"><b>Which switch?</b> Use an <b>arcade coin switch with an 85 mm straight wire actuator</b> (SPDT, ~$3.99 ea; ~$2 in 10-packs on eBay/AliExpress). It's a snap-action microswitch with a long thin wire — the wire pokes up through a slot in the playfield and the rolling coin trips it. The long wire gives so much leverage that a light coin trips it easily, and the switch body mounts <b>hidden under the playfield</b>. It wires like any SPDT switch (COM + NO), so no board changes. This is the same style Bally used.</div>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
