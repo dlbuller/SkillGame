@@ -1,4 +1,36 @@
-(kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0") (uuid "c9acd167-86f6-415d-9198-7eb052d8519c") (paper "B") (lib_symbols 
+(kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0") (uuid "c9acd167-86f6-415d-9198-7eb052d8519c") (paper "C") (lib_symbols 
+
+(symbol "Device:C" (pin_numbers (hide yes)) (pin_names (offset 0.254)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
+
+(property "Reference" "C" (at 0.635 2.54 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Value" "C" (at 0.635 -2.54 0) (effects (font (size 1.27 1.27)) (justify left))) 
+
+(property "Footprint" "" (at 0.9652 -3.81 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Unpolarized capacitor" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_keywords" "cap capacitor" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "ki_fp_filters" "C_*" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(symbol "C_0_1" 
+
+(polyline (pts 
+
+(xy -2.032 0.762) 
+
+(xy 2.032 0.762)) (stroke (width 0.508) (type default)) (fill (type none))) 
+
+(polyline (pts 
+
+(xy -2.032 -0.762) 
+
+(xy 2.032 -0.762)) (stroke (width 0.508) (type default)) (fill (type none)))) 
+
+(symbol "C_1_1" (pin passive line (at 0 3.81 270) (length 2.794) (name "~" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27))))) (pin passive line (at 0 -3.81 90) (length 2.794) (name "~" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))) (embedded_fonts no)) 
 
 (symbol "Device:LED" (pin_numbers (hide yes)) (pin_names (offset 1.016) (hide yes)) (exclude_from_sim no) (in_bom yes) (on_board yes) 
 
@@ -7210,588 +7242,1278 @@
 
 (property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
-(property "Description" "#555 wedge LED bulb (off-board, in a lamp socket)" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "37ec1325-e9bb-4f0d-bd1d-23288d57813b")) (pin "1" (uuid "2b542d76-2bee-475e-9a4f-5a0716b9dcd4")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "D119") (unit 1)))))	(label "LN100"
-		(at 355.6 144.78 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "7ebcec76-1eef-4a49-b7c1-fd5947f16f1b")
-	)
-	(label "LP100"
-		(at 368.3 144.78 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "2e260800-7014-4d3b-ab01-e4e7084ce06b")
-	)
-	(label "LN200"
-		(at 355.6 147.32 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "d1fe68a3-a179-4ded-8a46-09da7eb8fec8")
-	)
-	(label "LP200"
-		(at 368.3 147.32 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "cec49eb3-d187-4730-ad97-dfd7620d4409")
-	)
-	(label "LN300"
-		(at 355.6 149.86 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "96b725aa-af84-4353-83b7-f942b136a14d")
-	)
-	(label "LP300"
-		(at 368.3 149.86 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "ab09cc90-0d43-48fd-a907-e72e4379455d")
-	)
-	(label "LN400"
-		(at 355.6 152.4 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "0fdde7bb-0d62-4b98-b7ba-92384d993534")
-	)
-	(label "LP400"
-		(at 368.3 152.4 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "cd7e8d0e-f7aa-4652-a4c1-fffdc9634cb6")
-	)
-	(label "LNGO"
-		(at 355.6 154.94 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "ba3d4c31-8483-46d3-bf31-8456226fd747")
-	)
-	(label "LPGO"
-		(at 368.3 154.94 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "87cf786e-427a-4a56-9f54-2f17cd76539a")
-	)
-	(label "LNWIN"
-		(at 355.6 157.48 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "dcef92c4-4423-4333-9f3a-c07a953cec49")
-	)
-	(label "LPWIN"
-		(at 368.3 157.48 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "93bfd302-50f6-4eb1-abfe-a5653f006485")
-	)
-	(label "LN10"
-		(at 355.6 160.02 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "b223f508-3db7-4493-a1f3-5d2cce3835cc")
-	)
-	(label "LP10"
-		(at 368.3 160.02 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "d71b67e3-1db0-43e2-9116-754d92e6a0bc")
-	)
-	(label "LN20"
-		(at 355.6 162.56 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "96206af0-52dc-41be-9e35-1db89ff279d1")
-	)
-	(label "LP20"
-		(at 368.3 162.56 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "c2c0e541-9c02-48f0-a1f0-491ac852c75f")
-	)
-	(label "LN30"
-		(at 355.6 165.1 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "674e9442-a260-48cc-8011-b6599ba79198")
-	)
-	(label "LP30"
-		(at 368.3 165.1 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "86a5aa63-183a-430f-9ea5-83377ebabf90")
-	)
-	(label "LN40"
-		(at 355.6 167.64 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "a2164622-be02-4c96-af68-148694ccc04c")
-	)
-	(label "LP40"
-		(at 368.3 167.64 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "44e30cee-2a31-4419-a5ee-e6df1550606c")
-	)
-	(label "LN50"
-		(at 355.6 170.18 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "14aee318-2210-4807-90e7-e5f60c4bcec5")
-	)
-	(label "LP50"
-		(at 368.3 170.18 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "62cb293b-e55e-42db-91fe-ece09a07fb7e")
-	)
-	(label "LN60"
-		(at 355.6 172.72 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "d765cfc3-9118-4efc-9b25-58ddcfc91485")
-	)
-	(label "LP60"
-		(at 368.3 172.72 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "55ce247a-d93e-4a1f-97a7-8157ded7acc2")
-	)
-	(label "LN70"
-		(at 355.6 175.26 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "fa1cc54c-051b-41db-8eda-c4cb77d1fb28")
-	)
-	(label "LP70"
-		(at 368.3 175.26 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "3d5bc126-0abc-459f-b874-de275f59c6af")
-	)
-	(label "LN80"
-		(at 355.6 177.8 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "865585ec-2eac-4869-9343-bdeb7bd40d3c")
-	)
-	(label "LP80"
-		(at 368.3 177.8 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "6d319801-f04f-4bb1-ba60-46a8403bf58e")
-	)
-	(label "LN90"
-		(at 355.6 180.34 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "94be7227-15db-4bef-bc3e-03260587e79e")
-	)
-	(label "LP90"
-		(at 368.3 180.34 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "0583f628-2a06-40b8-8ccf-0d30312efa99")
-	)
-	(label "LNTILT"
-		(at 355.6 182.88 180)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "b7ee46e5-9b46-40c6-bd7a-1d70bbaddc83")
-	)
-	(label "LPTILT"
-		(at 368.3 182.88 0)
-		(effects
-			(font (size 0.8 0.8))
-			(justify left bottom)
-		)
-		(uuid "7be7ec38-361b-4b31-a91f-f0dac0ab873a")
-	)
-	(label "LP100"
-		(at 149.86 215.9 0)
+(property "Description" "#555 wedge LED bulb (off-board, in a lamp socket)" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "37ec1325-e9bb-4f0d-bd1d-23288d57813b")) (pin "1" (uuid "2b542d76-2bee-475e-9a4f-5a0716b9dcd4")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "D119") (unit 1))))) 
+
+(label "LN100" (at 355.6 144.78 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "7ebcec76-1eef-4a49-b7c1-fd5947f16f1b")) 
+
+(label "LP100" (at 368.3 144.78 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "2e260800-7014-4d3b-ab01-e4e7084ce06b")) 
+
+(label "LN200" (at 355.6 147.32 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "d1fe68a3-a179-4ded-8a46-09da7eb8fec8")) 
+
+(label "LP200" (at 368.3 147.32 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "cec49eb3-d187-4730-ad97-dfd7620d4409")) 
+
+(label "LN300" (at 355.6 149.86 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "96b725aa-af84-4353-83b7-f942b136a14d")) 
+
+(label "LP300" (at 368.3 149.86 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "ab09cc90-0d43-48fd-a907-e72e4379455d")) 
+
+(label "LN400" (at 355.6 152.4 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "0fdde7bb-0d62-4b98-b7ba-92384d993534")) 
+
+(label "LP400" (at 368.3 152.4 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "cd7e8d0e-f7aa-4652-a4c1-fffdc9634cb6")) 
+
+(label "LNGO" (at 355.6 154.94 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "ba3d4c31-8483-46d3-bf31-8456226fd747")) 
+
+(label "LPGO" (at 368.3 154.94 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "87cf786e-427a-4a56-9f54-2f17cd76539a")) 
+
+(label "LNWIN" (at 355.6 157.48 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "dcef92c4-4423-4333-9f3a-c07a953cec49")) 
+
+(label "LPWIN" (at 368.3 157.48 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "93bfd302-50f6-4eb1-abfe-a5653f006485")) 
+
+(label "LN10" (at 355.6 160.02 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "b223f508-3db7-4493-a1f3-5d2cce3835cc")) 
+
+(label "LP10" (at 368.3 160.02 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "d71b67e3-1db0-43e2-9116-754d92e6a0bc")) 
+
+(label "LN20" (at 355.6 162.56 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "96206af0-52dc-41be-9e35-1db89ff279d1")) 
+
+(label "LP20" (at 368.3 162.56 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "c2c0e541-9c02-48f0-a1f0-491ac852c75f")) 
+
+(label "LN30" (at 355.6 165.1 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "674e9442-a260-48cc-8011-b6599ba79198")) 
+
+(label "LP30" (at 368.3 165.1 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "86a5aa63-183a-430f-9ea5-83377ebabf90")) 
+
+(label "LN40" (at 355.6 167.64 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "a2164622-be02-4c96-af68-148694ccc04c")) 
+
+(label "LP40" (at 368.3 167.64 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "44e30cee-2a31-4419-a5ee-e6df1550606c")) 
+
+(label "LN50" (at 355.6 170.18 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "14aee318-2210-4807-90e7-e5f60c4bcec5")) 
+
+(label "LP50" (at 368.3 170.18 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "62cb293b-e55e-42db-91fe-ece09a07fb7e")) 
+
+(label "LN60" (at 355.6 172.72 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "d765cfc3-9118-4efc-9b25-58ddcfc91485")) 
+
+(label "LP60" (at 368.3 172.72 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "55ce247a-d93e-4a1f-97a7-8157ded7acc2")) 
+
+(label "LN70" (at 355.6 175.26 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "fa1cc54c-051b-41db-8eda-c4cb77d1fb28")) 
+
+(label "LP70" (at 368.3 175.26 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "3d5bc126-0abc-459f-b874-de275f59c6af")) 
+
+(label "LN80" (at 355.6 177.8 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "865585ec-2eac-4869-9343-bdeb7bd40d3c")) 
+
+(label "LP80" (at 368.3 177.8 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "6d319801-f04f-4bb1-ba60-46a8403bf58e")) 
+
+(label "LN90" (at 355.6 180.34 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "94be7227-15db-4bef-bc3e-03260587e79e")) 
+
+(label "LP90" (at 368.3 180.34 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "0583f628-2a06-40b8-8ccf-0d30312efa99")) 
+
+(label "LNTILT" (at 355.6 182.88 180) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "b7ee46e5-9b46-40c6-bd7a-1d70bbaddc83")) 
+
+(label "LPTILT" (at 368.3 182.88 0) (effects (font (size 0.8 0.8)) (justify left bottom)) (uuid "7be7ec38-361b-4b31-a91f-f0dac0ab873a")) 
+
+(label "LP100" (at 149.86 215.9 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "d62c523d-073f-42f8-bbad-df44fdec0c06")) 
+
+(label "LN100" (at 149.86 208.28 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "ac939f69-b6ac-4c96-96ab-7de2742b2962")) 
+
+(label "LP100" (at 180.34 215.9 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "fc682621-a0c1-403c-810d-7093b9ca74a0")) 
+
+(label "LN100" (at 180.34 208.28 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "8a4499af-c477-4aa7-80da-7163e4b85a25")) 
+
+(label "LP200" (at 209.55 215.9 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "71ec52de-12fd-48c6-b162-a230f775944d")) 
+
+(label "LN200" (at 209.55 208.28 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "6b94a754-1ddc-410e-b6fe-e6bc8d792649")) 
+
+(label "LP200" (at 240.03 215.9 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "a67254cf-38e3-4485-a32d-45b42ba8734d")) 
+
+(label "LN200" (at 240.03 208.28 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "307c6d27-08c0-4790-8518-c3018627a194")) 
+
+(label "LP300" (at 270.51 215.9 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "2df25e6d-7490-41b7-bcac-546f1a580b2e")) 
+
+(label "LN300" (at 270.51 208.28 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "08335363-b5f6-4e78-8862-5872ceb87615")) 
+
+(label "LP300" (at 149.86 232.41 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "034921e1-322f-4ea6-8129-875ff2cb092b")) 
+
+(label "LN300" (at 149.86 224.79 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "0675cbe8-5b50-45a6-9a28-4b3e340d9864")) 
+
+(label "LP400" (at 180.34 232.41 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "2c59bdf2-cacc-4060-8e9f-c3aec5f7879e")) 
+
+(label "LN400" (at 180.34 224.79 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "5200067b-7805-4be0-bc93-47fc32dfc86c")) 
+
+(label "LP400" (at 209.55 232.41 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "cf137ab1-7e03-4422-aebc-45fab653130c")) 
+
+(label "LN400" (at 209.55 224.79 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "4729f022-fd73-4a12-8b98-d07053625b88")) 
+
+(label "LPGO" (at 240.03 232.41 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "877aaac3-1398-42aa-ba05-2d7a8a738234")) 
+
+(label "LNGO" (at 240.03 224.79 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "9efb6fdb-520b-4a1a-b7e3-c693944f0502")) 
+
+(label "LPWIN" (at 270.51 232.41 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "4fab911c-0606-4c4a-b0e5-a8c0ee4f3cc0")) 
+
+(label "LNWIN" (at 270.51 224.79 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "e81fc781-e306-41b5-89d5-ef59dbe0ed35")) 
+
+(label "LP10" (at 149.86 247.65 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "e8f1fb27-eb2b-4859-a5f0-94e032efcfa6")) 
+
+(label "LN10" (at 149.86 240.03 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "3a64297d-e6a7-4f01-a2d3-867c09c86a57")) 
+
+(label "LP20" (at 180.34 247.65 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "98c8fe14-16e3-4709-a64e-9d21270d5db3")) 
+
+(label "LN20" (at 180.34 240.03 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "fff002a3-cf44-4825-ae48-b385961c6310")) 
+
+(label "LP30" (at 209.55 247.65 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "39045b13-5e93-4fd4-b671-79e636958617")) 
+
+(label "LN30" (at 209.55 240.03 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "a17fca6f-b482-4291-81b3-52fedf0ad8f1")) 
+
+(label "LP40" (at 240.03 247.65 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "3dd8d472-a430-47f0-a872-83bb6bd168dd")) 
+
+(label "LN40" (at 240.03 240.03 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "52cabc97-0e91-4b50-b74a-81c1e61d72a4")) 
+
+(label "LP50" (at 270.51 247.65 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "5ec82681-e486-447d-aba6-6156195c4403")) 
+
+(label "LN50" (at 270.51 240.03 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "efdfe0d6-02b1-447f-9486-063683c954e8")) 
+
+(label "LP60" (at 149.86 264.16 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "5ef34c5e-ade5-4e3c-a801-4b81e2e23354")) 
+
+(label "LN60" (at 149.86 256.54 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "951b710f-858d-4ad4-a789-621adb110111")) 
+
+(label "LP70" (at 180.34 264.16 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "109b4adc-0398-44b3-b559-22e81ad42aa7")) 
+
+(label "LN70" (at 180.34 256.54 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "232cbf75-de00-42b5-9042-ae23ce26b4d9")) 
+
+(label "LP80" (at 209.55 264.16 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "3afb05b1-13fd-4989-b405-28debe24fdc7")) 
+
+(label "LN80" (at 209.55 256.54 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "bcc2e036-c1c5-410a-a37f-f45d30369db4")) 
+
+(label "LP90" (at 240.03 264.16 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "0f225a29-d62e-4ccb-b943-4abab18b7072")) 
+
+(label "LN90" (at 240.03 256.54 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "bfff77e8-b5ea-4f84-a12b-873fe64ea93a")) 
+
+(label "LPTILT" (at 270.51 264.16 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "61b086de-ae19-4a86-9cfd-8f917772c7fb")) 
+
+(label "LNTILT" (at 270.51 256.54 0) (effects (font (size 1.0 1.0)) (justify left bottom)) (uuid "7634a20e-03cb-4ccf-a21b-763ae588dfd2")) 
+
+(text "LAMPS: each pair drives an off-board #555 wedge LED bulb (6.3 V non-polar, self-limiting).\nR30-R62 = 0 R links (the bulb has its own resistor; the 5 V rail under-drives a 6.3 V bulb = safe).\n100 / 200 / 300 / 400 hole = TWO bulbs in parallel on the same J2 output = double brightness." (at 17.78 213 0) (effects (font (size 1.3 1.3)) (justify left top)) (uuid "6c01fa58-db60-4516-b1dd-f826754e40e8")) 
+
+(symbol (lib_id "Device:C") (at 34.29 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "41907f38-f7fe-4f12-a601-7498d05cc52b") 
+
+(property "Reference" "C1" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "8a225d0b-73b4-4a23-b858-478348db3109")) (pin "1" (uuid "407491ff-e4dd-4a60-9ed5-2ffc7360f236")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C1") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 34.29 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "16c5b257-22c9-4bbf-909b-0b8024178622") 
+
+(property "Reference" "#PWR0C1" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "ca98caf3-6eba-433e-b274-5d83a87abdac")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C1") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 72.39 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "1a2d92eb-dddc-4905-accc-51326b408796") 
+
+(property "Reference" "C2" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "aecdbc29-9e4c-4f5b-878f-5591e40e3f3f")) (pin "1" (uuid "622d1f49-7263-4494-a685-b55305c9f7ae")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C2") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 72.39 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "54f3e31e-b8f7-4f8c-94e8-be443a7195cc") 
+
+(property "Reference" "#PWR0C2" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "29303b2b-890a-4eeb-83fa-d049591adf3c")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C2") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 110.49 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c1b1ed2d-20aa-400f-b2a7-ab7cfcf2cf5f") 
+
+(property "Reference" "C3" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "60e7e6e1-59d7-479a-9c11-f02d5ba5f833")) (pin "1" (uuid "4ef51aa2-9501-4c16-bc05-b9e51651cdb6")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C3") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 110.49 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "459e5156-0134-4754-b68f-c1961dd507ac") 
+
+(property "Reference" "#PWR0C3" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "a914d1fe-7394-46a9-b524-45ca6047c002")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C3") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 148.59 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "2e1308e3-513d-4d86-acdd-b49a7962c57f") 
+
+(property "Reference" "C4" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "1f431208-54b3-4290-9691-56104e2ab644")) (pin "1" (uuid "2e6ed37b-3aff-4d48-9994-e092531fed76")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C4") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 148.59 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "8b691af7-9848-467b-9c4d-fd5befb98141") 
+
+(property "Reference" "#PWR0C4" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "a504db3e-6f4a-4b19-bcc4-bf21b64b0b8a")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C4") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 185.42000000000002 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "13736e80-b650-49c1-ae82-945a65fd5326") 
+
+(property "Reference" "C5" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "e4322688-f6d4-4f04-b801-a8e34248a4b2")) (pin "1" (uuid "4a8bfff2-f190-4293-8be1-ccf594245c59")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C5") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 185.42 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "4cb383d0-5e30-4e1e-912c-d93497158a4b") 
+
+(property "Reference" "#PWR0C5" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c2b9d03e-7935-4715-ad71-77fb6efd8ddc")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C5") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 223.52 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "5a85b9c6-ae50-48e5-bbe8-2c7b69478f3f") 
+
+(property "Reference" "C6" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "294acec9-89c6-4758-b571-2bb25cbe2699")) (pin "1" (uuid "d592d275-74f6-411f-b868-23db5078fe6b")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C6") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 223.52 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "a78875d3-b31d-4840-8c86-1e926f9661bb") 
+
+(property "Reference" "#PWR0C6" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "0d731ea7-671a-44a5-ae61-c0f644a25ce0")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C6") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 261.62 299.72 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "efd1a203-aee1-4712-bdab-b0fa785760c6") 
+
+(property "Reference" "C7" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "828609ea-a2ae-4227-9adb-593663c8087c")) (pin "1" (uuid "74347336-08b7-446c-ba1f-453268450cf6")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C7") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 261.62 303.53 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "32721795-8a10-4b13-b6cf-ce4c86f998d7") 
+
+(property "Reference" "#PWR0C7" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "931d69ce-e9f6-4e48-9cdc-2ec71a484ffe")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C7") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 34.29 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "1d58ea53-c41e-4d20-aa41-04d42c123ae4") 
+
+(property "Reference" "C8" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "0d5248c7-a9e0-4cba-9568-b89ec03068d7")) (pin "1" (uuid "9c602814-1e86-4300-a97a-1f0609e026d7")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C8") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 34.29 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "c8bf46f6-328b-4086-8331-d4b81d6fd325") 
+
+(property "Reference" "#PWR0C8" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "549aa194-b364-4387-ae5f-89070c884f69")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C8") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 72.39 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "a33e9aac-8f9c-42ca-a0f3-43945f6f2cd5") 
+
+(property "Reference" "C9" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "bc10200c-5393-4a5a-a706-0d8e1b975438")) (pin "1" (uuid "59efc1f1-fe96-4ea1-8793-2592f73f9af4")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C9") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 72.39 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "a55f2aef-deb1-45e7-bfcf-d29b302dfc05") 
+
+(property "Reference" "#PWR0C9" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "a2db5b8d-3750-4c01-bab6-d70b3cd58700")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C9") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 110.49 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "6b34c2f0-73be-4c32-a203-c6058217fa5d") 
+
+(property "Reference" "C10" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "7b52de1f-b3a8-4b50-9b6a-b82e749aec4d")) (pin "1" (uuid "a4237332-b63d-4969-b6d8-4db5e9ad2cd5")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C10") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 110.49 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "5db1e623-9447-43b9-bfd0-9961891cf83e") 
+
+(property "Reference" "#PWR0C10" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3ba21f07-1902-4661-a7fa-dc3a39d3ea8b")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C10") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 148.59 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "dc4bacca-cf99-4ef7-ada0-0cac6e3f7122") 
+
+(property "Reference" "C11" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "cc634a47-7b76-4420-99bd-39b48ffd5678")) (pin "1" (uuid "0ef881fb-3758-41e2-b509-88d16918a380")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C11") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 148.59 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "67078561-ec46-4317-80a0-bb2d58ab2d3e") 
+
+(property "Reference" "#PWR0C11" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "1c19dd07-59a9-4874-8b5b-8e0b430f3d4e")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C11") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 185.42000000000002 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "a239295d-9d38-4ec3-aaff-e75fc5b06cef") 
+
+(property "Reference" "C12" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "1c97fe34-eef1-4660-a3d6-1b1e0f9eba39")) (pin "1" (uuid "c74dedc7-3436-431c-9b78-7fc669bdf04a")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C12") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 185.42 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "40ed41dc-dfe9-4118-bb23-6c8254918db9") 
+
+(property "Reference" "#PWR0C12" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "b602598f-88a5-4e13-a17e-8f10820c4ffe")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C12") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 223.52 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "cb3108de-3961-49a9-8c14-b97585b339d2") 
+
+(property "Reference" "C13" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "e19b0541-acff-45fb-bb64-be7d183cfba2")) (pin "1" (uuid "e9a69028-c1bb-4e26-bc1c-cf9d2ed3c60d")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C13") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 223.52 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "87ea6912-dff9-4397-a91b-84445831a6c7") 
+
+(property "Reference" "#PWR0C13" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "52ccc0a8-cdd1-4d00-ae10-0896c397a045")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C13") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 261.62 334.01 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e8fe53a8-8d16-4954-b0e8-0972672ad116") 
+
+(property "Reference" "C14" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "156a9c55-f283-4d82-92bb-d09f515ec04b")) (pin "1" (uuid "943122ed-3013-410b-9402-3a4758604dc9")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C14") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 261.62 337.82 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "8fe75a7d-c60a-4ae8-a96c-77a35dca5f58") 
+
+(property "Reference" "#PWR0C14" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "3c74e417-b259-4db1-8c76-0e5193a4acfc")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C14") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 34.29 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c11bb4bb-3977-4e33-a963-62a158331cda") 
+
+(property "Reference" "C15" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "00f19f47-2ea3-4701-9aeb-959de4e3342e")) (pin "1" (uuid "9abd2f2e-6e16-427e-be90-b4887c4d60a7")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C15") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 34.29 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "a3152c7c-e800-4460-93cb-06e9755d8d01") 
+
+(property "Reference" "#PWR0C15" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "2ecf81fb-508b-412f-aed2-ce5e4d7bd9ff")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C15") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 72.39 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "98bbfa2f-3935-4fe4-b17a-9eafb3b63d5e") 
+
+(property "Reference" "C16" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "73e4d9e3-2bfa-4f1c-918a-2ad3ac8f5904")) (pin "1" (uuid "4194cca5-4d52-4b2f-99e5-eb35f0eca866")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C16") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 72.39 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "56ee2e8b-3484-40e0-971d-16f94726c7cb") 
+
+(property "Reference" "#PWR0C16" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "6cbab57c-ee28-47e8-ae22-6c09be9dfe41")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C16") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 110.49 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "fb61869a-f647-482e-aa4e-7e9d4b3adddd") 
+
+(property "Reference" "C17" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "58754781-8780-4e48-9fcd-b90f0b57c3d0")) (pin "1" (uuid "3dba8a17-6c96-420d-8c59-95bfb66722ed")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C17") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 110.49 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "bdd3ca7f-b214-4fd4-81b3-1ffe065dd22e") 
+
+(property "Reference" "#PWR0C17" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "72801d85-3966-4a32-87bb-73b4400831e5")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C17") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 148.59 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "763f74e5-e7f5-4831-b6e4-5430ddbf1ef5") 
+
+(property "Reference" "C18" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "9635f21b-0103-429f-a2d3-86533e510dac")) (pin "1" (uuid "d0abe2fb-34fe-4aaa-99a3-ec4c0e659451")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C18") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 148.59 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "044fddd1-dbc6-4c99-9b08-7cd3c2f35864") 
+
+(property "Reference" "#PWR0C18" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "cfc8a3fa-a3a6-460d-a731-a5ad98481201")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C18") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 185.42000000000002 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "f5b3175d-ef22-4307-a32a-b8fa96219001") 
+
+(property "Reference" "C19" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "d39f9dbf-b560-478f-a489-e382e0f0e3a0")) (pin "1" (uuid "6571a658-2de5-4f89-aaf9-c5ebb5528704")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C19") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 185.42 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "1dbc85ef-517b-43de-a7e9-28334e557e0e") 
+
+(property "Reference" "#PWR0C19" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "001869c3-c6d5-404c-9118-7601eda02c26")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C19") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 223.52 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e5070d06-94ad-4e18-8c49-cd1bfbde65d1") 
+
+(property "Reference" "C20" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "3d6fa188-9686-4f76-a363-3d6ea4736748")) (pin "1" (uuid "746cc32b-442b-4991-8f07-d444c9f10acd")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C20") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 223.52 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "7e68cb18-5972-4a66-8958-905f58316499") 
+
+(property "Reference" "#PWR0C20" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "82e44586-899d-4fc4-b7fa-94041984dced")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C20") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 261.62 368.3 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "adea3884-d761-4321-ad65-167c1d06495a") 
+
+(property "Reference" "C21" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "f90e2867-d6d0-4bc7-8b20-939de0992fbc")) (pin "1" (uuid "582b9f19-9f6a-4fcd-80c6-028cc9654c15")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C21") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 261.62 372.11 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "2050d0a0-de25-4865-8c5e-90216613e9ba") 
+
+(property "Reference" "#PWR0C21" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "7a78a107-a504-436c-a117-d397144ec958")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C21") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 34.29 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "ee265d1e-d37d-41e6-ab50-5724f8339a53") 
+
+(property "Reference" "C22" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "7b6685bb-380f-47f8-a32f-5f4b0965eba2")) (pin "1" (uuid "6d79a24f-f6d6-4935-8111-dc858bc03ea2")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C22") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 34.29 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "a4b6cb3b-c3af-49ac-a32c-b90f4aa72f82") 
+
+(property "Reference" "#PWR0C22" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "686137cb-7b6a-4bf5-8be7-96dbdcba1186")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C22") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 72.39 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "204b1eeb-2dbf-4030-abf1-9fda8e1878f3") 
+
+(property "Reference" "C23" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "97a0ee05-589d-4db4-ba2c-5ac382b2cf60")) (pin "1" (uuid "2a77e2ca-0252-4dfc-af07-6f6bd528c574")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C23") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 72.39 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "69b47052-7023-43fb-bbc7-d8d00cd5a656") 
+
+(property "Reference" "#PWR0C23" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c04fac5d-19df-4f02-877d-132987ae7d43")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C23") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 110.49 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "30af92a8-3589-4df3-bee4-1a50790798e5") 
+
+(property "Reference" "C24" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "9258fc2c-35cc-4d10-87c8-12b520ca2803")) (pin "1" (uuid "3385bb58-3d86-4818-937f-ed8d78921d14")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C24") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 110.49 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "776de213-0474-4db6-97ba-c5ad58052ca1") 
+
+(property "Reference" "#PWR0C24" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c6d65245-8afa-40e2-9491-ac249149e557")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C24") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 148.59 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "e0e1c3b1-1c73-4d20-94bc-89a05d43afe1") 
+
+(property "Reference" "C25" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "ed2c7938-e41f-4214-a166-522eee6cb2cb")) (pin "1" (uuid "2385c86c-8f8a-4b85-9e83-1170b00b9847")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C25") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 148.59 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "9403b66c-ea92-469d-9760-d9dd946a1e39") 
+
+(property "Reference" "#PWR0C25" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "c4a31979-2d62-409a-9ab8-dfcb5b317678")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C25") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 185.42000000000002 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "8322dd03-ccaf-4bed-881c-dc029dc18467") 
+
+(property "Reference" "C26" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "761492c7-90ce-497d-b6ab-dbd5ef53e29e")) (pin "1" (uuid "d3d1f885-3fac-4274-8d19-6eacef853f7a")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C26") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 185.42 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "93dde8a4-1a1b-4e9a-9288-1a69d488214b") 
+
+(property "Reference" "#PWR0C26" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "5aa409c6-69c5-4538-ae40-9396189aea05")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C26") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 223.52 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "9adf1714-2171-408d-a9c2-9c225994d009") 
+
+(property "Reference" "C27" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "01727a84-efac-4ef4-91dc-8736eab99c83")) (pin "1" (uuid "9d3b1ebd-4766-43f6-b2d2-e264de94b283")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C27") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 223.52 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "db2e9242-ebca-439a-bc48-8394bca4a2f1") 
+
+(property "Reference" "#PWR0C27" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "b07c4ad4-3818-4998-98bb-75b3cf2f28e9")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C27") (unit 1))))) 
+
+(symbol (lib_id "Device:C") (at 261.62 402.59000000000003 0) (mirror x) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "4033e900-3b2f-4d2a-97f7-38bf235b98ae") 
+
+(property "Reference" "C28" (at 54.61 61.214 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Value" "100nF" (at 54.61 63.754 90) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 54.61 64.262 90) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "~" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "0.1uF debounce/noise cap, switch input to GND" (at 54.61 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "2" (uuid "100d3cc0-573a-45ae-bdee-cf811c2dc45b")) (pin "1" (uuid "d52e14e8-7794-4d70-825e-b4d8b8799a5d")) (instances (project "" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "C28") (unit 1))))) 
+
+(symbol (lib_id "power:GNDREF") (at 261.62 406.4 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced yes) (uuid "2d2c6a86-f161-459c-b0f8-dbc1e488187c") 
+
+(property "Reference" "#PWR0C28" (at 165.1 101.6 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Value" "GNDREF" (at 165.1 100.33 0) (effects (font (size 1.27 1.27)))) 
+
+(property "Footprint" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Datasheet" "" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+
+(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground" (at 165.1 95.25 0) (effects (font (size 1.27 1.27)) (hide yes))) (pin "1" (uuid "1dafde8a-0797-4be1-b821-7935e93c72a9")) (instances (project "SkillGame" (path "/c9acd167-86f6-415d-9198-7eb052d8519c" (reference "#PWR0C28") (unit 1)))))	(label "SWIN0"
+		(at 34.29 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "d62c523d-073f-42f8-bbad-df44fdec0c06")
+		(uuid "61949d33-8a1e-4ed5-bfb1-9bbe84f9034c")
 	)
-	(label "LN100"
-		(at 149.86 208.28 0)
+	(label "SWIN0"
+		(at 50.8 66.04 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "a4293b00-15c6-4938-a684-3285ee3d7f81")
+	)
+	(label "SWIN1"
+		(at 72.39 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "ac939f69-b6ac-4c96-96ab-7de2742b2962")
+		(uuid "a59e18b7-8a77-4226-ae66-9376b8f28d50")
 	)
-	(label "LP100"
-		(at 180.34 215.9 0)
+	(label "SWIN1"
+		(at 59.69 72.39 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "537a4cbf-fa79-42c4-ad9c-2b396d524463")
+	)
+	(label "SWIN2"
+		(at 110.49 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "fc682621-a0c1-403c-810d-7093b9ca74a0")
+		(uuid "cb6f1aeb-e618-4ad1-9719-e14b820183e2")
 	)
-	(label "LN100"
-		(at 180.34 208.28 0)
+	(label "SWIN2"
+		(at 71.12 78.74 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "58283ba2-f43b-4baa-8add-a938f4b7c681")
+	)
+	(label "SWIN3"
+		(at 148.59 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "8a4499af-c477-4aa7-80da-7163e4b85a25")
+		(uuid "4b29e6bc-70c9-44c0-9232-e25d35f0e9c4")
 	)
-	(label "LP200"
-		(at 209.55 215.9 0)
+	(label "SWIN3"
+		(at 81.28 85.09 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "3cbc2e10-61bc-4185-ba15-d126d2878785")
+	)
+	(label "SWIN4"
+		(at 185.42 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "71ec52de-12fd-48c6-b162-a230f775944d")
+		(uuid "4104d7b5-8a40-4a4c-8f7a-e26e24a2d815")
 	)
-	(label "LN200"
-		(at 209.55 208.28 0)
+	(label "SWIN4"
+		(at 130.81 77.47 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "2940e944-e474-4b26-a154-4623ad53d109")
+	)
+	(label "SWIN5"
+		(at 223.52 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "6b94a754-1ddc-410e-b6fe-e6bc8d792649")
+		(uuid "2b8b17f3-7242-4924-9f47-04b5d3d848cd")
 	)
-	(label "LP200"
-		(at 240.03 215.9 0)
+	(label "SWIN5"
+		(at 125.73 69.85 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "f7cf6283-e85c-43e2-880a-2350f76597f4")
+	)
+	(label "SWIN6"
+		(at 261.62 295.91 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "a67254cf-38e3-4485-a32d-45b42ba8734d")
+		(uuid "bf32c4e3-c586-4d6f-ab1f-fd5a7770f87d")
 	)
-	(label "LN200"
-		(at 240.03 208.28 0)
+	(label "SWIN6"
+		(at 139.7 62.23 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "76db32fa-48f8-4b47-ba86-a22a8082e9be")
+	)
+	(label "SWIN7"
+		(at 34.29 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "307c6d27-08c0-4790-8518-c3018627a194")
+		(uuid "ca172b21-4e33-4307-84d4-9c74f64695f4")
 	)
-	(label "LP300"
-		(at 270.51 215.9 0)
+	(label "SWIN7"
+		(at 151.13 54.61 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "bc6f975a-73f1-4bc5-bb12-0694285f4c38")
+	)
+	(label "SWIN8"
+		(at 72.39 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "2df25e6d-7490-41b7-bcac-546f1a580b2e")
+		(uuid "19b5a678-810b-4cd2-b422-51dbd3ded4ae")
 	)
-	(label "LN300"
-		(at 270.51 208.28 0)
+	(label "SWIN8"
+		(at 151.13 45.72 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "1022bdb3-bbd0-4669-aa13-ed9553574c8e")
+	)
+	(label "SWIN9"
+		(at 110.49 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "08335363-b5f6-4e78-8862-5872ceb87615")
+		(uuid "ff32ea13-f294-4277-a7d1-7e22e5d7cbf1")
 	)
-	(label "LP300"
-		(at 149.86 232.41 0)
+	(label "SWIN9"
+		(at 151.13 38.1 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "a681d6ca-987c-4866-8274-d6069a175f6b")
+	)
+	(label "SWIN10"
+		(at 148.59 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "034921e1-322f-4ea6-8129-875ff2cb092b")
+		(uuid "b4b0ac91-cdf4-4d6e-a379-13a0213511e3")
 	)
-	(label "LN300"
-		(at 149.86 224.79 0)
+	(label "SWIN10"
+		(at 151.13 30.48 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "ee9aa7be-25ad-47fb-ac19-02757b1cb71b")
+	)
+	(label "SWIN11"
+		(at 185.42 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "0675cbe8-5b50-45a6-9a28-4b3e340d9864")
+		(uuid "dbced126-5273-4efc-a816-21792a01f6b2")
 	)
-	(label "LP400"
-		(at 180.34 232.41 0)
+	(label "SWIN11"
+		(at 151.13 22.86 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "6b8573bc-64cf-4950-8aa7-fba72dd9add8")
+	)
+	(label "SWIN12"
+		(at 223.52 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "2c59bdf2-cacc-4060-8e9f-c3aec5f7879e")
+		(uuid "6f6db185-e810-4dd3-be22-a8b767dd232a")
 	)
-	(label "LN400"
-		(at 180.34 224.79 0)
+	(label "SWIN12"
+		(at 50.8 154.94 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "aa125214-6ae2-4bd9-a254-f137047a284b")
+	)
+	(label "SWIN13"
+		(at 261.62 330.2 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "5200067b-7805-4be0-bc93-47fc32dfc86c")
+		(uuid "91a0a05a-0334-4122-85be-d3c18a6dd0dd")
 	)
-	(label "LP400"
-		(at 209.55 232.41 0)
+	(label "SWIN13"
+		(at 59.69 161.29 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "6095f549-dfc5-4679-8e19-a3f28003773b")
+	)
+	(label "SWIN14"
+		(at 34.29 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "cf137ab1-7e03-4422-aebc-45fab653130c")
+		(uuid "f15b800e-d3c4-453a-8404-c6d45fce1495")
 	)
-	(label "LN400"
-		(at 209.55 224.79 0)
+	(label "SWIN14"
+		(at 71.12 167.64 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "709f1f68-2c85-49c3-b2ca-08b7c9f3ce26")
+	)
+	(label "SWIN15"
+		(at 72.39 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "4729f022-fd73-4a12-8b98-d07053625b88")
+		(uuid "b316155a-82fe-42c2-8226-f3bf6987421f")
 	)
-	(label "LPGO"
-		(at 240.03 232.41 0)
+	(label "SWIN15"
+		(at 81.28 173.99 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "725b79da-d91f-404d-a933-2f157fc295ac")
+	)
+	(label "SWIN16"
+		(at 110.49 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "877aaac3-1398-42aa-ba05-2d7a8a738234")
+		(uuid "90277497-9546-4ab2-a54e-c72ef2985274")
 	)
-	(label "LNGO"
-		(at 240.03 224.79 0)
+	(label "SWIN16"
+		(at 130.81 166.37 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "d8f95d95-4d20-4a30-977e-c7b03cf75024")
+	)
+	(label "SWIN17"
+		(at 148.59 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "9efb6fdb-520b-4a1a-b7e3-c693944f0502")
+		(uuid "45b86bb6-9be9-4aa2-8ff1-517f5b22bde3")
 	)
-	(label "LPWIN"
-		(at 270.51 232.41 0)
+	(label "SWIN17"
+		(at 125.73 158.75 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "e5276c55-b5d6-47a5-a280-59a3a501b360")
+	)
+	(label "SWIN18"
+		(at 185.42 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "4fab911c-0606-4c4a-b0e5-a8c0ee4f3cc0")
+		(uuid "967bcfb3-2023-489b-8314-8a4ee5132941")
 	)
-	(label "LNWIN"
-		(at 270.51 224.79 0)
+	(label "SWIN18"
+		(at 139.7 151.13 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "50ce639c-dc50-485a-b580-7d042633a2f4")
+	)
+	(label "SWIN19"
+		(at 223.52 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "e81fc781-e306-41b5-89d5-ef59dbe0ed35")
+		(uuid "2711d942-fb4b-440e-b3f4-5aaaa621a2db")
 	)
-	(label "LP10"
-		(at 149.86 247.65 0)
+	(label "SWIN19"
+		(at 151.13 143.51 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "c03f2731-30e0-46b9-92ae-2fe66d521fe5")
+	)
+	(label "SWIN20"
+		(at 261.62 364.49 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "e8f1fb27-eb2b-4859-a5f0-94e032efcfa6")
+		(uuid "569eabd7-c09a-4fec-aa8f-14f22ccd0835")
 	)
-	(label "LN10"
-		(at 149.86 240.03 0)
+	(label "SWIN20"
+		(at 151.13 134.62 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "2595406b-b877-47ab-a451-7a47fdbca531")
+	)
+	(label "SWIN21"
+		(at 34.29 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "3a64297d-e6a7-4f01-a2d3-867c09c86a57")
+		(uuid "e9bf21ce-7daf-43f7-b4f5-091fe5f98467")
 	)
-	(label "LP20"
-		(at 180.34 247.65 0)
+	(label "SWIN21"
+		(at 151.13 127 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "bc00a2b3-4caf-4ead-9e7a-8842e91be6db")
+	)
+	(label "SWIN22"
+		(at 72.39 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "98c8fe14-16e3-4709-a64e-9d21270d5db3")
+		(uuid "3b05fea0-70a3-410f-a45f-b1ae81c65d2c")
 	)
-	(label "LN20"
-		(at 180.34 240.03 0)
+	(label "SWIN22"
+		(at 151.13 119.38 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "c44200c8-0e6e-49e4-b90c-22e4a3212310")
+	)
+	(label "SWIN23"
+		(at 110.49 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "fff002a3-cf44-4825-ae48-b385961c6310")
+		(uuid "9aad2a2f-3411-4b55-adb4-6220597228cc")
 	)
-	(label "LP30"
-		(at 209.55 247.65 0)
+	(label "SWIN23"
+		(at 151.13 111.76 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "1728db05-a14f-427f-8577-b37f9c79312c")
+	)
+	(label "SWIN24"
+		(at 148.59 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "39045b13-5e93-4fd4-b671-79e636958617")
+		(uuid "4a6a99f4-e7de-4dd3-8f4e-ffc82988ced8")
 	)
-	(label "LN30"
-		(at 209.55 240.03 0)
+	(label "SWIN24"
+		(at 237.49 83.82 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "fd8896e2-1ce1-43ac-a50b-df2b75744790")
+	)
+	(label "SWIN25"
+		(at 185.42 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "a17fca6f-b482-4291-81b3-52fedf0ad8f1")
+		(uuid "9e9ddb17-d80f-42ed-87d3-be19048e771e")
 	)
-	(label "LP40"
-		(at 240.03 247.65 0)
+	(label "SWIN25"
+		(at 246.38 90.17 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "998ac805-f832-45dc-856d-44bcf05f39df")
+	)
+	(label "SWIN26"
+		(at 223.52 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "3dd8d472-a430-47f0-a872-83bb6bd168dd")
+		(uuid "e84207a6-7295-4a8f-bd30-4c9dbaf0a451")
 	)
-	(label "LN40"
-		(at 240.03 240.03 0)
+	(label "SWIN26"
+		(at 257.81 96.52 0)
+		(effects
+			(font (size 0.9 0.9))
+			(justify left bottom)
+		)
+		(uuid "071baeda-9bfd-4bf3-a087-3202f563764f")
+	)
+	(label "SWIN27"
+		(at 261.62 398.78 0)
 		(effects
 			(font (size 1.0 1.0))
 			(justify left bottom)
 		)
-		(uuid "52cabc97-0e91-4b50-b74a-81c1e61d72a4")
+		(uuid "4136c365-36b3-4546-8064-ffd3cd6388cd")
 	)
-	(label "LP50"
-		(at 270.51 247.65 0)
+	(label "SWIN27"
+		(at 267.97 102.87 0)
 		(effects
-			(font (size 1.0 1.0))
+			(font (size 0.9 0.9))
 			(justify left bottom)
 		)
-		(uuid "5ec82681-e486-447d-aba6-6156195c4403")
+		(uuid "f80c87d4-dff7-4ba1-b5e6-e8751c64d87c")
 	)
-	(label "LN50"
-		(at 270.51 240.03 0)
+	(text "SWITCH-INPUT DEBOUNCE CAPS  -  100 nF from each input to GND (with the 10k pull-down = ~1 ms RC)."
+		(at 34 288 0)
 		(effects
-			(font (size 1.0 1.0))
+			(font (size 2.2 2.2))
 			(justify left bottom)
 		)
-		(uuid "efdfe0d6-02b1-447f-9486-063683c954e8")
-	)
-	(label "LP60"
-		(at 149.86 264.16 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "5ef34c5e-ade5-4e3c-a801-4b81e2e23354")
-	)
-	(label "LN60"
-		(at 149.86 256.54 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "951b710f-858d-4ad4-a789-621adb110111")
-	)
-	(label "LP70"
-		(at 180.34 264.16 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "109b4adc-0398-44b3-b559-22e81ad42aa7")
-	)
-	(label "LN70"
-		(at 180.34 256.54 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "232cbf75-de00-42b5-9042-ae23ce26b4d9")
-	)
-	(label "LP80"
-		(at 209.55 264.16 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "3afb05b1-13fd-4989-b405-28debe24fdc7")
-	)
-	(label "LN80"
-		(at 209.55 256.54 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "bcc2e036-c1c5-410a-a37f-f45d30369db4")
-	)
-	(label "LP90"
-		(at 240.03 264.16 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "0f225a29-d62e-4ccb-b943-4abab18b7072")
-	)
-	(label "LN90"
-		(at 240.03 256.54 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "bfff77e8-b5ea-4f84-a12b-873fe64ea93a")
-	)
-	(label "LPTILT"
-		(at 270.51 264.16 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "61b086de-ae19-4a86-9cfd-8f917772c7fb")
-	)
-	(label "LNTILT"
-		(at 270.51 256.54 0)
-		(effects
-			(font (size 1.0 1.0))
-			(justify left bottom)
-		)
-		(uuid "7634a20e-03cb-4ccf-a21b-763ae588dfd2")
-	)
-	(text "LAMPS: each pair drives an off-board #555 wedge LED bulb (6.3 V non-polar, self-limiting).\nR30-R62 = 0 R links (the bulb has its own resistor; the 5 V rail under-drives a 6.3 V bulb = safe).\n100 / 200 / 300 / 400 hole = TWO bulbs in parallel on the same J2 output = double brightness."
-		(at 17.78 213 0)
-		(effects
-			(font (size 1.3 1.3))
-			(justify left top)
-		)
-		(uuid "6c01fa58-db60-4516-b1dd-f826754e40e8")
+		(uuid "4e8241d0-5e96-4ee4-93d2-70175ee91908")
 	)
 )

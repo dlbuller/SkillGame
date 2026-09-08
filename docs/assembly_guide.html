@@ -62,6 +62,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">28</td><td>10 kΩ resistor</td><td>switch pull-downs</td></tr>
     <tr><td class="qty">16</td><td>1 kΩ resistor</td><td>transistor base</td></tr>
     <tr><td class="qty">16</td><td>0 Ω jumper (or solder bridge)</td><td>lamp links R30–R62 — the #555 bulb self-limits</td></tr>
+    <tr><td class="qty">28</td><td>100 nF ceramic cap (0805 SMD)</td><td>C1–C28 · switch-input debounce/noise (back of board)</td></tr>
     <tr><td class="qty">2</td><td>2.2 kΩ resistor</td><td>TIP120 base</td></tr>
     <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
     <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
@@ -174,6 +175,18 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <li><b>Keep the common at 3.3 V — never 5 V.</b> The FT232H inputs are <b>not</b> 5 V-tolerant; 5 V on an input can kill the chip.</li>
     <li>The <b>7 gobble holes</b> all report as one input (S23): wire their switches <b>in parallel</b> so any of them trips it.</li>
     <li>Run it as a harness (see the last pages): one 3.3 V bus wire daisy-chained to every switch, plus one signal wire per switch back to the board.</li>
+  </ul>
+  <div class="foot">SkillGame Assembly Guide</div>
+</div>
+
+<!-- STEP 5b: debounce caps -->
+<div class="page">
+  <div class="step-head"><div class="num">5b</div><div><div class="step-title">Fit the input caps</div><div class="step-sub">28× 100 nF on the board's back — debounce &amp; noise</div></div></div>
+  <img class="diagram" src="file:///C:/SkillGame/Schematics/caps.png" style="max-height:110mm;">
+  <ul class="do">
+    <li>Each switch input gets a <b>100 nF (0.1 µF) ceramic cap to GND</b> — C1–C28. With the 10 kΩ pull-down it forms a ~1 ms RC filter that kills contact chatter and noise picked up on the long playfield leads.</li>
+    <li>They're <b>SMD 0805 on the back of the board</b>, one tucked next to each pull-down (GND pad on the ground pour, the other to the input). Solder them last.</li>
+    <li>Optional but recommended — the game still works without them (the software also debounces), but they make the long switch runs far more reliable.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
