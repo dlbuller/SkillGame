@@ -55,7 +55,7 @@ namespace SkillGameWpf
             _live.Tick += LiveTick;
             Loaded += (s, e) =>
             {
-                if (!_built) { BuildBlocks(); BuildSchematic(); BuildChips(); BuildLiveOverlays(); _built = true; }
+                if (!_built) { BuildBlocks(); BuildSchematic(); BuildChips(); BuildHarnessBar(); BuildLiveOverlays(); _built = true; }
                 Dispatcher.BeginInvoke(new Action(() => ZoomTo(_sections["OVERVIEW"], false)), System.Windows.Threading.DispatcherPriority.Loaded);
                 LedEffects.FrameProduced += OnLedFrame;
                 _live.Start();
@@ -594,6 +594,67 @@ namespace SkillGameWpf
                 ImgSchem.Source = null; ImgSchem.Visibility = Visibility.Collapsed;
                 ImgPlaceholder.Visibility = Visibility.Visible; DetailZoomText.Visibility = Visibility.Collapsed;
                 ImgPlaceholderText.Text = $"Add your schematic here:\n{System.IO.Path.Combine(SchemDir, b.Key + ".png")}";
+            }
+            DetailOverlay.Visibility = Visibility.Visible;
+            DetailOverlay.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(160)));
+            if (found != null) Dispatcher.BeginInvoke(new Action(FitDetail), System.Windows.Threading.DispatcherPriority.Loaded);
+        }
+
+        // The small "cables" reference bar along the bottom: pops up a wiring drawing (image only, no block needed).
+        private void BuildHarnessBar()
+        {
+            var slate = new SolidColorBrush(Information);
+            HarnessHost.Children.Add(new TextBlock { Text = "CABLES + WIRING", Foreground = slate, FontFamily = (FontFamily)FindResource("DisplayFont"),
+                FontSize = 12, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(2, 0, 12, 0), Opacity = 0.85 });
+            foreach (var (label, key, cap) in new[]
+            {
+                ("LAMP HARNESS",   "lamp_harness",     "J2 plug → the 20 #555 wedge-bulb sockets, every solder point."),
+                ("LAMP 3D",        "lamp_harness_3d",  "The lamp cable in 3D — the plug fanning out to the bulbs."),
+                ("LAMPS ON BOARD", "lamp_playfield",   "Where each lamp lands on the backglass, wired back to J2."),
+                ("SWITCH HARNESS", "switch_harness",   "3.3 V bus + one signal per switch back to the board, every solder point."),
+                ("SWITCH 3D",      "switch_harness_3d","The switch cable in 3D — coin switches on the 3.3 V bus."),
+                ("SWITCHES ON PF", "switch_playfield", "Every switch in its real playfield spot, wired to the board."),
+                ("FUSE CABLE",     "fuse_cable_3d",    "The inline F3 fuse cable spliced into the 5 V lead to J3."),
+            })
+            {
+                string k = key, t = label, c = cap;
+                var btn = new Button { Content = label, Style = (Style)FindResource("PillButton"), Height = 30, MinWidth = 60,
+                    Margin = new Thickness(0, 0, 7, 7), Foreground = slate, BorderBrush = slate, FontSize = 11, Padding = new Thickness(12, 0, 12, 0) };
+                btn.Click += (s, e) => ShowImage(k, t, Information, c);
+                HarnessHost.Children.Add(btn);
+            }
+        }
+
+        // Pop the detail overlay showing just an image (used by the cables bar) — no diagram block required.
+        private void ShowImage(string imgKey, string title, Color accent, string caption)
+        {
+            DetailTitle.Text = title;
+            DetailTitle.Foreground = new SolidColorBrush(accent);
+            DetailAccent.Background = new SolidColorBrush(accent);
+            DetailTheory.Text = caption;
+            PinoutPanel.Visibility = Visibility.Collapsed;
+            ImgBox.Visibility = Visibility.Visible;
+            Grid.SetColumn(TheoryPanel, 1); Grid.SetColumnSpan(TheoryPanel, 1);
+            TheoryPanel.Width = 330; TheoryPanel.BorderThickness = new Thickness(1, 0, 0, 0);
+            PowerDeck.Visibility = Visibility.Collapsed; PowerHint.Visibility = Visibility.Collapsed;
+            BoardSideBtn.Visibility = Visibility.Collapsed; _boardSide = "front";
+            string? found = FindImg(imgKey);
+            if (found != null)
+            {
+                try
+                {
+                    var bmp = new BitmapImage();
+                    bmp.BeginInit(); bmp.CacheOption = BitmapCacheOption.OnLoad; bmp.UriSource = new Uri(found); bmp.EndInit();
+                    ImgSchem.Source = bmp; ImgSchem.Width = bmp.PixelWidth; ImgSchem.Height = bmp.PixelHeight;
+                    ImgSchem.Visibility = Visibility.Visible; ImgPlaceholder.Visibility = Visibility.Collapsed; DetailZoomText.Visibility = Visibility.Visible;
+                }
+                catch { found = null; }
+            }
+            if (found == null)
+            {
+                ImgSchem.Source = null; ImgSchem.Visibility = Visibility.Collapsed;
+                ImgPlaceholder.Visibility = Visibility.Visible; DetailZoomText.Visibility = Visibility.Collapsed;
+                ImgPlaceholderText.Text = $"Add the image here:\n{System.IO.Path.Combine(SchemDir, imgKey + ".png")}";
             }
             DetailOverlay.Visibility = Visibility.Visible;
             DetailOverlay.BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(160)));
