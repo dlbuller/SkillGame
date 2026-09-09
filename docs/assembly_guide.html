@@ -222,6 +222,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <img class="diagram" src="file:///C:/SkillGame/Schematics/strip.png" style="max-height:88mm;">
   <ul class="do">
     <li><b>Coin-Lock → J5</b>, <b>Winner-Lock → J4</b>. These are the fused (F1/F2), TIP120-driven 5 V coils — keep the flyback diode across each coil.</li>
+    <li>They are <b>spring-return</b> coils: at rest the plunger is pushed <b>OUT</b> (blocking a coin) with <b>no power</b>. The software fires each as a brief <b>pulse</b> — it retracts to drop the coin, then springs back. They are <b>never held energized</b> (intermittent-duty), so mount each with the plunger blocking its coin path at rest.</li>
     <li>LED strip <b>data → GPIO4's D1</b> (SPI MOSI). Data is one wire plus a common ground.</li>
     <li>Power the strip from its <b>own 5 V feed</b> (LED+5 / LED−5), <b>not</b> J3, so its heavy draw can't sag the lamp/logic rail. Tie all grounds common.</li>
   </ul>

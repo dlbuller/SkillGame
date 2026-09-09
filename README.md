@@ -12,7 +12,7 @@
 ![KiCad 9](https://img.shields.io/badge/KiCad_9-hardware-314CB6?logo=kicad&logoColor=white)
 ![FT232H](https://img.shields.io/badge/4%C3%97-FT232H-E7A91D)
 ![Windows](https://img.shields.io/badge/Windows-x64-0078D6?logo=windows&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-52%20passing-3fb950)
+![Tests](https://img.shields.io/badge/tests-56%20passing-3fb950)
 
 </div>
 
@@ -42,7 +42,7 @@ The player rolls a physical coin up the playfield. It rides the rails, skims the
 - 🛠️ **Service** — a single-screen operator console for volume, quiet hours, tilt sensitivity and the rest.
 - 🗺️ **Interactive schematic page** — a clickable system diagram with crossing-free animated wiring, plus one-tap access to the BOM, fuses, system hookup, full schematic, FT232H pinout and a 3D board viewer.
 - 👻 **Attract / demo mode** — with no boards attached the app plays itself, so you can see the whole thing run on a laptop.
-- ✅ **52 unit tests** over the game core — scoring, levels, tilt, coin gate, stuck detection and the switch router.
+- ✅ **56 unit tests** over the game core — scoring, levels, tilt, coin gate, the spring-return lock pulses, stuck detection and the switch router.
 
 ## Screens
 
@@ -61,7 +61,7 @@ The control board is a custom KiCad 9 design driven by **four Adafruit FT232H** 
 |---|---|
 | **Inputs** | 28 switches on GPIO1–3 (S23 = 7 parallel gobble holes). Commons run on 3.3 V — the FT232H inputs are **not** 5 V-tolerant. |
 | **Score lamps** | 16 lamps via PN2222A drivers → 16 off-board **#555 wedge LED bulbs**. |
-| **Solenoids** | Coin-Lock + Winner-Lock, via TIP120 Darlingtons with 1N4004 flyback, fused (F1/F2 T2A). |
+| **Solenoids** | Coin-Lock + Winner-Lock — **spring-return** coils (plunger out at rest blocks a coin with no power; a brief **pulse** retracts it to drop the coin, never held). TIP120 Darlingtons with 1N4004 flyback, fused (F1/F2 T2A). |
 | **LED strip** | 150-pixel WS2812b on GPIO4's SPI line, on its own 5 V feed. |
 | **Power** | 3.3 V → J1 (switch commons), 5 V → J3 / LED± (lamps, strip, coils), guarded by inline F3 (T3.5A). |
 

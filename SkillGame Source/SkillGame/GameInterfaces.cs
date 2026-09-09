@@ -22,6 +22,8 @@ namespace SkillGame
         void SetLamp(string lamp, bool on);
         /// <summary>Play a brief "crazy" celebration burst on the score lamps, then settle back onto the given score.</summary>
         void Flourish(int finalScore);
+        /// <summary>Fire a named lock coil as a brief pulse (energize to retract, then release). Never held — these coils are intermittent-duty.</summary>
+        void PulseSolenoid(string name, int ms = 250);
     }
 
     /// <summary>Persistent audit counters the game rules feed (games, play time, per-switch hits, high scores).</summary>

@@ -28,10 +28,12 @@ namespace SkillGame.Tests
         public int? LastTally;
         public int WinnerCalls, FlourishCalls;
         public readonly List<(string lamp, bool on)> Lamps = new();
+        public readonly List<string> Pulses = new();
         public void TallyScore(int value) => LastTally = value;
         public void Winner() => WinnerCalls++;
         public void SetLamp(string lamp, bool on) => Lamps.Add((lamp, on));
         public void Flourish(int finalScore) { FlourishCalls++; LastTally = finalScore; }
+        public void PulseSolenoid(string name, int ms = 250) => Pulses.Add(name);
     }
 
     internal class FakeAudit : IAuditSink
@@ -137,6 +139,47 @@ namespace SkillGame.Tests
             e.Coin(true);                                   // level 1
             e.Hit(Hole(80, level: 1, winner: true), true);
             Assert.Equal(1, l.WinnerCalls);
+        }
+
+        [Fact]
+        public void Coin_up_pulses_the_coin_lock_to_drop_the_coin()
+        {
+            var (e, _, _, l) = New();
+            e.Coin(true);
+            Assert.Contains("CoinLock", l.Pulses);       // the inserted coin is dropped onto the rails
+        }
+
+        [Fact]
+        public void Winning_does_not_energize_a_coil()
+        {
+            var (e, _, _, l) = New();
+            e.Coin(true);                                    // pulses CoinLock (the coin-up drop)
+            l.Pulses.Clear();
+            e.Hit(Hole(80, level: 1, winner: true), true);   // win — the coin is held by spring, no coil fires
+            Assert.Empty(l.Pulses);
+        }
+
+        [Fact]
+        public void Winner_coin_is_released_on_the_next_coin_up()
+        {
+            var (e, _, _, l) = New();
+            e.Coin(true);
+            e.Hit(Hole(80, level: 1, winner: true), true);   // win — Win-Lock holds the coin
+            l.Pulses.Clear();
+            e.Coin(true);                                    // next game: release the held winner + drop the new coin
+            Assert.Contains("WinnerLock", l.Pulses);
+            Assert.Contains("CoinLock", l.Pulses);
+        }
+
+        [Fact]
+        public void Demo_game_never_touches_a_coil()
+        {
+            var (e, _, _, l) = New();
+            e.RecordAudits = false;                          // attract/demo play drives the engine in software only
+            e.Coin(true);
+            e.Hit(Hole(80, level: 1, winner: true), true);
+            e.Coin(true);
+            Assert.Empty(l.Pulses);
         }
 
         [Fact]

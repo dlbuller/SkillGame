@@ -275,12 +275,22 @@ namespace SkillGame
             }
         }
 
-        /// <summary>Winner LED + Win-Lock solenoid + Game-Over LED.</summary>
+        /// <summary>Winner LED + Game-Over LED. The winning coin is held as proof by the Win-Lock's spring-extended
+        /// plunger — no power needed — and is released by a pulse on the next coin-up, so the coil is never energized here.</summary>
         public void Winner()
         {
-            Drive(3, 15, true); // Winner LED
-            Drive(3, 9, true);  // Win Lock solenoid
-            Drive(3, 14, true); // Game Over LED
+            Drive(3, 15, true); // Winner LED (stays on)
+            Drive(3, 14, true); // Game Over LED (stays on)
+        }
+
+        /// <summary>Fire a lock coil as a brief pulse: energize to retract (drop the coin), then release so the
+        /// spring pushes the plunger back out. These are intermittent-duty solenoids — they must never be held on.</summary>
+        public async void PulseSolenoid(string name, int ms = 250)
+        {
+            if (!Outputs.TryGetValue(name, out var loc)) return;
+            Drive(loc.board, loc.pin, true);
+            try { await System.Threading.Tasks.Task.Delay(ms); } catch { }
+            Drive(loc.board, loc.pin, false);
         }
 
         /// <summary>Turn off every lamp and solenoid on both output boards.</summary>

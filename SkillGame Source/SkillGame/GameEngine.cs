@@ -20,6 +20,7 @@ namespace SkillGame
         public int TiltsAllowed { get; set; } = 0;
 
         private int _tilts;   // tilts taken this game (reset on coin)
+        private bool _winnerHeld;   // a winning coin is captive at the spring-held Win-Lock, released on the next coin-up
 
         /// <summary>When false, nothing this game does is written to the audits — used by the demo/attract game,
         /// which drives the engine in software and must never count as physical play (games, switch wear, winners, scores).</summary>
@@ -46,6 +47,13 @@ namespace SkillGame
                 _tilts = 0;
                 Aud?.GameStarted();
                 _led?.Coin();
+                // Real play only: pulse the Coin-Lock to drop the inserted coin onto the rails, and release any
+                // coin the Win-Lock has been holding (by spring) since the last win. Demo/attract never touches a coil.
+                if (RecordAudits)
+                {
+                    _lamps.PulseSolenoid("CoinLock");
+                    if (_winnerHeld) { _lamps.PulseSolenoid("WinnerLock"); _winnerHeld = false; }
+                }
                 Status("S0 - Coin Up", "Game In Progress");
             }
         }
@@ -69,6 +77,7 @@ namespace SkillGame
                 _led?.Winner();
                 Status(def.Label, "Winner!");   // distinct from a plain loss, so the UI can celebrate a win
                 _lamps.Winner();
+                if (RecordAudits) _winnerHeld = true;   // spring-held Win-Lock keeps the coin as proof until the next coin-up
                 GameInProgress = false;         // a winner ends the game
                 Aud?.GameEnded(Score);      // record play time + the winning score in the high-score table
             }
