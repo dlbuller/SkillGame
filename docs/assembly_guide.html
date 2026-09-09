@@ -273,58 +273,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <div class="step-head"><div class="num" style="background:#1E6E7E;">IN</div><div><div class="step-title">Switch-input pin map</div><div class="step-sub">which pin every switch wire goes to</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/wiring_inputs.png" style="max-height:150mm;">
   <div class="tip">Each coin switch is a plain SPDT: <b>COM → the 3.3 V common bus</b> (fed by J1), <b>NO → the FT232H pin shown</b>. NC is unused. The 7 gobble switches all wire in parallel onto the one S23 pin (GPIO2 · C7).</div>
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- HARNESS INTRO -->
-<div class="page">
-  <h1>Wiring <span class="gold">harnesses</span></h1>
-  <h2>the cables that join the playfield to the board</h2>
-  <ul class="do">
-    <li>The board only holds the transistors, resistors and connectors. The <b>lamps</b> (backglass) and <b>switches</b> (playfield) live off-board, so two harnesses connect them:</li>
-    <li><b>Lamp harness</b> — a 2×20 plug on J2 fans out to the 20 #555 wedge sockets.</li>
-    <li><b>Switch harness</b> — one 3.3 V common bus to every switch, plus a signal wire from each switch back to the board.</li>
-    <li>Plus the <b>inline fuse cable</b> (F3) spliced into the 5 V feed.</li>
-    <li>Each cable is shown three ways on the next pages: flat with every solder point, a 3D view, and <b>where every point lands on the real game</b>.</li>
-  </ul>
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- LAMP HARNESS wiring -->
-<div class="page">
-  <div class="step-head"><div class="num" style="background:#C8901A;">L</div><div><div class="step-title">Lamp harness — wiring</div><div class="step-sub">J2 plug → 20 #555 sockets, every solder point</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_harness.png" style="max-height:200mm;">
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- LAMP HARNESS 3d -->
-<div class="page">
-  <div class="step-head"><div class="num" style="background:#C8901A;">L</div><div><div class="step-title">Lamp harness — 3D &amp; where it lands</div><div class="step-sub">the physical cable, and each bulb's spot on the backglass</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_harness_3d.png" style="max-height:95mm;">
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/lamp_playfield.png" style="max-height:120mm;">
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- SWITCH HARNESS wiring -->
-<div class="page">
-  <div class="step-head"><div class="num" style="background:#1E6E7E;">S</div><div><div class="step-title">Switch harness — wiring</div><div class="step-sub">3.3 V bus + one signal per switch, every solder point</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_harness.png" style="max-height:176mm;">
-  <div class="warn"><b>Which switch?</b> Use an <b>arcade coin switch with an 85 mm straight wire actuator</b> (SPDT, ~$3.99 ea; ~$2 in 10-packs on eBay/AliExpress). It's a snap-action microswitch with a long thin wire — the wire pokes up through a slot in the playfield and the rolling coin trips it. The long wire gives so much leverage that a light coin trips it easily, and the switch body mounts <b>hidden under the playfield</b>. It wires like any SPDT switch (COM + NO), so no board changes. This is the same style Bally used.</div>
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- SWITCH HARNESS 3d -->
-<div class="page">
-  <div class="step-head"><div class="num" style="background:#1E6E7E;">S</div><div><div class="step-title">Switch harness — 3D &amp; where it lands</div><div class="step-sub">the physical cable, and every switch's spot on the playfield</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_harness_3d.png" style="max-height:88mm;">
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/switch_playfield.png" style="max-height:130mm;">
-  <div class="foot">SkillGame Assembly Guide</div>
-</div>
-
-<!-- FUSE CABLE 3d -->
-<div class="page">
-  <div class="step-head"><div class="num" style="background:#C15656;">F</div><div><div class="step-title">Inline fuse cable — 3D</div><div class="step-sub">F3 in the 5 V feed to J3</div></div></div>
-  <img class="diagram" src="file:///C:/SkillGame/Schematics/fuse_cable_3d.png" style="max-height:120mm;">
+  <div class="warn"><b>The switch:</b> an <b>arcade coin switch with an 85 mm straight wire actuator</b> (SPDT, ~$3.99 ea; ~$2 in 10-packs). The long wire pokes up through a playfield slot and the rolling coin trips it — light touch, body hidden under the playfield. Wires like any SPDT switch (COM + NO), so no board changes. Same style Bally used.</div>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 

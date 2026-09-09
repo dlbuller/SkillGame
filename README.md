@@ -84,11 +84,9 @@ The KiCad 9 project (schematic + PCB) lives in [`hardware/`](hardware/) — ERC 
 
 ## Wiring
 
-Two harnesses join the off-board lamps and switches to the control board — the guide draws each one flat (every solder point), in 3D, and **in place on the real game**, so you can see exactly how the wires snake to each lamp socket and switch. Switch positions are traced from the actual Skill-Roll playfield.
+Every connector and input is labeled so the board can be wired from the wire side — the labeled board below (and the switch-input pin map + J2 lamp pinout in the guide) show where each wire lands. These are on the app's Schematic page too (**BOARD WIRING** / **INPUT MAP**).
 
-| Switches on the playfield | Lamps on the backglass |
-|---|---|
-| ![Switch wiring](docs/schematics/switch_playfield.png) | ![Lamp wiring](docs/schematics/lamp_playfield.png) |
+![Board wiring reference](docs/schematics/wiring_board.png)
 
 > **Switches:** each hole uses an **arcade coin switch** — a snap-action switch with an 85 mm wire actuator that pokes up through a playfield slot; the rolling coin trips the wire (the long wire gives it a feather-light touch). It mounts hidden under the playfield and wires like any SPDT switch (~$3.99 ea, cheaper in packs).
 
