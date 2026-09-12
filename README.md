@@ -63,7 +63,7 @@ The control board is a custom KiCad 9 design driven by **four Adafruit FT232H** 
 | **Score lamps** | 16 lamps via PN2222A drivers → 16 off-board **#555 wedge LED bulbs**. |
 | **Solenoids** | Coin-Lock + Winner-Lock — **spring-return** coils (plunger out at rest blocks a coin with no power; a brief **pulse** retracts it to drop the coin, never held). TIP120 Darlingtons with 1N4004 flyback, fused (F1/F2 T2A). |
 | **LED strip** | 150-pixel WS2812b on GPIO4's SPI line, on its own 5 V feed. |
-| **Power** | 3.3 V → J1 (switch commons), 5 V → J3 / LED± (lamps, strip, coils), guarded by inline F3 (T3.5A). |
+| **Power** | 3.3 V → J1 (switch commons). One 5 V / 10 A brick splits into two fused branches — **F3** (T3.5A) → J3 (lamps + coils, ~2.7 A) and **F4** (T5A) → the strip's own LED± feed (~3.6 A, firmware brightness-capped). The strip never runs through the board. |
 
 **The lamps are LEDs, wired honestly.** Each score lamp is a non-polar #555 wedge LED bulb in a twist-lock socket. Because the bulb is pre-resistored, the board's lamp positions (R30–R62) are **0 Ω links** — and a 6.3 V bulb on the 5 V rail runs safely under-driven. The **100 / 200 / 300 / 400** holes each drive **two** bulbs in parallel for double brightness.
 

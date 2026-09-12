@@ -14,7 +14,7 @@ namespace SkillGameWpf
         public void Winner() { }
         public void SetLamp(string lamp, bool on) { }
         public void Flourish(int finalScore) { }
-        public void PulseSolenoid(string name, int ms = 250) { }
+        public void PulseSolenoid(string name, int ms = 250, int startDelayMs = 0) { }
     }
 
     internal sealed class NoLedSink : ILedSink

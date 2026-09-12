@@ -284,10 +284,12 @@ namespace SkillGame
         }
 
         /// <summary>Fire a lock coil as a brief pulse: energize to retract (drop the coin), then release so the
-        /// spring pushes the plunger back out. These are intermittent-duty solenoids — they must never be held on.</summary>
-        public async void PulseSolenoid(string name, int ms = 250)
+        /// spring pushes the plunger back out. These are intermittent-duty solenoids — they must never be held on.
+        /// startDelayMs offsets the pulse so two coils fired together (e.g. on a post-win coin-up) never overlap.</summary>
+        public async void PulseSolenoid(string name, int ms = 250, int startDelayMs = 0)
         {
             if (!Outputs.TryGetValue(name, out var loc)) return;
+            try { if (startDelayMs > 0) await System.Threading.Tasks.Task.Delay(startDelayMs); } catch { }
             Drive(loc.board, loc.pin, true);
             try { await System.Threading.Tasks.Task.Delay(ms); } catch { }
             Drive(loc.board, loc.pin, false);

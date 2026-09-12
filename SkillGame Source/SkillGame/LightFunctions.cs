@@ -41,7 +41,7 @@ namespace SkillGame
             {
                 for (int i = 0; i < img.Width; i++)
                 {
-                    img.SetPixel(i, 0, color);
+                    SetPixelCapped(img, i, 0, color);
                 }
                 device.Update();
             }
@@ -72,7 +72,7 @@ namespace SkillGame
                     for (int i = 0; i < 4; i++)
                     {
                         Color randomColor = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256));
-                        device.Image.SetPixel(rng.Next(count), 0, randomColor);
+                        SetPixelCapped(device.Image, rng.Next(count), 0, randomColor);
                     }
                     device.Update();
                     await Task.Delay(rng.Next(30, 100)); // Glitchy timing
@@ -88,7 +88,7 @@ namespace SkillGame
                     for (int i = 0; i < count; i++)
                     {
                         int hue = (i + offset) * (360 / count);
-                        device.Image.SetPixel(i, 0, HsvToRgb(hue % 360, 1, 1));
+                        SetPixelCapped(device.Image, i, 0, HsvToRgb(hue % 360, 1, 1));
                     }
                     device.Update();
                     offset += 3;
@@ -141,7 +141,7 @@ namespace SkillGame
                     {
                         if ((i % 2 == 0) == toggle)
                         {
-                            img.SetPixel(i, 0, color);
+                            SetPixelCapped(img, i, 0, color);
                         }
                     }
 
@@ -178,7 +178,7 @@ namespace SkillGame
                     {
                         // Give each pixel a color from its position plus a moving offset.
                         int colorPos = (i * (256 / count) + offset) & 255;
-                        img.SetPixel(i, 0, GetWheelColor(colorPos));
+                        SetPixelCapped(img, i, 0, GetWheelColor(colorPos));
                     }
 
                     device.Update();
@@ -225,12 +225,12 @@ namespace SkillGame
                     {
                         // Lower scale factor (e.g. 0.7) = shorter tail, Higher (e.g. 0.9) = longer tail
                         _ledState[i] = ScaleColor(_ledState[i], 0.8);
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // 2. Draw the bright Comet head
                     _ledState[headPos] = color;
-                    img.SetPixel(headPos, 0, color);
+                    SetPixelCapped(img, headPos, 0, color);
 
                     // 3. Push to hardware
                     device.Update();
@@ -275,7 +275,7 @@ namespace SkillGame
                         // Fill the strip
                         for (int p = 0; p < count; p++)
                         {
-                            img.SetPixel(p, 0, pulsedColor);
+                            SetPixelCapped(img, p, 0, pulsedColor);
                         }
 
                         device.Update();
@@ -313,21 +313,21 @@ namespace SkillGame
                         {
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Yellow);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Yellow);
                             }
                             device.Update();
 
 
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Blue);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Blue);
                             }
                             device.Update();
 
 
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Black);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Black);
                             }
                         }
 
@@ -359,13 +359,13 @@ namespace SkillGame
                     for (int i = 0; i < img.Width; i++)
                     {
                         _ledState[i] = ScaleColor(_ledState[i], 0.9); // Slow fade
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // Add a random sparkle
                     int pos = rnd.Next(img.Width);
                     _ledState[pos] = color;
-                    img.SetPixel(pos, 0, color);
+                    SetPixelCapped(img, pos, 0, color);
 
                     device.Update();
                     await Task.Delay(delayMs, token);
@@ -401,12 +401,12 @@ namespace SkillGame
                     for (int i = 0; i < count; i++)
                     {
                         _ledState[i] = ScaleColor(_ledState[i], 0.85); // Fade by 15%
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // 2. Place the bright "eye"
                     _ledState[position] = color;
-                    img.SetPixel(position, 0, color);
+                    SetPixelCapped(img, position, 0, color);
 
                     // 3. Push to hardware and wait
                     device.Update();
@@ -453,7 +453,7 @@ namespace SkillGame
                         int b = (int)(Math.Sin((i + time) * 0.15) * 127 + 128);
 
                         _ledState[i] = Color.FromArgb(r, g, b);
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     device.Update();
@@ -492,7 +492,7 @@ namespace SkillGame
                 while (!token.IsCancellationRequested)
                 {
                     // Clear frame
-                    for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                    for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
 
                     for (int i = 0; i < ballColors.Length; i++)
                     {
@@ -501,7 +501,7 @@ namespace SkillGame
                         if (pos[i] >= count - 1 || pos[i] <= 0) vel[i] *= -1;
 
                         int p = (int)Math.Clamp(pos[i], 0, count - 1);
-                        img.SetPixel(p, 0, ballColors[i]);
+                        SetPixelCapped(img, p, 0, ballColors[i]);
                     }
 
                     device.Update();
@@ -540,13 +540,13 @@ namespace SkillGame
                         for (int i = 0; i < strikeWidth; i++)
                         {
                             int p = (strikePosition + i) % img.Width;
-                            img.SetPixel(p, 0, lightningColor);
+                            SetPixelCapped(img, p, 0, lightningColor);
                         }
                         device.Update();
                         await Task.Delay(rnd.Next(10, 50), token);
 
                         // Flash OFF
-                        for (int i = 0; i < img.Width; i++) img.SetPixel(i, 0, Color.Black);
+                        for (int i = 0; i < img.Width; i++) SetPixelCapped(img, i, 0, Color.Black);
                         device.Update();
                         await Task.Delay(rnd.Next(10, 50), token);
                     }
@@ -581,14 +581,14 @@ namespace SkillGame
                         {
                             // Use ScaleColor on the local array instead of GetPixel.
                             _ledState[j] = ScaleColor(_ledState[j], 0.75);
-                            img.SetPixel(j, 0, _ledState[j]);
+                            SetPixelCapped(img, j, 0, _ledState[j]);
                         }
 
                         // 2. Draw meteor head into shadow buffer and image
                         if (i < width)
                         {
                             _ledState[i] = meteorColor;
-                            img.SetPixel(i, 0, meteorColor);
+                            SetPixelCapped(img, i, 0, meteorColor);
                         }
 
                         device.Update();
@@ -619,11 +619,11 @@ namespace SkillGame
                 {
                     for (int burst = 0; burst < 4; burst++) // Four rapid bursts
                     {
-                        for (int i = 0; i < count; i++) img.SetPixel(i, 0, color);
+                        for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, color);
                         device.Update();
                         await Task.Delay(30, token); // Short "ON" time
 
-                        for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                        for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
                         device.Update();
                         await Task.Delay(30, token); // Short "OFF" time
                     }
@@ -669,7 +669,7 @@ namespace SkillGame
                             else _ledState[i] = c2;
                         }
 
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     device.Update();
@@ -698,14 +698,14 @@ namespace SkillGame
                 while (!token.IsCancellationRequested)
                 {
                     // Start with a mostly black frame
-                    for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                    for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
 
                     // Throw 3 random colored pixels
                     for (int i = 0; i < 3; i++)
                     {
                         int pos = rnd.Next(0, count);
                         Color randColor = GetWheelColor(rnd.Next(0, 255));
-                        img.SetPixel(pos, 0, randColor);
+                        SetPixelCapped(img, pos, 0, randColor);
                     }
 
                     device.Update();
@@ -738,7 +738,7 @@ namespace SkillGame
                     {
                         if ((i % 2 == 0) == toggle)
                         {
-                            img.SetPixel(i, 0, color);
+                            SetPixelCapped(img, i, 0, color);
                         }
                     }
 
@@ -780,7 +780,7 @@ namespace SkillGame
                     {
                         // Give each pixel a color from its position plus a moving offset.
                         int colorPos = (i * (256 / count) + offset) & 255;
-                        img.SetPixel(i, 0, GetWheelColor(colorPos));
+                        SetPixelCapped(img, i, 0, GetWheelColor(colorPos));
                     }
 
                     device.Update();
@@ -827,12 +827,12 @@ namespace SkillGame
                     {
                         // Lower scale factor (e.g. 0.7) = shorter tail, Higher (e.g. 0.9) = longer tail
                         _ledState[i] = ScaleColor(_ledState[i], 0.8);
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // 2. Draw the bright Comet head
                     _ledState[headPos] = color;
-                    img.SetPixel(headPos, 0, color);
+                    SetPixelCapped(img, headPos, 0, color);
 
                     // 3. Push to hardware
                     device.Update();
@@ -879,7 +879,7 @@ namespace SkillGame
                     // Fill the strip
                     for (int p = 0; p < count; p++)
                     {
-                        img.SetPixel(p, 0, pulsedColor);
+                        SetPixelCapped(img, p, 0, pulsedColor);
                     }
 
                     device.Update();
@@ -898,7 +898,7 @@ namespace SkillGame
                     // Fill the strip
                     for (int p = 0; p < count; p++)
                     {
-                        img.SetPixel(p, 0, pulsedColor);
+                        SetPixelCapped(img, p, 0, pulsedColor);
                     }
 
                     device.Update();
@@ -934,21 +934,21 @@ namespace SkillGame
                         {
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Yellow);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Yellow);
                             }
                             device.Update();
 
 
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Blue);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Blue);
                             }
                             device.Update();
 
 
                             for (int i = 0; i < img.Width; i += 3)
                             {
-                                if (i + q < img.Width) img.SetPixel(i + q, 0, Color.Black);
+                                if (i + q < img.Width) SetPixelCapped(img, i + q, 0, Color.Black);
                             }
                         }
 
@@ -984,13 +984,13 @@ namespace SkillGame
                     for (int i = 0; i < img.Width; i++)
                     {
                         _ledState[i] = ScaleColor(_ledState[i], 0.9); // Slow fade
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // Add a random sparkle
                     int pos = rnd.Next(img.Width);
                     _ledState[pos] = color;
-                    img.SetPixel(pos, 0, color);
+                    SetPixelCapped(img, pos, 0, color);
 
                     device.Update();
                     await Task.Delay(delayMs, token);
@@ -1033,12 +1033,12 @@ namespace SkillGame
                     for (int i = 0; i < count; i++)
                     {
                         _ledState[i] = ScaleColor(_ledState[i], 0.85); // Fade by 15%
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     // 2. Place the bright "eye"
                     _ledState[position] = color;
-                    img.SetPixel(position, 0, color);
+                    SetPixelCapped(img, position, 0, color);
 
                     // 3. Push to hardware and wait
                     device.Update();
@@ -1091,7 +1091,7 @@ namespace SkillGame
                         int b = (int)(Math.Sin((i + time) * 0.15) * 127 + 128);
 
                         _ledState[i] = Color.FromArgb(r, g, b);
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     device.Update();
@@ -1136,7 +1136,7 @@ namespace SkillGame
                 while (watch.ElapsedMilliseconds < 10000)
                 {
                     // Clear frame
-                    for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                    for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
 
                     for (int i = 0; i < ballColors.Length; i++)
                     {
@@ -1145,7 +1145,7 @@ namespace SkillGame
                         if (pos[i] >= count - 1 || pos[i] <= 0) vel[i] *= -1;
 
                         int p = (int)Math.Clamp(pos[i], 0, count - 1);
-                        img.SetPixel(p, 0, ballColors[i]);
+                        SetPixelCapped(img, p, 0, ballColors[i]);
                     }
 
                     device.Update();
@@ -1190,13 +1190,13 @@ namespace SkillGame
                         for (int i = 0; i < strikeWidth; i++)
                         {
                             int p = (strikePosition + i) % img.Width;
-                            img.SetPixel(p, 0, lightningColor);
+                            SetPixelCapped(img, p, 0, lightningColor);
                         }
                         device.Update();
                         await Task.Delay(rnd.Next(10, 50), token);
 
                         // Flash OFF
-                        for (int i = 0; i < img.Width; i++) img.SetPixel(i, 0, Color.Black);
+                        for (int i = 0; i < img.Width; i++) SetPixelCapped(img, i, 0, Color.Black);
                         device.Update();
                         await Task.Delay(rnd.Next(10, 50));
                     }
@@ -1234,14 +1234,14 @@ namespace SkillGame
                     {
                         // Use ScaleColor on the local array instead of GetPixel.
                         _ledState[j] = ScaleColor(_ledState[j], 0.75);
-                        img.SetPixel(j, 0, _ledState[j]);
+                        SetPixelCapped(img, j, 0, _ledState[j]);
                     }
 
                     // 2. Draw meteor head into shadow buffer and image
                     if (i < width)
                     {
                         _ledState[i] = meteorColor;
-                        img.SetPixel(i, 0, meteorColor);
+                        SetPixelCapped(img, i, 0, meteorColor);
                     }
 
                     device.Update();
@@ -1275,11 +1275,11 @@ namespace SkillGame
                 {
                     for (int burst = 0; burst < 4; burst++) // Four rapid bursts
                     {
-                        for (int i = 0; i < count; i++) img.SetPixel(i, 0, color);
+                        for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, color);
                         device.Update();
                         await Task.Delay(30); // Short "ON" time
 
-                        for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                        for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
                         device.Update();
                         await Task.Delay(30); // Short "OFF" time
                     }
@@ -1331,7 +1331,7 @@ namespace SkillGame
                             else _ledState[i] = c2;
                         }
 
-                        img.SetPixel(i, 0, _ledState[i]);
+                        SetPixelCapped(img, i, 0, _ledState[i]);
                     }
 
                     device.Update();
@@ -1366,14 +1366,14 @@ namespace SkillGame
                 while (watch.ElapsedMilliseconds < 10000)
                 {
                     // Start with a mostly black frame
-                    for (int i = 0; i < count; i++) img.SetPixel(i, 0, Color.Black);
+                    for (int i = 0; i < count; i++) SetPixelCapped(img, i, 0, Color.Black);
 
                     // Throw 3 random colored pixels
                     for (int i = 0; i < 3; i++)
                     {
                         int pos = rnd.Next(0, count);
                         Color randColor = GetWheelColor(rnd.Next(0, 255));
-                        img.SetPixel(pos, 0, randColor);
+                        SetPixelCapped(img, pos, 0, randColor);
                     }
 
                     device.Update();
@@ -1423,6 +1423,15 @@ namespace SkillGame
                 (int)(color.B * factor)
             );
         }
+
+        // WS2812b full white is ~60 mA/pixel, so 150 px at 100% would want ~9 A — more than the strip's supply.
+        // 0.40 keeps even an all-white frame under ~3.6 A. Every pattern writes through SetPixelCapped, so this caps
+        // the physical strip globally; the on-screen preview draws separately and is unaffected.
+        public static double MaxBrightness = 0.40;
+
+        /// <summary>SetPixel with the global brightness cap applied. All patterns write through this instead of img.SetPixel.</summary>
+        private void SetPixelCapped(RawPixelContainer img, int x, int y, Color c)
+            => img.SetPixel(x, y, MaxBrightness >= 0.999 ? c : ScaleColor(c, MaxBrightness));
 
         public void BrightnessUP(Ws2812b device, Color color)
         {
@@ -1585,7 +1594,7 @@ namespace SkillGame
 
         void Fill(Ws2812b strip, int count, Color c)
         {
-            for (int i = 0; i < count; i++) strip.Image.SetPixel(i, 0, c);
+            for (int i = 0; i < count; i++) SetPixelCapped(strip.Image, i, 0, c);
             strip.Update();
         }
 

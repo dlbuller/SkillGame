@@ -33,7 +33,7 @@ namespace SkillGame.Tests
         public void Winner() => WinnerCalls++;
         public void SetLamp(string lamp, bool on) => Lamps.Add((lamp, on));
         public void Flourish(int finalScore) { FlourishCalls++; LastTally = finalScore; }
-        public void PulseSolenoid(string name, int ms = 250) => Pulses.Add(name);
+        public void PulseSolenoid(string name, int ms = 250, int startDelayMs = 0) => Pulses.Add(name);
     }
 
     internal class FakeAudit : IAuditSink

@@ -52,7 +52,8 @@ namespace SkillGame
                 if (RecordAudits)
                 {
                     _lamps.PulseSolenoid("CoinLock");
-                    if (_winnerHeld) { _lamps.PulseSolenoid("WinnerLock"); _winnerHeld = false; }
+                    // Release a held winner coin after the Coin-Lock pulse finishes, so the two coils never draw at once.
+                    if (_winnerHeld) { _lamps.PulseSolenoid("WinnerLock", startDelayMs: 300); _winnerHeld = false; }
                 }
                 Status("S0 - Coin Up", "Game In Progress");
             }

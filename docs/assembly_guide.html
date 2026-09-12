@@ -64,7 +64,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">16</td><td>0 Ω jumper (or solder bridge)</td><td>lamp links R30–R62 — the #555 bulb self-limits</td></tr>
     <tr><td class="qty">28</td><td>100 nF ceramic cap (0805 SMD)</td><td>C1–C28 · switch-input debounce/noise (back of board)</td></tr>
     <tr><td class="qty">2</td><td>2.2 kΩ resistor</td><td>TIP120 base</td></tr>
-    <tr><td class="qty">3</td><td>5×20 mm fuses · 4 Keystone clips + 1 inline holder</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V lead to J3)</td></tr>
+    <tr><td class="qty">4</td><td>5×20 mm fuses · 4 Keystone clips + 2 inline holders</td><td>F1/F2 T2A (solenoids) · F3 T3.5A inline (5 V to J3) · F4 T5A inline (strip feed)</td></tr>
     <tr><td class="qty">1</td><td>2×20 pin header (J2)</td><td>lamp / output connector</td></tr>
     <tr><td class="qty">4</td><td>2-pin headers (J1/J3/J4/J5)</td><td>power in + solenoid out</td></tr>
     <tr><td class="qty">~34</td><td>Arcade coin switch (85 mm wire actuator)</td><td>28 inputs (S23 = 7 gobble) · coin trips the wire in the slot</td></tr>
@@ -77,12 +77,13 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <tr><td class="qty">1</td><td>QQU 15.6" portable touchscreen (with stand)</td><td>the display · 1080P IPS/HDR touch</td></tr>
     <tr><td class="qty">1</td><td>4-port USB 2.0 hub</td><td>one port per FT232H</td></tr>
     <tr><td class="qty">1</td><td>3.3 V wall adapter</td><td>switch / GPIO logic (J1)</td></tr>
-    <tr><td class="qty">1</td><td>5 V wall adapter (≥5 A)</td><td>lamps · LEDs · coils (J3 / LED±)</td></tr>
+    <tr><td class="qty">1</td><td>5 V wall adapter — BTF-LIGHTING 5 V 10 A 50 W (ETL)</td><td>the whole 5 V system — split to J3 (F3, board) + strip (F4); ~6.3 A worst, 10 A leaves headroom</td></tr>
+    <tr><td class="qty">1</td><td>2-way terminal block / Wago 221</td><td>splits the 5 V brick into the F3 (board) and F4 (strip) branches; commons the grounds</td></tr>
   </table>
   <div class="two" style="margin-top:16px;">
     <div><h2 style="margin-bottom:8px;">Tools</h2>
       <div class="tools">• Soldering iron + solder<br>• Flush cutters<br>• Small screwdriver<br>• Multimeter<br>• Wire + crimp/ferrules</div></div>
-    <div><div class="warn"><b>Before you power up:</b> the 3.3 V adapter goes to J1 (switch commons) and the 5 V to J3 / LED±. Never feed 5 V into J1 — the FT232H inputs are not 5 V-tolerant.</div></div>
+    <div><div class="warn"><b>Before you power up:</b> the 3.3 V adapter goes to J1 (switch commons); the 5 V brick splits to J3 (board) and the strip's LED± feed. Never feed 5 V into J1 — the FT232H inputs are not 5 V-tolerant.</div></div>
   </div>
   <div class="foot">SkillGame Assembly Guide · page 1</div>
 </div>
@@ -141,14 +142,14 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
 
 <!-- FUSE F3 (inline) -->
 <div class="page">
-  <div class="step-head"><div class="num">3c</div><div><div class="step-title">The inline main fuse</div><div class="step-sub">F3 — one fuse that guards the whole 5 V rail</div></div></div>
+  <div class="step-head"><div class="num">3c</div><div><div class="step-title">The inline 5 V fuses</div><div class="step-sub">one brick, split → F3 (board) + F4 (strip)</div></div></div>
   <img class="diagram" src="file:///C:/SkillGame/Schematics/f3.png" style="max-height:110mm;">
   <ul class="do">
-    <li>F1/F2 only protect the coils. <b>F3 protects everything on 5 V</b> — lamps, LED strip and coils — right where the adapter feeds the board.</li>
-    <li>It isn't on the PCB: cut the <b>+5 V</b> wire coming from the adapter and splice the <b>inline holder</b> (uxcell 18 AWG, screw-terminal) into the break. Leave the ground/return wire whole.</li>
-    <li>Fit a <b>T3.5A slow-blow, 5×20 mm</b> fuse (Bussmann GDC-3.5A). Sized above the full lamp + strip + coil draw, below the adapter's limit.</li>
+    <li>One 5 V / 10 A brick feeds a <b>2-way split</b> (a terminal block). F1/F2 only protect the coils. <b>F3 fuses the board branch</b> — J3, lamps + coils, ~2.7 A worst. The strip is the <b>other branch</b> (see step 6c), fused by F4 — never through J3, because its draw is far larger.</li>
+    <li>Neither is on the PCB: from the split, run the board's <b>+5 V</b> through the F3 <b>inline holder</b> to J3, and the strip's <b>+5 V</b> through the F4 inline holder (uxcell 18 AWG, screw-terminal). Leave the ground/return whole and common.</li>
+    <li>Fit <b>F3 = T3.5A</b> (Bussmann GDC-3.5A) on the board branch and <b>F4 = T5A</b> (GDC-5A) on the strip branch — both slow-blow, 5×20 mm.</li>
   </ul>
-  <div class="tip">Rule of thumb: F3 ≈ your steady current + inrush headroom, and always below what the wiring can carry. 3.5 A suits a ≥5 A adapter here.</div>
+  <div class="tip">Rule of thumb: a fuse ≈ steady current + inrush headroom, and always below what the wiring can carry. T3.5A suits the board branch (~2.7 A); T5A suits the strip branch (~3.6 A capped).</div>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
 
@@ -224,7 +225,8 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
     <li><b>Coin-Lock → J5</b>, <b>Winner-Lock → J4</b>. These are the fused (F1/F2), TIP120-driven 5 V coils — keep the flyback diode across each coil.</li>
     <li>They are <b>spring-return</b> coils: at rest the plunger is pushed <b>OUT</b> (blocking a coin) with <b>no power</b>. The software fires each as a brief <b>pulse</b> — it retracts to drop the coin, then springs back. They are <b>never held energized</b> (intermittent-duty), so mount each with the plunger blocking its coin path at rest.</li>
     <li>LED strip <b>data → GPIO4's D1</b> (SPI MOSI). Data is one wire plus a common ground.</li>
-    <li>Power the strip from its <b>own 5 V feed</b> (LED+5 / LED−5), <b>not</b> J3, so its heavy draw can't sag the lamp/logic rail. Tie all grounds common.</li>
+    <li>Power the strip on its <b>own branch</b> off the 5 V brick (LED+5 / LED−5 through fuse <b>F4, T5A inline</b>), <b>not</b> through J3, so its heavy draw can't sag the lamp/logic rail. Tie all grounds common.</li>
+    <li>Why the separate branch: 150 px at full white is ~9 A. The firmware caps the strip to ~40 % brightness (<code>LightFunctions.MaxBrightness</code>), holding a worst-case frame under ~3.6 A; with the board's ~2.7 A that's ~6.3 A total, which the 10 A brick covers.</li>
   </ul>
   <div class="foot">SkillGame Assembly Guide</div>
 </div>
@@ -236,7 +238,7 @@ table.parts tr:nth-child(even) td { background:#f6f8fb; }
   <ul class="do">
     <li><b>Mini-PC → HDMI → monitor</b> (the QQU 15.6" touch panel), and its USB-C touch lead back to the PC.</li>
     <li><b>Mini-PC → USB hub → the four FT232H boards</b> — one hub port per board.</li>
-    <li><b>3.3 V adapter → J1</b> (switch commons). <b>5 V adapter → J3</b> (through the F3 inline fuse) and to the LED strip's own <b>LED± feed</b>.</li>
+    <li><b>3.3 V adapter → J1</b> (switch commons). <b>One 5 V brick → terminal-block split:</b> the F3 branch → J3 (board: lamps + coils), the F4 branch → the strip's LED± feed. Separate branches so the strip can't sag the board rail.</li>
     <li><b>Tie every ground together</b> — the 3.3 V return, the 5 V return, the LED strip and the boards all share one common ground, or nothing reads right.</li>
     <li>Double-check J1 is 3.3 V and J3 is 5 V before powering on. They are not interchangeable.</li>
   </ul>
