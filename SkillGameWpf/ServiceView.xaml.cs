@@ -118,7 +118,7 @@ namespace SkillGameWpf
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             _s.ResetToDefaults(); _s.Clamp(); _s.Save(); _s.ApplyToQuietHours();
-            AppState.ApplyAccent(_s.AccentColor); AppState.ApplySettings?.Invoke(_s);
+            AppState.ApplyTheme(_s.Theme); AppState.ApplySettings?.Invoke(_s);
             AppState.SetBenchMode(_s.BenchMode);   // propagate the reset bench state to the coordinator
             (Window.GetWindow(this) as MainWindow)?.SetBrightness(_s.ScreenBrightness);
             LoadFromSettings();

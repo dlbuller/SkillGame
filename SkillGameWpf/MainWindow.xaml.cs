@@ -21,7 +21,7 @@ namespace SkillGameWpf
         {
             InitializeComponent();
             MainContent.Content = _gameView;
-            AppState.ApplyAccent(AppState.Settings.AccentColor);   // apply the saved UI accent
+            AppState.ApplyTheme(AppState.Settings.Theme);   // re-assert the saved UI theme (OnStartup applies it first)
             SetBrightness(AppState.Settings.ScreenBrightness);
 
             _coord = new HardwareCoordinator(_gameView, _diagView, OnHardwareState, Dispatcher);

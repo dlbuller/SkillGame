@@ -25,7 +25,8 @@ namespace SkillGame
         public bool DistractSoundOn { get; set; } = true;
         public bool DistractLightsOn { get; set; } = true;
         public bool ShowGremlin { get; set; } = true;   // the diagnostics mechanic gremlin
-        public string AccentColor { get; set; } = "Gold";   // UI accent theme
+        public string AccentColor { get; set; } = "Gold";   // UI accent (within a theme)
+        public string Theme { get; set; } = "Classy";        // UI theme preset (Classy / Fun / Plain / Blackout)
         public int ScreenBrightness { get; set; } = 100;    // 30-100; dims the whole screen for the cabinet
         public bool BenchMode { get; set; }   // ignore live switch inputs (for bench testing with nothing wired)
         public bool TutorialSeen { get; set; } // the first-run tour has been shown once (replayable from Service)

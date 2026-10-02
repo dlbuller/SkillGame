@@ -165,7 +165,7 @@ namespace SkillGameWpf
 
             CountUp_Changed(null, null); AttractLight_Changed(null, null); AttractSound_Changed(null, null);
             QuietStart_Changed(null, null); QuietEnd_Changed(null, null); QuietVol_Changed(null, null); TiltsAllowed_Changed(null, null);
-            Brightness_Changed(null, null); BuildAccents();
+            Brightness_Changed(null, null); BuildThemes();
 
             SoundFxToggle.IsChecked = AppState.SoundFxOn;
             AttractSoundToggle.IsChecked = AppState.AttractSoundOn;
@@ -314,24 +314,44 @@ namespace SkillGameWpf
             SliderTick();
         }
 
-        // Accent-color swatches; clicking one recolors the whole UI live and saves it.
-        private void BuildAccents()
+        // Theme presets; clicking one saves it and restarts so every cached view re-skins cleanly.
+        private void BuildThemes()
         {
             AccentSwatches.Children.Clear();
-            foreach (var kv in AppState.Accents)
+            foreach (var (name, blurb) in AppState.ThemeList)
             {
-                string name = kv.Key;
-                var col = (Color)ColorConverter.ConvertFromString(kv.Value.main);
-                bool sel = string.Equals(name, _s.AccentColor, StringComparison.OrdinalIgnoreCase);
-                var ring = new Border
+                bool sel = string.Equals(name, _s.Theme, StringComparison.OrdinalIgnoreCase);
+                var dot = (Color)ColorConverter.ConvertFromString(AppState.ThemeAccent(name));
+                var chip = new Border
                 {
-                    Width = 30, Height = 30, CornerRadius = new CornerRadius(15), Margin = new Thickness(0, 0, 10, 0),
-                    Background = new SolidColorBrush(col), BorderThickness = new Thickness(sel ? 3 : 0),
-                    BorderBrush = new SolidColorBrush(Colors.White), Cursor = System.Windows.Input.Cursors.Hand, ToolTip = name,
+                    CornerRadius = new CornerRadius(9), Margin = new Thickness(0, 0, 8, 0), Padding = new Thickness(10, 6, 12, 6),
+                    Background = new SolidColorBrush(sel ? Color.FromArgb(0x26, dot.R, dot.G, dot.B) : Color.FromArgb(0x14, 0xFF, 0xFF, 0xFF)),
+                    BorderThickness = new Thickness(sel ? 1.5 : 1),
+                    BorderBrush = new SolidColorBrush(sel ? dot : Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),
+                    Cursor = System.Windows.Input.Cursors.Hand, ToolTip = blurb,
                 };
-                if (sel) { ring.Effect = new System.Windows.Media.Effects.DropShadowEffect { Color = col, BlurRadius = 12, ShadowDepth = 0, Opacity = 0.9 }; if (AccentName != null) AccentName.Text = name.ToUpperInvariant(); }
-                ring.MouseLeftButtonDown += (s, e) => { AppState.ApplyAccent(name); AppState.PersistSettings(); Sfx("select"); BuildAccents(); TintGears(); };
-                AccentSwatches.Children.Add(ring);
+                var sp = new StackPanel { Orientation = Orientation.Horizontal };
+                sp.Children.Add(new Border { Width = 14, Height = 14, CornerRadius = new CornerRadius(7), Background = new SolidColorBrush(dot), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) });
+                sp.Children.Add(new TextBlock { Text = name.ToUpperInvariant(), Foreground = (Brush)FindResource(sel ? "TextBrush" : "MutedBrush"), FontFamily = (FontFamily)FindResource("DisplayFont"), FontSize = 13, VerticalAlignment = VerticalAlignment.Center });
+                chip.Child = sp;
+                string n = name;
+                chip.MouseLeftButtonDown += (s, e) => OnPickTheme(n);
+                AccentSwatches.Children.Add(chip);
+            }
+            if (AccentName != null)
+                AccentName.Text = AppState.ThemeList.FirstOrDefault(t => string.Equals(t.name, _s.Theme, StringComparison.OrdinalIgnoreCase)).blurb?.ToUpperInvariant() ?? "";
+        }
+
+        private void OnPickTheme(string name)
+        {
+            if (string.Equals(name, _s.Theme, StringComparison.OrdinalIgnoreCase)) return;
+            Sfx("select");
+            if (AppDialog.Confirm("SWITCH THEME", $"Switch to the {name} theme?\n\nSkillGame will restart to apply it.", "RESTART", "CANCEL"))
+            {
+                _s.Theme = name;
+                AppState.PersistSettings();
+                AppState.ApplyTheme(name);
+                AppState.Restart();
             }
         }
 

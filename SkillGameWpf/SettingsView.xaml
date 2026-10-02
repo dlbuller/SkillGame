@@ -246,7 +246,7 @@
                                    FontSize="30" Foreground="{DynamicResource GoldBrush}" HorizontalAlignment="Center" Margin="0,4,0,0">
                             <TextBlock.Effect><DropShadowEffect Color="#E7A91D" BlurRadius="20" ShadowDepth="0" Opacity="0.45"/></TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock Text="A Tribute to the Game of Skill" Foreground="{StaticResource MutedBrush}"
+                        <TextBlock Text="Roll · Climb · Win" Foreground="{StaticResource MutedBrush}"
                                    FontSize="12" HorizontalAlignment="Center" Margin="0,0,0,18"/>
                         <Border Height="1" Background="#1EFFFFFF" Margin="0,0,0,14"/>
 
@@ -255,7 +255,7 @@
                         <TextBlock Text="the app's highlight color and screen dimming" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,0,0,10"
                                    ToolTip="How the control panel looks: the highlight (accent) color used across the app, and overall screen brightness."/>
                         <StackPanel ToolTip="Recolors the highlight theme used all over the app — the SKILLGAME titles, score digits, the flashing INSERT COIN sign, gold buttons, high-score numbers and their glows. Pick the color you want those to be.">
-                            <TextBlock Text="ACCENT COLOR" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,0,0,7"
+                            <TextBlock Text="THEME" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,0,0,7"
                                        ToolTip="Recolors the highlight theme used all over the app — titles, score digits, INSERT COIN, gold buttons, high-score numbers and their glows."/>
                             <StackPanel x:Name="AccentSwatches" Orientation="Horizontal" Margin="0,0,0,4"/>
                             <TextBlock x:Name="AccentName" Foreground="{DynamicResource GoldBrush}" FontFamily="{StaticResource DisplayFont}" FontSize="13" Margin="0,0,0,14"/>

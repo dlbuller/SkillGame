@@ -27,6 +27,9 @@ namespace SkillGameWpf
                 ex.SetObserved();
             };
 
+            // Apply the saved UI theme before any window loads, so every view's StaticResource brushes resolve themed.
+            AppState.ApplyTheme(AppState.Settings.Theme);
+
             // Offscreen render mode for design verification: --render <path> [w] [h]
             if (e.Args.Length >= 1 && e.Args[0] == "--render")
             {
@@ -45,6 +48,7 @@ namespace SkillGameWpf
             int w = args.Length > 2 ? int.Parse(args[2]) : 1340;
             int h = args.Length > 3 ? int.Parse(args[3]) : 860;
             _renderView = args.Length > 4 ? args[4] : null;
+            if (args.Length > 5) AppState.ApplyTheme(args[5]);   // optional theme override for QC renders
 
             try { RenderCore(path, w, h); }
             catch (Exception ex) { File.WriteAllText(path + ".log", ex.ToString()); Shutdown(); }

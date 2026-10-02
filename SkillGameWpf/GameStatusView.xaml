@@ -46,7 +46,7 @@
                         <DropShadowEffect x:Name="LogoGlow" Color="#E7A91D" BlurRadius="26" ShadowDepth="0" Opacity="0.55"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBlock Text="A Tribute to the Game of Skill" Foreground="{StaticResource MutedBrush}"
+                <TextBlock Text="Roll · Climb · Win" Foreground="{StaticResource MutedBrush}"
                            FontSize="14" Margin="2,-4,0,0"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">

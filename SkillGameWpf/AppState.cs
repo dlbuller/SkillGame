@@ -44,6 +44,68 @@ namespace SkillGameWpf
             SetColor("AccentColor", a.main); SetColor("AccentBright", a.bright); SetColor("AccentDim", a.dim);
         }
 
+        // ---- Full UI themes (palette presets). Each entry is the whole palette; switching restarts the app so the
+        //      cached views re-skin cleanly (most surfaces use StaticResource, resolved once per view).
+        // Order: BgTop,BgBottom, Card,Card2,Border, Gold,GoldDim,Teal,Cyan,Green,Amber,Purple,Red, Text,Muted, Accent,AccentBright,AccentDim
+        public static readonly (string name, string blurb)[] ThemeList =
+        {
+            ("Classy",   "warm walnut & brass"),
+            ("Fun",      "bright arcade neon"),
+            ("Plain",    "calm neutral graphite"),
+            ("Blackout", "OLED black & amber"),
+        };
+        private static readonly Dictionary<string, string[]> _themes = new()
+        {
+            ["Classy"]   = new[]{"#241A12","#140D07","#241A11","#2F2318","#47331E","#D7A33C","#7A5A1E","#6E9E8A","#E6D5AC","#97A95E","#E0A736","#BE8A5E","#C25A4C","#F1EAD9","#A7957C","#D7A33C","#E8B84A","#7A5A1E"},
+            ["Fun"]      = new[]{"#12121A","#0A0A10","#191922","#20202C","#31313F","#E7A91D","#7A5A12","#16C8B0","#33C9FF","#2FE08C","#F0AA1E","#B45AE0","#E2493C","#ECECF2","#8A8A98","#E7A91D","#F0AA1E","#7A5A12"},
+            ["Plain"]    = new[]{"#1A1E26","#10131A","#1F2531","#28303F","#3B4556","#8FB4D6","#45586E","#74A6A6","#BBCBDE","#8FB488","#C2C3CE","#9E9BC4","#CC7A70","#E7EBF1","#8793A3","#8FB4D6","#B6D2EA","#45586E"},
+            ["Blackout"] = new[]{"#000000","#000000","#0A0A0A","#141414","#2A2A2A","#FFB000","#8A5F00","#46B9A8","#E0C080","#7BC86A","#FFC94D","#C88AD0","#FF5A4A","#EDEDED","#8A8A8A","#FFB000","#FFC94D","#8A5F00"},
+        };
+        private static readonly string[] _brushKeys =
+        { "","", "CardBrush","CardBrush2","CardBorderBrush","GoldBrush","GoldDimBrush","TealBrush","CyanBrush","GreenBrush","AmberBrush","PurpleBrush","RedBrush","TextBrush","MutedBrush" };
+
+        public static string ThemeAccent(string name) => (_themes.TryGetValue(name, out var p) ? p : _themes["Classy"])[15];
+
+        /// <summary>Swap the whole palette to a named theme. Call before the windows load (App startup); in-session the
+        /// Settings screen restarts afterwards so cached views pick it up cleanly.</summary>
+        public static void ApplyTheme(string name)
+        {
+            if (!_themes.TryGetValue(name, out var p)) { p = _themes["Classy"]; name = "Classy"; }
+            Settings.Theme = name;
+            SetColor("BgTop", p[0]); SetColor("BgBottom", p[1]);
+            for (int i = 2; i <= 14; i++) SetBrush(_brushKeys[i], p[i]);
+            SetColor("AccentColor", p[15]); SetColor("AccentBright", p[16]); SetColor("AccentDim", p[17]);
+            try
+            {
+                var res = Application.Current?.Resources; if (res == null) return;
+                Color bgTop = C(p[0]), bgBot = C(p[1]), card = C(p[2]), card2 = C(p[3]);
+                res["AppBg"] = new LinearGradientBrush(
+                    new GradientStopCollection { new GradientStop(bgTop, 0), new GradientStop(bgBot, 1) },
+                    new Point(0, 0), new Point(0, 1));
+                res["GlassFill"] = new LinearGradientBrush(new GradientStopCollection
+                {
+                    new GradientStop(Color.FromArgb(0x22, 0xFF, 0xFF, 0xFF), 0),
+                    new GradientStop(Color.FromArgb(0x14, card2.R, card2.G, card2.B), 0.10),
+                    new GradientStop(Color.FromArgb(0x10, card.R, card.G, card.B), 0.55),
+                    new GradientStop(Color.FromArgb(0x16, bgBot.R, bgBot.G, bgBot.B), 1),
+                }, new Point(0.15, 0), new Point(0.55, 1));
+            }
+            catch { }
+        }
+        private static Color C(string hex) => (Color)ColorConverter.ConvertFromString(hex);
+
+        /// <summary>Relaunch the app (used after a theme change so every cached view rebuilds with the new palette).</summary>
+        public static void Restart()
+        {
+            try
+            {
+                var exe = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+                if (!string.IsNullOrEmpty(exe)) System.Diagnostics.Process.Start(exe);
+            }
+            catch { }
+            Application.Current?.Shutdown();
+        }
+
         // Colors are structs (never frozen), so replacing the entry is enough; DynamicResource users (control glows) update.
         private static void SetColor(string key, string hex)
         {
