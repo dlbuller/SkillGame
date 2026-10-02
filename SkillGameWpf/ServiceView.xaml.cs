@@ -53,6 +53,7 @@ namespace SkillGameWpf
                 PinActivity.Changed += OnPins;
                 Faults.Changed += OnFaults;
                 _lastPollCycles = _coord?.PollCycles ?? 0; _lastPollSample = DateTime.UtcNow;
+                VersionText.Text = $"SkillGame v{Updater.Current.ToString(3)}";
                 Refresh();
                 _refresh.Start();
             };
@@ -338,6 +339,8 @@ namespace SkillGameWpf
         }
 
         private void Tutorial_Click(object sender, RoutedEventArgs e) => (Window.GetWindow(this) as MainWindow)?.StartTutorial();
+
+        private void Update_Click(object sender, RoutedEventArgs e) => UpdateDialog.Show();
 
         private void AllOff_Click(object sender, RoutedEventArgs e)
         {
