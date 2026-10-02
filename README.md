@@ -24,7 +24,7 @@ The player rolls a physical coin up the playfield. It rides the rails, skims the
 
 ## Contents
 
-- [How it plays](#how-it-plays) · [Features](#features) · [Screens](#screens) · [Hardware](#hardware) · [Build the board](#build-the-board) · [Build &amp; run the app](#build--run-the-app) · [Layout](#layout)
+- [How it plays](#how-it-plays) · [Features](#features) · [Screens](#screens) · [Themes](#themes) · [Hardware](#hardware) · [Build the board](#build-the-board) · [Software updates](#software-updates) · [Build &amp; run the app](#build--run-the-app) · [Layout](#layout)
 
 ## How it plays
 
@@ -55,6 +55,14 @@ The player rolls a physical coin up the playfield. It rides the rails, skims the
 | **Audits** — plays, wins, hits, high scores (the gremlin) | **Service** — one-page operator console |
 | ![Audits](docs/screenshots/audit.png) | ![Service](docs/screenshots/service.png) |
 
+## Themes
+
+Pick a look in **Settings → Theme**. Each of the **11 themes** reskins the whole UI *and* the playfield art — and every board below is geometry-matched to the original, so the coin paths never move:
+
+![SkillGame themes](docs/themes.png)
+
+**Classy** (walnut &amp; brass, the default) · **Fun** (arcade neon) · **Plain** (cool slate) · **Blackout** (OLED black &amp; amber) · **Vintage** (the 1949 look) · **Maple** · **Midnight** (navy &amp; chrome) · **Synthwave** · **Lava** · **Circuit** · **Galaxy**.
+
 ## Hardware
 
 The control board is a custom KiCad 9 design driven by **four Adafruit FT232H** breakouts over USB (MPSSE mode). Everything the software touches maps 1:1 to a real pin.
@@ -83,6 +91,20 @@ Everything you need to source and assemble it is in [`docs/`](docs/):
 - 📖 **[Assembly guide (PDF)](docs/SkillGame%20Assembly%20Guide.pdf)** — an IKEA-style, step-by-step build, parts list on page one.
 
 The KiCad 9 project (schematic + PCB) lives in [`hardware/`](hardware/) — ERC clean and DRC clean.
+
+## Software updates
+
+The machine updates itself over the internet — no USB stick, no reflashing.
+
+**For the operator:** **Service → Check for Updates** lists every published version (newest first, latest tagged). Pick any one to **install forward or roll back** — it shows the release notes, downloads, verifies the file, swaps it in and relaunches. It's unzip-and-copy only: **no PC reboot.** New versions are flagged automatically on boot and every few hours.
+
+**Where it comes from:** releases are hosted free from this repo's [`update/`](https://github.com/dlbuller/SkillGame/tree/main/update) folder over `raw.githubusercontent.com` — [`versions.json`](https://github.com/dlbuller/SkillGame/blob/main/update/versions.json) is the list the app reads. Cut a new version with one command:
+
+```bash
+powershell -File tools\publish-update.ps1 -Version 1.1.0 -Notes "What changed."
+```
+
+That builds, zips, hashes, writes the manifest + release notes + CHANGELOG, updates the version list, and pushes — the app sees it within a couple of minutes.
 
 ## Wiring
 
@@ -119,4 +141,3 @@ The app targets `net8.0-windows` (WPF, x64). With no FT232H boards attached it r
 ## Credits
 
 Scott Wezeman &amp; Dan Bullerman — **WezeBull Games**. *All huff, no bull.*
-</content>
