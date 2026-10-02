@@ -324,13 +324,13 @@ namespace SkillGameWpf
                 var dot = (Color)ColorConverter.ConvertFromString(AppState.ThemeAccent(name));
                 var chip = new Border
                 {
-                    CornerRadius = new CornerRadius(9), Margin = new Thickness(0, 0, 8, 8), Padding = new Thickness(10, 6, 12, 6),
+                    Width = 118, CornerRadius = new CornerRadius(9), Margin = new Thickness(0, 0, 8, 8), Padding = new Thickness(10, 6, 10, 6),
                     Background = new SolidColorBrush(sel ? Color.FromArgb(0x26, dot.R, dot.G, dot.B) : Color.FromArgb(0x14, 0xFF, 0xFF, 0xFF)),
                     BorderThickness = new Thickness(sel ? 1.5 : 1),
                     BorderBrush = new SolidColorBrush(sel ? dot : Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),
                     Cursor = System.Windows.Input.Cursors.Hand, ToolTip = blurb,
                 };
-                var sp = new StackPanel { Orientation = Orientation.Horizontal };
+                var sp = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Center };
                 sp.Children.Add(new Border { Width = 14, Height = 14, CornerRadius = new CornerRadius(7), Background = new SolidColorBrush(dot), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 8, 0) });
                 sp.Children.Add(new TextBlock { Text = name.ToUpperInvariant(), Foreground = (Brush)FindResource(sel ? "TextBrush" : "MutedBrush"), FontFamily = (FontFamily)FindResource("DisplayFont"), FontSize = 13, VerticalAlignment = VerticalAlignment.Center });
                 chip.Child = sp;

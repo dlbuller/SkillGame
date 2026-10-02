@@ -60,6 +60,7 @@ namespace SkillGameWpf
             ("Lava",      "molten rock · glow"),
             ("Circuit",   "green PCB · copper"),
             ("Galaxy",    "deep-space nebula"),
+            ("Ruby",      "deep garnet · gold"),
         };
         private static readonly Dictionary<string, string[]> _themes = new()
         {
@@ -74,6 +75,7 @@ namespace SkillGameWpf
             ["Lava"]     = new[]{"#1E0E08","#0A0503","#24120A","#30180E","#5A2A12","#FF8A1E","#8A3A0A","#C8783C","#FFC870","#C8B040","#FFB040","#C05A3A","#FF4A10","#FFE8D0","#B08A70","#FF6A10","#FFA040","#8A2A00"},
             ["Circuit"]  = new[]{"#0C3A20","#051A0E","#0E4426","#125230","#1E7A44","#DEBE5A","#8C6E28","#3CC8A0","#C8F0D8","#5CE08C","#E8B84A","#A08CD0","#E0604C","#F0F8F0","#90B8A0","#C47C3A","#FAC878","#784620"},
             ["Galaxy"]   = new[]{"#0E0A24","#03020A","#141034","#1C1646","#352C70","#C8C8E6","#5A5082","#1FA6C9","#8CE0F0","#6CD8A8","#E8C870","#8C6EFF","#E05A9A","#F0EEFF","#9A94C0","#8C6EFF","#B4A0FF","#4A3A9A"},
+            ["Ruby"]     = new[]{"#3A0E1C","#1C0610","#2E0C16","#3A1020","#5A1A2E","#E8C45A","#7A5A22","#4FA38C","#F2D9B0","#8FB06A","#E8A93A","#D07AA0","#E23A52","#F8E6EC","#C09AA6","#E8C45A","#F6DC7A","#7A5A22"},
         };
         private static readonly string[] _brushKeys =
         { "","", "CardBrush","CardBrush2","CardBorderBrush","GoldBrush","GoldDimBrush","TealBrush","CyanBrush","GreenBrush","AmberBrush","PurpleBrush","RedBrush","TextBrush","MutedBrush" };
