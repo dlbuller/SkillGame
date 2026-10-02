@@ -59,11 +59,7 @@ namespace SkillGameWpf
                 return;
             }
 
-            if (info == null)
-            {
-                ShowMessage("UP TO DATE", $"SkillGame v{Updater.Current.ToString(3)} is the latest version. Nothing to install.", okText: "OK");
-                return;
-            }
+            if (info == null) { ShowUpToDate(); return; }
             ShowAvailable(info);
         }
 
@@ -82,6 +78,34 @@ namespace SkillGameWpf
                 panel.Children.Add(Buttons(ok));
             }
             _card.Child = panel;
+        }
+
+        private void ShowUpToDate()
+        {
+            var panel = new StackPanel();
+            panel.Children.Add(Title("UP TO DATE"));
+            panel.Children.Add(Body($"SkillGame v{Updater.Current.ToString(3)} is the latest version. Nothing to install."));
+            var ok = Pill("OK", gold: true);
+            ok.Click += (s, e) => _win.Close();
+            if (Updater.CanRollback)
+            {
+                var rb = Pill($"ROLL BACK TO v{Updater.PreviousVersion}", gold: false);
+                rb.Click += (s, e) => DoRollback();
+                panel.Children.Add(Buttons(rb, ok));
+            }
+            else panel.Children.Add(Buttons(ok));
+            _card.Child = panel;
+        }
+
+        private async void DoRollback()
+        {
+            var done = new StackPanel();
+            done.Children.Add(Title("ROLLING BACK"));
+            done.Children.Add(Body($"Restoring v{Updater.PreviousVersion} and restarting SkillGame…"));
+            done.Children.Add(Indeterminate());
+            _card.Child = done;
+            await Task.Delay(700);
+            Updater.Rollback();
         }
 
         private void ShowAvailable(UpdateInfo info)
@@ -141,9 +165,7 @@ namespace SkillGameWpf
                 // Installing phase — files get swapped by the external step, then reboot. Keep it reassuring.
                 var done = new StackPanel();
                 done.Children.Add(Title("INSTALLING"));
-                done.Children.Add(Body(Updater.RebootAfterUpdate
-                    ? $"Installing v{info.Version} and restarting the machine…\nDon't power off."
-                    : $"Installing v{info.Version} and relaunching…"));
+                done.Children.Add(Body($"Installing v{info.Version} and restarting SkillGame…\nThis only unzips and copies files — it won't reboot the PC."));
                 done.Children.Add(Indeterminate());
                 _card.Child = done;
                 await Task.Delay(900);           // let the message paint before we hand off and shut down

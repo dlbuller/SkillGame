@@ -27,6 +27,18 @@ namespace SkillGameWpf
                 ex.SetObserved();
             };
 
+            // A just-updated staged copy finishing the file swap, or a rollback restoring the backup (no window/theme) — do it and exit.
+            if (e.Args.Length >= 2 && e.Args[0] == "--finish-update")
+            {
+                Updater.FinishUpdate(e.Args[1]);
+                return;
+            }
+            if (e.Args.Length >= 2 && e.Args[0] == "--restore")
+            {
+                Updater.RestoreUpdate(e.Args[1]);
+                return;
+            }
+
             // Apply the saved UI theme before any window loads, so every view's StaticResource brushes resolve themed.
             AppState.ApplyTheme(AppState.Settings.Theme);
 
@@ -37,7 +49,9 @@ namespace SkillGameWpf
                 return;
             }
 
+            Updater.CleanupStaging();   // clear any leftover _staged folder from a completed update
             new MainWindow().Show();
+            Updater.StartBackgroundChecks();   // flag when a newer version is available (on boot + every few hours)
         }
 
         private string? _renderView;

@@ -53,7 +53,8 @@ namespace SkillGameWpf
                 PinActivity.Changed += OnPins;
                 Faults.Changed += OnFaults;
                 _lastPollCycles = _coord?.PollCycles ?? 0; _lastPollSample = DateTime.UtcNow;
-                VersionText.Text = $"SkillGame v{Updater.Current.ToString(3)}";
+                Updater.Changed += OnUpdateAvail;
+                RefreshUpdateUi();
                 Refresh();
                 _refresh.Start();
             };
@@ -61,6 +62,7 @@ namespace SkillGameWpf
             {
                 PinActivity.Changed -= OnPins;
                 Faults.Changed -= OnFaults;
+                Updater.Changed -= OnUpdateAvail;
                 _refresh.Stop();
                 if (_coord?.BulbRunning == true) { _coord.StopBulbTest(); TestLampsBtn.Content = "TEST LAMPS"; }   // don't leave lamps cycling
                 if (_ledTestOn) { _coord?.LedOff(); _ledTestOn = false; TestLedsBtn.Content = "TEST LEDS"; }        // or the strip running
@@ -341,6 +343,24 @@ namespace SkillGameWpf
         private void Tutorial_Click(object sender, RoutedEventArgs e) => (Window.GetWindow(this) as MainWindow)?.StartTutorial();
 
         private void Update_Click(object sender, RoutedEventArgs e) => UpdateDialog.Show();
+
+        private void OnUpdateAvail() => Dispatcher.Invoke(RefreshUpdateUi);
+        private void RefreshUpdateUi()
+        {
+            var a = Updater.Available;
+            if (a != null)
+            {
+                UpdateBtn.Content = new TextBlock { Text = $"⬆  UPDATE AVAILABLE — v{a.Version}", Margin = new Thickness(15, 0, 15, 0) };
+                UpdateBtn.Style = (Style)FindResource("GoldButton");
+                VersionText.Text = $"SkillGame v{Updater.Current.ToString(3)}  ·  v{a.Version} ready to install";
+            }
+            else
+            {
+                UpdateBtn.Content = new TextBlock { Text = "⟳  CHECK FOR UPDATES", Margin = new Thickness(15, 0, 15, 0) };
+                UpdateBtn.Style = (Style)FindResource("PillButton");
+                VersionText.Text = $"SkillGame v{Updater.Current.ToString(3)}";
+            }
+        }
 
         private void AllOff_Click(object sender, RoutedEventArgs e)
         {

@@ -29,9 +29,6 @@ namespace SkillGameWpf
         // The only thing to change to move hosting: point this at wherever version.json lives.
         public const string ManifestUrl = "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/version.json";
 
-        // After a successful swap: reboot the cabinet (true) or just relaunch the app (false).
-        public const bool RebootAfterUpdate = true;
-
         private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(30) };
 
         /// <summary>This build's version — read from version.txt beside the exe, falling back to the assembly version.</summary>
@@ -101,50 +98,143 @@ namespace SkillGameWpf
             return zipPath;
         }
 
-        /// <summary>Unpack the zip, hand off to an external script that waits for us to exit, swaps the files in,
-        /// writes the new version, and reboots. The app shuts down so its files aren't locked during the swap.</summary>
+        /// <summary>Unpack the update next to the app and relaunch into it. It's just unzip + copy + restart the app —
+        /// no cmd.exe, no temp script, no PC reboot (that "drop a script in temp and reboot" pattern looks like malware
+        /// to endpoint security like Cortex). When the package carries new binaries we hand off to a staged copy of
+        /// ourselves to do the copy (the running exe/DLLs are locked until we exit); a notes-only update applies in place.</summary>
         public static void ApplyAndRestart(string zipPath, UpdateInfo info)
         {
-            string staging = Path.Combine(WorkDir, "staging");
-            if (Directory.Exists(staging)) Directory.Delete(staging, true);
-            Directory.CreateDirectory(staging);
-            ZipFile.ExtractToDirectory(zipPath, staging, overwriteFiles: true);
+            string installDir = AppContext.BaseDirectory.TrimEnd('\\', '/');
+            string staged = Path.Combine(installDir, "_staged");
+            if (Directory.Exists(staged)) Directory.Delete(staged, true);
+            Directory.CreateDirectory(staged);
+            ZipFile.ExtractToDirectory(zipPath, staged, overwriteFiles: true);
+            try { File.WriteAllText(Path.Combine(staged, "version.txt"), info.Version); } catch { }
 
-            // The zip may or may not carry a version.txt; make sure the installed version ends up correct either way.
-            try { File.WriteAllText(Path.Combine(staging, "version.txt"), info.Version); } catch { }
+            string stagedExe = Path.Combine(staged, "SkillGameWpf.exe");
+            string installExe = Path.Combine(installDir, "SkillGameWpf.exe");
 
-            string installDir = AppContext.BaseDirectory.TrimEnd('\\');
-            string exe = Path.Combine(installDir, "SkillGameWpf.exe");
-            int pid = Environment.ProcessId;
-            string restart = RebootAfterUpdate
-                ? "shutdown /r /t 5 /c \"SkillGame updated - restarting\""
-                : $"start \"\" \"{exe}\"";
-
-            string cmd = $@"@echo off
-setlocal
-echo Installing SkillGame {info.Version}...
-:waitloop
-tasklist /FI ""PID eq {pid}"" 2>nul | find ""{pid}"" >nul
-if not errorlevel 1 (
-  timeout /t 1 /nobreak >nul
-  goto waitloop
-)
-xcopy ""{staging}\*"" ""{installDir}\"" /E /Y /I >nul
-{restart}
-";
-            string cmdPath = Path.Combine(WorkDir, "apply_update.cmd");
-            File.WriteAllText(cmdPath, cmd, new UTF8Encoding(false));
-
-            Process.Start(new ProcessStartInfo
+            if (File.Exists(stagedExe))
             {
-                FileName = "cmd.exe",
-                Arguments = $"/c \"{cmdPath}\"",
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                WorkingDirectory = WorkDir,
-            });
-
+                // Full build: the staged exe runs from _staged, so the install files are free to overwrite once we exit.
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = stagedExe,
+                    Arguments = $"--finish-update \"{installDir}\"",
+                    UseShellExecute = false,
+                    WorkingDirectory = staged,
+                });
+            }
+            else
+            {
+                // Notes-only / no locked binaries: back up the current version, apply in place, relaunch ourselves.
+                try { string bak = Path.Combine(installDir, "_backup"); if (Directory.Exists(bak)) Directory.Delete(bak, true); CopyOver(installDir, bak); } catch { }
+                CopyOver(staged, installDir);
+                try { Directory.Delete(staged, true); } catch { }
+                Process.Start(new ProcessStartInfo { FileName = installExe, UseShellExecute = false, WorkingDirectory = installDir });
+            }
             Application.Current.Shutdown();
+        }
+
+        /// <summary>Run by the staged copy (App sees --finish-update): the old instance has exited, so copy the staged
+        /// build over the install dir and relaunch the updated app. No external processes — just file copies.</summary>
+        public static void FinishUpdate(string installDir)
+        {
+            string staged = AppContext.BaseDirectory.TrimEnd('\\', '/');   // we're running from _staged
+            installDir = installDir.TrimEnd('\\', '/');
+            // Keep the version we're replacing so the operator can roll back to it.
+            try { string bak = Path.Combine(installDir, "_backup"); if (Directory.Exists(bak)) Directory.Delete(bak, true); CopyOver(installDir, bak, retries: 8); } catch { }
+            CopyOver(staged, installDir, retries: 15);                      // the old instance may take a moment to release files
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = Path.Combine(installDir, "SkillGameWpf.exe"),
+                    UseShellExecute = false,
+                    WorkingDirectory = installDir,
+                });
+            }
+            catch { }
+            Application.Current?.Shutdown();
+        }
+
+        /// <summary>Remove a leftover _staged folder from a completed update (called on a normal startup).</summary>
+        public static void CleanupStaging()
+        {
+            try
+            {
+                string staged = Path.Combine(AppContext.BaseDirectory.TrimEnd('\\', '/'), "_staged");
+                if (Directory.Exists(staged)) Directory.Delete(staged, true);
+            }
+            catch { }
+        }
+
+        // ---- rollback: the previous version is kept in _backup so the operator can pick old vs new ----
+        private static string BackupDir => Path.Combine(AppContext.BaseDirectory.TrimEnd('\\', '/'), "_backup");
+        public static bool CanRollback => File.Exists(Path.Combine(BackupDir, "SkillGameWpf.exe")) || File.Exists(Path.Combine(BackupDir, "version.txt"));
+        public static string PreviousVersion
+        {
+            get { try { var f = Path.Combine(BackupDir, "version.txt"); return File.Exists(f) ? File.ReadAllText(f).Trim() : "previous"; } catch { return "previous"; } }
+        }
+
+        /// <summary>Restore the backed-up previous version and relaunch into it (same gentle swap, source = _backup).</summary>
+        public static void Rollback()
+        {
+            string installDir = AppContext.BaseDirectory.TrimEnd('\\', '/');
+            string backupExe = Path.Combine(BackupDir, "SkillGameWpf.exe");
+            if (File.Exists(backupExe))
+                Process.Start(new ProcessStartInfo { FileName = backupExe, Arguments = $"--restore \"{installDir}\"", UseShellExecute = false, WorkingDirectory = BackupDir });
+            else
+            {
+                CopyOver(BackupDir, installDir);
+                Process.Start(new ProcessStartInfo { FileName = Path.Combine(installDir, "SkillGameWpf.exe"), UseShellExecute = false, WorkingDirectory = installDir });
+            }
+            Application.Current.Shutdown();
+        }
+
+        /// <summary>Run by the backup copy (App sees --restore): copy the backup over the install dir and relaunch. No re-backup.</summary>
+        public static void RestoreUpdate(string installDir)
+        {
+            installDir = installDir.TrimEnd('\\', '/');
+            CopyOver(AppContext.BaseDirectory.TrimEnd('\\', '/'), installDir, retries: 15);   // we're running from _backup
+            try { Process.Start(new ProcessStartInfo { FileName = Path.Combine(installDir, "SkillGameWpf.exe"), UseShellExecute = false, WorkingDirectory = installDir }); } catch { }
+            Application.Current?.Shutdown();
+        }
+
+        // ---- background "update available" checks (on app boot + every few hours) ----
+        public static UpdateInfo? Available { get; private set; }
+        public static event Action? Changed;
+        private static System.Windows.Threading.DispatcherTimer? _poll;
+
+        public static void StartBackgroundChecks()
+        {
+            _ = CheckInBackground();
+            _poll = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromHours(6) };
+            _poll.Tick += (s, e) => _ = CheckInBackground();
+            _poll.Start();
+        }
+        private static async Task CheckInBackground()
+        {
+            try { var info = await CheckAsync(); if (info != null) { Available = info; Changed?.Invoke(); } }
+            catch { }
+        }
+
+        // Copy every file from src over dst (overwrite), skipping a nested _staged. Retries ride out a file the
+        // just-exited instance hasn't released yet; a file we still can't replace is skipped, not fatal.
+        private static void CopyOver(string src, string dst, int retries = 1)
+        {
+            foreach (var file in Directory.GetFiles(src, "*", SearchOption.AllDirectories))
+            {
+                string rel = Path.GetRelativePath(src, file);
+                if (rel.StartsWith("_staged", StringComparison.OrdinalIgnoreCase) || rel.StartsWith("_backup", StringComparison.OrdinalIgnoreCase)) continue;
+                string target = Path.Combine(dst, rel);
+                for (int attempt = 0; ; attempt++)
+                {
+                    try { Directory.CreateDirectory(Path.GetDirectoryName(target)!); File.Copy(file, target, true); break; }
+                    catch when (attempt < retries) { Thread.Sleep(300); }
+                    catch { break; }
+                }
+            }
         }
     }
 }
