@@ -49,10 +49,17 @@ namespace SkillGameWpf
         // Order: BgTop,BgBottom, Card,Card2,Border, Gold,GoldDim,Teal,Cyan,Green,Amber,Purple,Red, Text,Muted, Accent,AccentBright,AccentDim
         public static readonly (string name, string blurb)[] ThemeList =
         {
-            ("Classy",   "warm walnut & brass"),
-            ("Fun",      "bright arcade neon"),
-            ("Plain",    "calm neutral graphite"),
-            ("Blackout", "OLED black & amber"),
+            ("Classy",    "warm walnut & brass"),
+            ("Fun",       "bright arcade neon"),
+            ("Plain",     "calm neutral graphite"),
+            ("Blackout",  "OLED black & amber"),
+            ("Vintage",   "1949 cream, red & yellow"),
+            ("Maple",     "blond maple & walnut"),
+            ("Midnight",  "navy lacquer & chrome"),
+            ("Synthwave", "retro sunset neon"),
+            ("Lava",      "molten rock & glow"),
+            ("Circuit",   "green PCB & copper"),
+            ("Galaxy",    "deep-space nebula"),
         };
         private static readonly Dictionary<string, string[]> _themes = new()
         {
@@ -60,6 +67,13 @@ namespace SkillGameWpf
             ["Fun"]      = new[]{"#12121A","#0A0A10","#191922","#20202C","#31313F","#E7A91D","#7A5A12","#16C8B0","#33C9FF","#2FE08C","#F0AA1E","#B45AE0","#E2493C","#ECECF2","#8A8A98","#E7A91D","#F0AA1E","#7A5A12"},
             ["Plain"]    = new[]{"#1A1E26","#10131A","#1F2531","#28303F","#3B4556","#8FB4D6","#45586E","#74A6A6","#BBCBDE","#8FB488","#C2C3CE","#9E9BC4","#CC7A70","#E7EBF1","#8793A3","#8FB4D6","#B6D2EA","#45586E"},
             ["Blackout"] = new[]{"#000000","#000000","#0A0A0A","#141414","#2A2A2A","#FFB000","#8A5F00","#46B9A8","#E0C080","#7BC86A","#FFC94D","#C88AD0","#FF5A4A","#EDEDED","#8A8A8A","#FFB000","#FFC94D","#8A5F00"},
+            ["Vintage"]  = new[]{"#2A1410","#170A07","#2E1813","#3A2019","#5A3024","#E8C35A","#8A6A22","#5E9C8C","#F2E6C8","#8FAE5A","#F0B840","#B07A9A","#D8432E","#F6EEDC","#B49C84","#D8432E","#EE6A52","#7E2418"},
+            ["Maple"]    = new[]{"#3B2D1D","#231A10","#3D2E1E","#4A3825","#6B5234","#E2C48E","#8A7048","#7FA58E","#F2E2C0","#A3B46A","#E8BE72","#C49A78","#C8664E","#FAF3E4","#BCA888","#E2C48E","#F2DAAE","#8A7048"},
+            ["Midnight"] = new[]{"#0E1828","#060B14","#121E31","#18263D","#2A3B57","#C9D2DE","#5E6B80","#5FA8B0","#A9C8E8","#7FBF9A","#D9C27A","#9A8CD0","#D06A6A","#EEF2F8","#8592A8","#C9D2DE","#E6ECF4","#5E6B80"},
+            ["Synthwave"]= new[]{"#1A0533","#0A0118","#22083D","#2E0C50","#5A1A80","#00E5FF","#006D80","#00E5FF","#7FF3FF","#5CFFB0","#FFB000","#B45AE0","#FF2E88","#FFE6FA","#B48AC8","#FF2E88","#FF7BE5","#8A1A50"},
+            ["Lava"]     = new[]{"#1E0E08","#0A0503","#24120A","#30180E","#5A2A12","#FF8A1E","#8A3A0A","#C8783C","#FFC870","#C8B040","#FFB040","#C05A3A","#FF4A10","#FFE8D0","#B08A70","#FF6A10","#FFA040","#8A2A00"},
+            ["Circuit"]  = new[]{"#0C3A20","#051A0E","#0E4426","#125230","#1E7A44","#DEBE5A","#8C6E28","#3CC8A0","#C8F0D8","#5CE08C","#E8B84A","#A08CD0","#E0604C","#F0F8F0","#90B8A0","#C47C3A","#FAC878","#784620"},
+            ["Galaxy"]   = new[]{"#0E0A24","#03020A","#141034","#1C1646","#352C70","#C8C8E6","#5A5082","#1FA6C9","#8CE0F0","#6CD8A8","#E8C870","#8C6EFF","#E05A9A","#F0EEFF","#9A94C0","#8C6EFF","#B4A0FF","#4A3A9A"},
         };
         private static readonly string[] _brushKeys =
         { "","", "CardBrush","CardBrush2","CardBorderBrush","GoldBrush","GoldDimBrush","TealBrush","CyanBrush","GreenBrush","AmberBrush","PurpleBrush","RedBrush","TextBrush","MutedBrush" };
@@ -93,6 +107,22 @@ namespace SkillGameWpf
             catch { }
         }
         private static Color C(string hex) => (Color)ColorConverter.ConvertFromString(hex);
+
+        /// <summary>Playfield art for the current theme, if a themed one exists, else the default board.
+        /// Themed boards are geometry-matched (same rail/hole/disc pixels) so the coin-path JSONs still line up.</summary>
+        public static string PlayfieldPath
+        {
+            get
+            {
+                try
+                {
+                    string themed = $@"C:\SkillGame\playfields\playfield_{Settings.Theme}.png";
+                    if (System.IO.File.Exists(themed)) return themed;
+                }
+                catch { }
+                return @"C:\SkillGame\playfield.png";
+            }
+        }
 
         /// <summary>Relaunch the app (used after a theme change so every cached view rebuilds with the new palette).</summary>
         public static void Restart()

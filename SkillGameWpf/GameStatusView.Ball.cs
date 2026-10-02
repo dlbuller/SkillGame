@@ -22,7 +22,7 @@ namespace SkillGameWpf
             try
             {
                 var bmp = new System.Windows.Media.Imaging.BitmapImage();
-                bmp.BeginInit(); bmp.UriSource = new Uri(@"C:\SkillGame\playfield.png");
+                bmp.BeginInit(); bmp.UriSource = new Uri(AppState.PlayfieldPath);
                 bmp.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad; bmp.EndInit();
                 var scaled = new System.Windows.Media.Imaging.TransformedBitmap(bmp,
                     new ScaleTransform((double)PfW / bmp.PixelWidth, (double)PfH / bmp.PixelHeight));

@@ -95,7 +95,7 @@ namespace SkillGameWpf
             {
                 var bmp = new System.Windows.Media.Imaging.BitmapImage();
                 bmp.BeginInit();
-                bmp.UriSource = new Uri(@"C:\SkillGame\playfield.png");
+                bmp.UriSource = new Uri(AppState.PlayfieldPath);
                 bmp.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
                 bmp.EndInit();
                 var board = new Image { Source = bmp, Width = PfW, Height = PfH, IsHitTestVisible = false, Stretch = Stretch.Fill };
