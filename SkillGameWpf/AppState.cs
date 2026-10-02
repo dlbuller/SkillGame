@@ -49,16 +49,16 @@ namespace SkillGameWpf
         // Order: BgTop,BgBottom, Card,Card2,Border, Gold,GoldDim,Teal,Cyan,Green,Amber,Purple,Red, Text,Muted, Accent,AccentBright,AccentDim
         public static readonly (string name, string blurb)[] ThemeList =
         {
-            ("Classy",    "warm walnut & brass"),
+            ("Classy",    "warm walnut · brass"),
             ("Fun",       "bright arcade neon"),
             ("Plain",     "calm neutral graphite"),
-            ("Blackout",  "OLED black & amber"),
-            ("Vintage",   "1949 cream, red & yellow"),
-            ("Maple",     "blond maple & walnut"),
-            ("Midnight",  "navy lacquer & chrome"),
+            ("Blackout",  "OLED black · amber"),
+            ("Vintage",   "1949 cream, red · yellow"),
+            ("Maple",     "blond maple · walnut"),
+            ("Midnight",  "navy lacquer · chrome"),
             ("Synthwave", "retro sunset neon"),
-            ("Lava",      "molten rock & glow"),
-            ("Circuit",   "green PCB & copper"),
+            ("Lava",      "molten rock · glow"),
+            ("Circuit",   "green PCB · copper"),
             ("Galaxy",    "deep-space nebula"),
         };
         private static readonly Dictionary<string, string[]> _themes = new()

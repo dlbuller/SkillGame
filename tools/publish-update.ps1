@@ -57,6 +57,13 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $up "version.json") -Encoding utf8
 Set-Content (Join-Path $up "RELEASE_NOTES.md") -Value "# SkillGame v$Version`n`n$Notes" -Encoding utf8
 
+# Maintain versions.json — the full release list the in-app picker reads (newest first).
+$vf = Join-Path $up "versions.json"
+$all = @()
+if (Test-Path $vf) { $all = @(Get-Content $vf -Raw | ConvertFrom-Json) }
+$all = @([pscustomobject]$manifest) + @($all | Where-Object { $_.version -ne $Version })
+$all | ConvertTo-Json -Depth 5 | Set-Content $vf -Encoding utf8
+
 # prepend to CHANGELOG
 $cl = Join-Path $repo "CHANGELOG.md"
 $entry = "## v$Version - $date`n$Notes`n`n"

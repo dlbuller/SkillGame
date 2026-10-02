@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -26,8 +28,9 @@ namespace SkillGameWpf
     /// <summary>Checks the WezeBull server for a newer SkillGame, downloads it, and swaps the files in on reboot.</summary>
     public static class Updater
     {
-        // The only thing to change to move hosting: point this at wherever version.json lives.
+        // The only thing to change to move hosting: point these at wherever the manifest + versions list live.
         public const string ManifestUrl = "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/version.json";
+        public const string VersionsUrl = "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/versions.json";
 
         private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(30) };
 
@@ -46,16 +49,40 @@ namespace SkillGameWpf
             }
         }
 
-        /// <summary>Hit the server. Returns the update when one is newer than this build, otherwise null.</summary>
+        private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
+        private static string Bust(string url) => url + (url.Contains('?') ? "&" : "?") + "t=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        internal static Version Parse(string s) => Version.TryParse((s ?? "").Trim(), out var v) ? v : new Version(0, 0, 0);
+
+        /// <summary>Read the latest-version manifest (no "is it newer" filter).</summary>
+        public static async Task<UpdateInfo?> FetchManifestAsync(CancellationToken ct = default)
+        {
+            string json = await Http.GetStringAsync(Bust(ManifestUrl), ct);
+            return JsonSerializer.Deserialize<UpdateInfo>(json, JsonOpts);
+        }
+
+        /// <summary>Hit the server. Returns the latest when it's newer than this build, otherwise null.</summary>
         public static async Task<UpdateInfo?> CheckAsync(CancellationToken ct = default)
         {
-            // Cache-buster so the host's CDN can't serve a stale manifest during testing.
-            string url = ManifestUrl + (ManifestUrl.Contains('?') ? "&" : "?") + "t=" + DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            string json = await Http.GetStringAsync(url, ct);
-            var info = JsonSerializer.Deserialize<UpdateInfo>(json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var info = await FetchManifestAsync(ct);
             if (info == null || !Version.TryParse(info.Version, out var remote)) return null;
             return remote > Current ? info : null;
+        }
+
+        /// <summary>Every published release, newest first — so the operator can install any version, forward or back.
+        /// Falls back to just the latest manifest if versions.json isn't there yet.</summary>
+        public static async Task<List<UpdateInfo>> GetVersionsAsync(CancellationToken ct = default)
+        {
+            try
+            {
+                string json = await Http.GetStringAsync(Bust(VersionsUrl), ct);
+                var list = JsonSerializer.Deserialize<List<UpdateInfo>>(json, JsonOpts);
+                if (list != null && list.Count > 0)
+                    return list.Where(v => !string.IsNullOrWhiteSpace(v.Version))
+                               .OrderByDescending(v => Parse(v.Version)).ToList();
+            }
+            catch { }
+            try { var one = await FetchManifestAsync(ct); if (one != null) return new List<UpdateInfo> { one }; } catch { }
+            return new List<UpdateInfo>();
         }
 
         private static string WorkDir

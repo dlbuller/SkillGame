@@ -324,7 +324,7 @@ namespace SkillGameWpf
                 var dot = (Color)ColorConverter.ConvertFromString(AppState.ThemeAccent(name));
                 var chip = new Border
                 {
-                    CornerRadius = new CornerRadius(9), Margin = new Thickness(0, 0, 8, 0), Padding = new Thickness(10, 6, 12, 6),
+                    CornerRadius = new CornerRadius(9), Margin = new Thickness(0, 0, 8, 8), Padding = new Thickness(10, 6, 12, 6),
                     Background = new SolidColorBrush(sel ? Color.FromArgb(0x26, dot.R, dot.G, dot.B) : Color.FromArgb(0x14, 0xFF, 0xFF, 0xFF)),
                     BorderThickness = new Thickness(sel ? 1.5 : 1),
                     BorderBrush = new SolidColorBrush(sel ? dot : Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),

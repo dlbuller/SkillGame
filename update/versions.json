@@ -1,0 +1,18 @@
+[
+  {
+    "version": "1.0.1",
+    "date": "2026-10-01",
+    "zip": "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/SkillGame-1.0.1.zip",
+    "sha256": "36820f6ec3e70a408a169cc9fc8ac854392060e3e2fa9c3bb45906e6304a1f32",
+    "size": 719,
+    "notes": "SkillGame v1.0.1\n\nNEW\n- In-app software updates: this screen. Check the WezeBull server, see what changed, and install with one tap - the machine swaps the files and restarts on its own.\n\nFIXES & IMPROVEMENTS\n- Solenoids now PULSE instead of being held on, so the lock coils can't overheat. Spring-return gate: plunger out blocks a coin, a pulse drops it.\n- LED strip brightness is capped so a full-white frame can't brown out the 5 V supply.\n- Power simplified to ONE 5 V / 10 A brick, split into two fused branches - F3 (board) and F4 (strip).\n- Board design rules gated at real fab minimums (DRC clean).\n\nThis is the first release pushed through the updater itself - if you're reading it after tapping Update, the whole pipeline works."
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-09-30",
+    "zip": "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/SkillGame-1.0.0.zip",
+    "sha256": "08e539d1c693b8fa44649cf552d80f6bbe737ed03adeea3ac4090d3d00930389",
+    "size": 362,
+    "notes": "SkillGame v1.0.0\n\nBaseline build - Game Status, Diagnostics, Audits, Service, interactive Schematic; 4x FT232H hardware layer; demo/attract mode."
+  }
+]

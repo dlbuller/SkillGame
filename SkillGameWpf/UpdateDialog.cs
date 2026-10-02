@@ -48,19 +48,15 @@ namespace SkillGameWpf
         private async Task RunAsync()
         {
             ShowMessage("CHECKING FOR UPDATES", $"Contacting the WezeBull server…\nYou're on v{Updater.Current.ToString(3)}.", busy: true);
-            UpdateInfo? info;
-            try
-            {
-                info = await Updater.CheckAsync();
-            }
+            System.Collections.Generic.List<UpdateInfo> versions;
+            try { versions = await Updater.GetVersionsAsync(); }
             catch (Exception ex)
             {
                 ShowMessage("COULDN'T CHECK", "Couldn't reach the update server. Check the network and try again.\n\n" + ex.Message, okText: "OK");
                 return;
             }
-
-            if (info == null) { ShowUpToDate(); return; }
-            ShowAvailable(info);
+            if (versions.Count == 0) { ShowMessage("NO VERSIONS", "The server didn't list any versions to install.", okText: "OK"); return; }
+            ShowVersions(versions);
         }
 
         // ---- states ---------------------------------------------------------
@@ -80,61 +76,81 @@ namespace SkillGameWpf
             _card.Child = panel;
         }
 
-        private void ShowUpToDate()
+        // The full release list — install any version, newer (UPDATE) or older (ROLL BACK). Latest + installed are tagged.
+        private void ShowVersions(System.Collections.Generic.List<UpdateInfo> versions)
         {
+            string cur = Updater.Current.ToString(3);
             var panel = new StackPanel();
-            panel.Children.Add(Title("UP TO DATE"));
-            panel.Children.Add(Body($"SkillGame v{Updater.Current.ToString(3)} is the latest version. Nothing to install."));
-            var ok = Pill("OK", gold: true);
-            ok.Click += (s, e) => _win.Close();
-            if (Updater.CanRollback)
+            panel.Children.Add(Title("SOFTWARE VERSIONS"));
+            panel.Children.Add(Body($"You're on v{cur}. Install any version — newer to update, older to roll back."));
+            var rows = new StackPanel { Margin = new Thickness(0, 12, 0, 0) };
+            for (int i = 0; i < versions.Count; i++)
+                rows.Children.Add(VersionRow(versions[i], latest: i == 0, installed: string.Equals(versions[i].Version, cur, StringComparison.OrdinalIgnoreCase)));
+            panel.Children.Add(new ScrollViewer { VerticalScrollBarVisibility = ScrollBarVisibility.Auto, MaxHeight = 330, Content = rows });
+            var close = Pill("CLOSE", gold: false);
+            close.Click += (s, e) => _win.Close();
+            panel.Children.Add(Buttons(close));
+            _card.Child = panel;
+        }
+
+        private Border VersionRow(UpdateInfo v, bool latest, bool installed)
+        {
+            var grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            var left = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+            var head = new StackPanel { Orientation = Orientation.Horizontal };
+            head.Children.Add(new TextBlock { Text = $"v{v.Version}", Foreground = B("GoldBrush"), FontFamily = F("DisplayFont"), FontSize = 16, VerticalAlignment = VerticalAlignment.Center });
+            if (!string.IsNullOrWhiteSpace(v.Date))
+                head.Children.Add(new TextBlock { Text = $"   {v.Date}", Foreground = B("MutedBrush"), FontSize = 11.5, VerticalAlignment = VerticalAlignment.Center });
+            if (latest) head.Children.Add(Tag("LATEST", strong: true));
+            if (installed) head.Children.Add(Tag("INSTALLED", strong: false));
+            left.Children.Add(head);
+            string note = (v.Notes ?? "").Trim();
+            int nl = note.IndexOfAny(new[] { '\n', '\r' });
+            if (nl > 0) note = note.Substring(0, nl);
+            if (note.Length > 0)
+                left.Children.Add(new TextBlock { Text = note, Foreground = B("MutedBrush"), FontSize = 12, TextTrimming = TextTrimming.CharacterEllipsis, Margin = new Thickness(0, 3, 0, 0), MaxWidth = 300 });
+            Grid.SetColumn(left, 0); grid.Children.Add(left);
+
+            if (installed)
             {
-                var rb = Pill($"ROLL BACK TO v{Updater.PreviousVersion}", gold: false);
-                rb.Click += (s, e) => DoRollback();
-                panel.Children.Add(Buttons(rb, ok));
+                var lbl = new TextBlock { Text = "CURRENT", Foreground = B("MutedBrush"), FontFamily = F("DisplayFont"), FontSize = 12, VerticalAlignment = VerticalAlignment.Center };
+                Grid.SetColumn(lbl, 1); grid.Children.Add(lbl);
             }
-            else panel.Children.Add(Buttons(ok));
-            _card.Child = panel;
+            else
+            {
+                bool newer = Updater.Parse(v.Version) > Updater.Current;
+                var btn = Pill(newer ? "UPDATE" : "ROLL BACK", gold: newer);
+                btn.Height = 38; btn.MinWidth = 108;
+                btn.Click += (s, e) => ConfirmInstall(v, newer);
+                Grid.SetColumn(btn, 1); grid.Children.Add(btn);
+            }
+
+            return new Border
+            {
+                CornerRadius = new CornerRadius(8), Background = new SolidColorBrush(Color.FromArgb(0x14, 0xFF, 0xFF, 0xFF)),
+                Padding = new Thickness(12, 9, 12, 9), Margin = new Thickness(0, 0, 0, 8), Child = grid,
+            };
         }
 
-        private async void DoRollback()
+        private UIElement Tag(string text, bool strong)
         {
-            var done = new StackPanel();
-            done.Children.Add(Title("ROLLING BACK"));
-            done.Children.Add(Body($"Restoring v{Updater.PreviousVersion} and restarting SkillGame…"));
-            done.Children.Add(Indeterminate());
-            _card.Child = done;
-            await Task.Delay(700);
-            Updater.Rollback();
+            return new Border
+            {
+                Margin = new Thickness(8, 0, 0, 0), Padding = new Thickness(6, 1, 6, 2), CornerRadius = new CornerRadius(4),
+                VerticalAlignment = VerticalAlignment.Center,
+                Background = strong ? B("GoldBrush") : new SolidColorBrush(Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)),
+                Child = new TextBlock { Text = text, FontSize = 10, FontWeight = FontWeights.Bold, Foreground = strong ? new SolidColorBrush(Color.FromRgb(0x20, 0x18, 0x0A)) : B("TextBrush") },
+            };
         }
 
-        private void ShowAvailable(UpdateInfo info)
+        private void ConfirmInstall(UpdateInfo v, bool newer)
         {
-            var panel = new StackPanel();
-            panel.Children.Add(Title("UPDATE AVAILABLE"));
-            panel.Children.Add(new TextBlock
-            {
-                Text = $"v{Updater.Current.ToString(3)}  →  v{info.Version}" + (string.IsNullOrWhiteSpace(info.Date) ? "" : $"   ·   {info.Date}"),
-                Foreground = B("GoldBrush"), FontFamily = F("DisplayFont"), FontSize = 16, Margin = new Thickness(0, 0, 0, 12),
-            });
-            panel.Children.Add(new TextBlock { Text = "WHAT'S NEW", Foreground = B("MutedBrush"), FontSize = 11.5, FontWeight = FontWeights.Bold, Margin = new Thickness(0, 0, 0, 6) });
-            panel.Children.Add(new Border
-            {
-                Background = new SolidColorBrush(Color.FromArgb(0x18, 0xFF, 0xFF, 0xFF)),
-                CornerRadius = new CornerRadius(8), Padding = new Thickness(14, 11, 14, 11), MaxHeight = 240,
-                Child = new ScrollViewer
-                {
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                    Content = new TextBlock { Text = info.Notes.Trim(), Foreground = B("TextBrush"), FontSize = 13.5, TextWrapping = TextWrapping.Wrap, LineHeight = 20, LineStackingStrategy = LineStackingStrategy.BlockLineHeight },
-                },
-            });
-
-            var later = Pill("LATER", gold: false);
-            later.Click += (s, e) => _win.Close();
-            var update = Pill("UPDATE NOW", gold: true);
-            update.Click += async (s, e) => await DownloadAndApply(info);
-            panel.Children.Add(Buttons(later, update));
-            _card.Child = panel;
+            string verb = newer ? "Update to" : "Roll back to";
+            if (AppDialog.Confirm(newer ? "UPDATE" : "ROLL BACK", $"{verb} v{v.Version}?\n\nSkillGame will download it and restart.", newer ? "UPDATE" : "ROLL BACK", "CANCEL"))
+                _ = DownloadAndApply(v);
         }
 
         private async Task DownloadAndApply(UpdateInfo info)

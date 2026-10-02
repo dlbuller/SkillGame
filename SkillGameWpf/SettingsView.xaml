@@ -257,7 +257,7 @@
                         <StackPanel ToolTip="Recolors the highlight theme used all over the app — the SKILLGAME titles, score digits, the flashing INSERT COIN sign, gold buttons, high-score numbers and their glows. Pick the color you want those to be.">
                             <TextBlock Text="THEME" Foreground="{StaticResource MutedBrush}" FontSize="12" Margin="0,0,0,7"
                                        ToolTip="Recolors the highlight theme used all over the app — titles, score digits, INSERT COIN, gold buttons, high-score numbers and their glows."/>
-                            <StackPanel x:Name="AccentSwatches" Orientation="Horizontal" Margin="0,0,0,4"/>
+                            <WrapPanel x:Name="AccentSwatches" Margin="0,0,0,4"/>
                             <TextBlock x:Name="AccentName" Foreground="{DynamicResource GoldBrush}" FontFamily="{StaticResource DisplayFont}" FontSize="13" Margin="0,0,0,14"/>
                         </StackPanel>
                         <Grid Margin="0,0,0,6" ToolTip="Dim the whole screen for the cabinet.">
