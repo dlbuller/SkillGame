@@ -8,27 +8,28 @@
             <local:SoundSetIconConverter x:Key="SoundSetIcon"/>
             <local:SoundSetColorConverter x:Key="SoundSetColor"/>
 
-            <!-- ===== Palette (dark arcade dashboard, mid-century Bally accents) ===== -->
-            <Color x:Key="BgTop">#12121A</Color>
-            <Color x:Key="BgBottom">#0A0A10</Color>
-            <SolidColorBrush x:Key="CardBrush"        Color="#191922"/>
-            <SolidColorBrush x:Key="CardBrush2"       Color="#20202C"/>
-            <SolidColorBrush x:Key="CardBorderBrush"  Color="#31313F"/>
-            <SolidColorBrush x:Key="GoldBrush"        Color="#E7A91D"/>
-            <SolidColorBrush x:Key="GoldDimBrush"     Color="#7A5A12"/>
-            <SolidColorBrush x:Key="TealBrush"        Color="#16C8B0"/>
-            <SolidColorBrush x:Key="CyanBrush"        Color="#33C9FF"/>
-            <SolidColorBrush x:Key="GreenBrush"       Color="#2FE08C"/>
-            <SolidColorBrush x:Key="AmberBrush"       Color="#F0AA1E"/>
-            <SolidColorBrush x:Key="PurpleBrush"      Color="#B45AE0"/>
-            <SolidColorBrush x:Key="RedBrush"         Color="#E2493C"/>
-            <SolidColorBrush x:Key="TextBrush"        Color="#ECECF2"/>
-            <SolidColorBrush x:Key="MutedBrush"       Color="#8A8A98"/>
+            <!-- ===== Palette (classy wood & brass — warm walnut surfaces, one antique-brass accent) ===== -->
+            <Color x:Key="BgTop">#241A12</Color>
+            <Color x:Key="BgBottom">#140D07</Color>
+            <SolidColorBrush x:Key="CardBrush"        Color="#241A11"/>
+            <SolidColorBrush x:Key="CardBrush2"       Color="#2F2318"/>
+            <SolidColorBrush x:Key="CardBorderBrush"  Color="#47331E"/>
+            <SolidColorBrush x:Key="GoldBrush"        Color="#D7A33C"/>
+            <SolidColorBrush x:Key="GoldDimBrush"     Color="#7A5A1E"/>
+            <!-- The old rainbow accents fold into the wood family so the app reads as one piece. -->
+            <SolidColorBrush x:Key="TealBrush"        Color="#6E9E8A"/>
+            <SolidColorBrush x:Key="CyanBrush"        Color="#E6D5AC"/>
+            <SolidColorBrush x:Key="GreenBrush"       Color="#97A95E"/>
+            <SolidColorBrush x:Key="AmberBrush"       Color="#E0A736"/>
+            <SolidColorBrush x:Key="PurpleBrush"      Color="#BE8A5E"/>
+            <SolidColorBrush x:Key="RedBrush"         Color="#C25A4C"/>
+            <SolidColorBrush x:Key="TextBrush"        Color="#F1EAD9"/>
+            <SolidColorBrush x:Key="MutedBrush"       Color="#A7957C"/>
 
             <!-- Accent colors (the picker swaps these live) — used by the controls' fills and glows. -->
-            <Color x:Key="AccentColor">#E7A91D</Color>
-            <Color x:Key="AccentBright">#F0AA1E</Color>
-            <Color x:Key="AccentDim">#7A5A12</Color>
+            <Color x:Key="AccentColor">#D7A33C</Color>
+            <Color x:Key="AccentBright">#E8B84A</Color>
+            <Color x:Key="AccentDim">#7A5A1E</Color>
 
             <LinearGradientBrush x:Key="AppBg" StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="{StaticResource BgTop}" Offset="0"/>
@@ -42,10 +43,10 @@
             <!-- ===== Frosted-glass surfaces ===== -->
             <!-- Translucent so the app gradient shows through (depth); bright top rim = glass edge. -->
             <LinearGradientBrush x:Key="GlassFill" StartPoint="0.15,0" EndPoint="0.55,1">
-                <GradientStop Color="#26FFFFFF" Offset="0"/>
-                <GradientStop Color="#12222836" Offset="0.10"/>
-                <GradientStop Color="#0F1A1F2B" Offset="0.55"/>
-                <GradientStop Color="#1410131C" Offset="1"/>
+                <GradientStop Color="#22FFFFFF" Offset="0"/>
+                <GradientStop Color="#14241A10" Offset="0.10"/>
+                <GradientStop Color="#0F1C1408" Offset="0.55"/>
+                <GradientStop Color="#16140D07" Offset="1"/>
             </LinearGradientBrush>
             <LinearGradientBrush x:Key="GlassRim" StartPoint="0,0" EndPoint="0,1">
                 <GradientStop Color="#59FFFFFF" Offset="0"/>
@@ -68,7 +69,7 @@
                 <Style.Triggers>
                     <!-- Interactive lift: the glass edge brightens on hover (no heavier blur — keeps it fast). -->
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="#5A16C8B0"/>
+                        <Setter Property="BorderBrush" Value="#66D7A33C"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>

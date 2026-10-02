@@ -57,7 +57,7 @@ namespace SkillGameWpf
 
             var card = new Border
             {
-                CornerRadius = new CornerRadius(16), Background = new SolidColorBrush(Color.FromRgb(0x12, 0x14, 0x1C)),
+                CornerRadius = new CornerRadius(16), Background = new SolidColorBrush(Color.FromRgb(0x1A, 0x12, 0x0B)),
                 BorderBrush = (Brush)app.FindResource("GoldBrush"), BorderThickness = new Thickness(1.5),
                 Padding = new Thickness(28, 24, 28, 22), Margin = new Thickness(26), Child = panel,   // margin leaves room for the shadow
                 Effect = new DropShadowEffect { Color = Colors.Black, BlurRadius = 40, ShadowDepth = 0, Opacity = 0.7 },

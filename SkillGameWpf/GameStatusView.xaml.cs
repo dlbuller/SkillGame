@@ -249,7 +249,9 @@ namespace SkillGameWpf
                 for (int i = 0; i < m; i++)
                 {
                     var sc = fr[(int)((long)i * (fr.Length - 1) / Math.Max(1, m - 1))];
-                    ((SolidColorBrush)_frontDots[i].Background).Color = Color.FromRgb(sc.R, sc.G, sc.B);
+                    // Follow the strip's motion/brightness, but render the marquee in warm maple — no rainbow on the sign.
+                    double lum = (sc.R * 0.299 + sc.G * 0.587 + sc.B * 0.114) / 255.0;
+                    ((SolidColorBrush)_frontDots[i].Background).Color = lum < 0.04 ? StripDim : WarmGlow(0.25 + 0.75 * lum);
                 }
                 return;
             }
@@ -282,11 +284,11 @@ namespace SkillGameWpf
                 Color c;
                 switch (_stripMode)
                 {
-                    case "attract": c = Mul(FromHue((i * 16 + f * 10) % 360), 1); break;
-                    case "distract": c = (f % 2 == 0) ? Mul(Color.FromRgb(0xB4, 0x5A, 0xE0), 1) : StripDim; break;
+                    case "attract": { double w = 0.5 + 0.5 * Math.Sin(i * 0.5 - f * 0.15); c = WarmGlow(0.4 + 0.6 * w); break; }   // warm maple glow wave
+                    case "distract": c = (f % 2 == 0) ? WarmGlow(0.95) : StripDim; break;   // warm ember strobe
                     case "score":
                     { int head = (f * 2) % (n + 8); int d = head - i; c = (d >= 0 && d < 8) ? Mul(_stripColor, 1 - d / 8.0) : StripDim; break; }
-                    default: c = Mul(FromHue((i * 12 + f * 3) % 360), 0.30); break;   // gentle idle shimmer
+                    default: { double w = 0.5 + 0.5 * Math.Sin(i * 0.4 + f * 0.05); c = Mul(WarmGlow(0.5 + 0.5 * w), 0.4); break; }   // gentle warm idle shimmer
                 }
                 if (_stripMode == "idle")
                 {
@@ -294,8 +296,8 @@ namespace SkillGameWpf
                     if (_quirkFlash > 0) c = Mul(Colors.White, 0.85);
                     else if (_spark.TryGetValue(i, out var sf)) c = sf > 1 ? Colors.White : Mul(Colors.White, 0.55);   // bright spark, quick decay
                     else if (letter == _deadLetter) c = StripDim;                                                     // whole letter burned out
-                    else if (letter == _blinkLetter) c = (f / 5 % 2 == 0) ? Mul(FromHue((i * 12) % 360), 0.55) : StripDim;   // whole letter blinking
-                    else if (_quirk.TryGetValue(i, out var qf)) c = (qf % 2 == 0) ? Mul(FromHue((i * 37) % 360), 1.0) : StripDim;   // dying-bulb flicker
+                    else if (letter == _blinkLetter) c = (f / 5 % 2 == 0) ? Mul(WarmGlow(0.7), 0.85) : StripDim;   // whole letter blinking
+                    else if (_quirk.TryGetValue(i, out var qf)) c = (qf % 2 == 0) ? WarmGlow(0.9) : StripDim;   // dying-bulb flicker
                 }
                 ((SolidColorBrush)_frontDots[i].Background).Color = c;   // reuse brush (no per-frame allocation)
             }
@@ -377,6 +379,13 @@ namespace SkillGameWpf
             else if (h < 180) { r = 0; g = 1; b = x; } else if (h < 240) { r = 0; g = x; b = 1; }
             else if (h < 300) { r = x; g = 0; b = 1; } else { r = 1; g = 0; b = x; }
             return Color.FromRgb((byte)(r * 255), (byte)(g * 255), (byte)(b * 255));
+        }
+
+        // Warm incandescent marquee tone: t 0..1 from dim ember to bright warm-white (maple glow, never rainbow).
+        private static Color WarmGlow(double t)
+        {
+            t = Math.Max(0, Math.Min(1, t));
+            return Color.FromRgb((byte)(200 + 55 * t), (byte)(120 + 112 * t), (byte)(24 + 152 * t));
         }
 
         // The coordinator's real engine (wired to the FT232H lamps/sounds) takes over the DEMO button.

@@ -17,12 +17,13 @@ namespace SkillGameWpf
     // section, and click any block to read its theory of operation (and see your own schematic image if you add one).
     public partial class SchematicsView : UserControl
     {
-        private static readonly Color Controller = Color.FromRgb(0x33, 0xC9, 0xFF);
-        private static readonly Color Inputs = Color.FromRgb(0x2F, 0xE0, 0x8C);
-        private static readonly Color Outputs = Color.FromRgb(0xE7, 0xA9, 0x1D);
-        private static readonly Color Lighting = Color.FromRgb(0xB4, 0x5A, 0xE0);
-        private static readonly Color Power = Color.FromRgb(0xE2, 0x49, 0x3C);
-        private static readonly Color Information = Color.FromRgb(0x9A, 0xA7, 0xBD);   // slate — reference/doc blocks, not part of the wired system
+        // One warm wood-and-brass family — groups stay distinguishable but read as a set, not a rainbow.
+        private static readonly Color Controller = Color.FromRgb(0x6E, 0x9E, 0x8A);    // aged copper patina
+        private static readonly Color Inputs = Color.FromRgb(0x97, 0xA9, 0x5E);        // muted olive
+        private static readonly Color Outputs = Color.FromRgb(0xD7, 0xA3, 0x3C);       // antique brass
+        private static readonly Color Lighting = Color.FromRgb(0xBE, 0x8A, 0x5E);      // warm bronze
+        private static readonly Color Power = Color.FromRgb(0xC2, 0x5A, 0x4C);         // oxblood
+        private static readonly Color Information = Color.FromRgb(0xA7, 0x95, 0x7C);   // warm taupe — reference/doc blocks, not part of the wired system
 
         // Drop your own schematic images here as <key>.png / .jpg to show them on a block's detail page.
         private const string SchemDir = @"C:\SkillGame\Schematics";
@@ -662,7 +663,7 @@ namespace SkillGameWpf
 
                     var card = new Border
                     {
-                        Width = 400, MinHeight = 340, Background = new SolidColorBrush(Color.FromRgb(0x12, 0x14, 0x1C)),
+                        Width = 400, MinHeight = 340, Background = new SolidColorBrush(Color.FromRgb(0x1A, 0x12, 0x0B)),
                         BorderBrush = accent, BorderThickness = new Thickness(1.5), CornerRadius = new CornerRadius(16),
                         HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center,
                         RenderTransformOrigin = new Point(0.5, 0.5), Child = sp,
