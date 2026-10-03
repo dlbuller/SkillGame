@@ -4,7 +4,7 @@ Every released version and what changed. The in-app updater (Service → Check f
 shows these notes before installing. Cut a new release with `tools/publish-update.ps1`.
 
 ## Unreleased
-- **11 UI themes** (Settings → Theme): Classy, Fun, Plain, Blackout, Vintage, Maple, Midnight, Synthwave, Lava, Circuit, Galaxy — each reskins the whole UI and the playfield art.
+- **12 UI themes** (Settings → Theme): Classy, Fun, Plain, Blackout, Vintage, Maple, Midnight, Synthwave, Lava, Circuit, Galaxy, Ruby — each reskins the whole UI and the playfield art.
 - **Original wood playfield** replaces the Bally artwork (same rail/hole layout, so coin paths are unchanged).
 - **Updater hardened** — unzip + copy + relaunch only; no PC reboot and no temp script (that pattern tripped endpoint security).
 - **Install any version** — the updater lists every release and installs forward or back, with the latest tagged; auto-checks on boot + every 6 h.

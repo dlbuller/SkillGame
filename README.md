@@ -40,7 +40,7 @@ The player rolls a physical coin up the playfield. It rides the rails, skims the
 - 🔧 **Diagnostics** — a live switch map and lamp map, a one-touch **Self-Test** that lights every lamp / pulses the coils / sweeps the LED strip, per-lamp **Identify** blink, and **stuck-switch** detection that turns a tile solid red.
 - 📊 **Audits** — plays, wins, hits, high scores and time played, watched over by the auditor gremlin. Demo/attract games are excluded, so the numbers only count real play.
 - 🛠️ **Service** — a single-screen operator console for volume, quiet hours, tilt sensitivity and the rest.
-- 🎨 **11 themes** — Classy, Fun, Plain, Blackout, Vintage, Maple, Midnight, Synthwave, Lava, Circuit, Galaxy; each reskins the whole UI *and* the playfield art. (Settings → Theme)
+- 🎨 **12 themes** — Classy, Fun, Plain, Blackout, Vintage, Maple, Midnight, Synthwave, Lava, Circuit, Galaxy, Ruby; each reskins the whole UI *and* the playfield art. (Settings → Theme)
 - ⬆️ **In-app software updates** — checks the WezeBull server, shows the release notes, and installs **any** version forward or back (Service → Check for Updates); it flags new versions on boot. Updates are unzip-and-copy + relaunch — no PC reboot.
 - 🗺️ **Interactive schematic page** — a clickable system diagram with crossing-free animated wiring, plus one-tap access to the BOM, fuses, system hookup, full schematic, FT232H pinout and a 3D board viewer.
 - 👻 **Attract / demo mode** — with no boards attached the app plays itself, so you can see the whole thing run on a laptop.
@@ -57,11 +57,11 @@ The player rolls a physical coin up the playfield. It rides the rails, skims the
 
 ## Themes
 
-Pick a look in **Settings → Theme**. Each of the **11 themes** reskins the whole UI *and* the playfield art — and every board below is geometry-matched to the original, so the coin paths never move:
+Pick a look in **Settings → Theme**. Each of the **12 themes** reskins the whole UI *and* the playfield art — and every board below is geometry-matched to the original, so the coin paths never move:
 
 ![SkillGame themes](docs/themes.png)
 
-**Classy** (walnut &amp; brass, the default) · **Fun** (arcade neon) · **Plain** (cool slate) · **Blackout** (OLED black &amp; amber) · **Vintage** (the 1949 look) · **Maple** · **Midnight** (navy &amp; chrome) · **Synthwave** · **Lava** · **Circuit** · **Galaxy**.
+**Classy** (walnut &amp; brass, the default) · **Fun** (arcade neon) · **Plain** (cool slate) · **Blackout** (OLED black &amp; amber) · **Vintage** (the 1949 look) · **Maple** · **Midnight** (navy &amp; chrome) · **Synthwave** · **Lava** · **Circuit** · **Galaxy** · **Ruby** (garnet &amp; gold).
 
 ## Hardware
 
