@@ -130,6 +130,7 @@ namespace SkillGameWpf
                 _scopeTimer.Start();
                 _diagLoaded = true;
                 ApplyGremlin();
+                ApplyBoardGating(_lastPresent);   // reflect current board presence on the hardware-test controls
             };
             Unloaded += (s, e) =>
             {
@@ -633,6 +634,28 @@ namespace SkillGameWpf
             _lastPresent = present;
             bool allPresent = present.Length >= 4 && present[0] && present[1] && present[2] && present[3];
             UpdateBotBoardState(present, allPresent);
+            ApplyBoardGating(present);
+        }
+
+        // Disable each hardware test whose board is absent: GPIO3 drives the 100-400 reels, Winner/Game-Over and both
+        // lock coils; GPIO4 drives the 10-90 lamps, Tilt and the LED strip. Whole-backglass lamp tests need both boards.
+        private void ApplyBoardGating(bool[] present)
+        {
+            bool g3 = present != null && present.Length > 2 && present[2];
+            bool g4 = present != null && present.Length > 3 && present[3];
+            bool lamps = g3 && g4;
+            static void Gate(FrameworkElement el, bool on) { el.IsEnabled = on; el.Opacity = on ? 1.0 : 0.4; }
+            Gate(PatternHost, lamps); PatternCap.Opacity = lamps ? 1.0 : 0.4;
+            Gate(BulbTestBtn, lamps);
+            Gate(SolenoidGroup, g3);
+            Gate(LedGroup, g4);
+            Gate(IdentifyBtn, g3 || g4);
+            Gate(LampHundredsHost, g3);
+            Gate(LampTensHost, g4);
+            // Stop anything already running on a board that just dropped.
+            if (!lamps) { _lamps.StopLampPattern(); SetActivePattern(null); if (_coord?.BulbRunning == true) { _coord.StopBulbTest(); ResetButtonLook(BulbTestBtn); } }
+            if (!g3) ClearSolenoidLatches(true);
+            if (!g4) _coord?.LedOff();
         }
 
         private bool _botSad, _celebrating, _allMissing;

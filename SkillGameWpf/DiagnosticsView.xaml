@@ -61,7 +61,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="⚠" FontSize="16" Foreground="{DynamicResource GoldBrush}" VerticalAlignment="Center"/>
                 <TextBlock Margin="10,0,0,0" VerticalAlignment="Center" Foreground="#E9CE86" FontSize="13"
-                           Text="No FT232H boards detected — hardware tests are disabled. On-screen lamp previews still work."/>
+                           Text="No FT232H boards detected — each board's tests are disabled until that board is connected."/>
             </StackPanel>
         </Border>
 
@@ -186,8 +186,8 @@
                     <StackPanel>
                         <TextBlock Text="OUTPUT TESTS" Style="{StaticResource Caption}" Foreground="{StaticResource PurpleBrush}"/>
 
-                        <TextBlock Text="LAMP PATTERNS" Style="{StaticResource GroupCap}" Margin="0,10,0,8"/>
-                        <UniformGrid Columns="2">
+                        <TextBlock x:Name="PatternCap" Text="LAMP PATTERNS" Style="{StaticResource GroupCap}" Margin="0,10,0,8"/>
+                        <UniformGrid x:Name="PatternHost" Columns="2">
                             <Button Content="CHASE"      Style="{StaticResource PillButton}" Margin="0,0,4,6" Click="Pattern_Click" Tag="chase"/>
                             <Button Content="INSIDE-OUT" Style="{StaticResource PillButton}" Margin="4,0,0,6" Click="Pattern_Click" Tag="inout"/>
                             <Button Content="SWEEP"      Style="{StaticResource PillButton}" Margin="0,0,4,6" Click="Pattern_Click" Tag="sweep"/>
@@ -200,15 +200,18 @@
                         <Button x:Name="BulbTestBtn" Content="BULB TEST (all lamps)" Style="{StaticResource PillButton}" HorizontalAlignment="Stretch" Click="Hw_Click" Tag="bulb"
                                 ToolTip="Fire each backglass lamp in turn to spot a dead bulb (previews on the map; drives real lamps with the boards connected)."/>
 
-                        <!-- These drive the FT232H outputs, so they're disabled until all four boards are connected. -->
+                        <!-- Each group is gated on the board that drives it: solenoids + reels/Winner/Game-Over = GPIO3, LED strip = GPIO4. -->
                         <StackPanel x:Name="HwOnlyPanel">
-                            <TextBlock Text="SOLENOIDS" Style="{StaticResource GroupCap}"/>
-                            <UniformGrid Columns="2">
-                                <Button Content="WINNER LOCK" Style="{StaticResource PillButton}" Margin="0,0,3,0" Click="Solenoid_Click" Tag="WinnerLock" ToolTip="Pulse the winner-lock solenoid — its LED lights while energized."/>
-                                <Button Content="COIN LOCK"   Style="{StaticResource PillButton}" Margin="3,0,0,0" Click="Solenoid_Click" Tag="CoinLock"   ToolTip="Pulse the coin-lock solenoid — its LED lights while energized."/>
-                            </UniformGrid>
-                            <UniformGrid x:Name="SolenoidHost" Columns="2" Margin="0,8,0,0"/>
+                            <StackPanel x:Name="SolenoidGroup">
+                                <TextBlock Text="SOLENOIDS" Style="{StaticResource GroupCap}"/>
+                                <UniformGrid Columns="2">
+                                    <Button Content="WINNER LOCK" Style="{StaticResource PillButton}" Margin="0,0,3,0" Click="Solenoid_Click" Tag="WinnerLock" ToolTip="Pulse the winner-lock solenoid — its LED lights while energized."/>
+                                    <Button Content="COIN LOCK"   Style="{StaticResource PillButton}" Margin="3,0,0,0" Click="Solenoid_Click" Tag="CoinLock"   ToolTip="Pulse the coin-lock solenoid — its LED lights while energized."/>
+                                </UniformGrid>
+                                <UniformGrid x:Name="SolenoidHost" Columns="2" Margin="0,8,0,0"/>
+                            </StackPanel>
 
+                            <StackPanel x:Name="LedGroup">
                             <TextBlock Text="LED STRIP" Style="{StaticResource GroupCap}"/>
                             <UniformGrid Columns="3">
                                 <Button Content="RED" Style="{StaticResource PillButton}" Margin="0,0,3,6" Click="Led_Click" Tag="Red"    ToolTip="Light the whole strip red — click again to turn it off."/>
@@ -237,6 +240,7 @@
                             <Border CornerRadius="8" Background="#20000000" BorderBrush="#1EFFFFFF" BorderThickness="1" Padding="8,7" Margin="0,8,0,0">
                                 <WrapPanel x:Name="LedDotHost" HorizontalAlignment="Center"/>
                             </Border>
+                            </StackPanel>
                         </StackPanel>
 
                         <TextBlock Text="SOUND" Style="{StaticResource GroupCap}"/>
