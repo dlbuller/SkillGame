@@ -710,6 +710,13 @@ namespace SkillGameWpf
             EnsureBotTransform();
             Dispatcher.BeginInvoke(new Action(() =>
             {
+                // All boards gone = the tombstone shows (it sticks ~46px above him), so park him on the floor where
+                // the stone has headroom and clears the DIAGNOSTICS title instead of freezing wherever he roamed.
+                if (allMissing)
+                {
+                    double h = BotLayer.ActualHeight > 50 ? BotLayer.ActualHeight : 820;
+                    cx = 48; cy = Math.Max(60, h - 130);
+                }
                 _botMove.BeginAnimation(TranslateTransform.XProperty, null);
                 _botMove.BeginAnimation(TranslateTransform.YProperty, null);
                 _botMove.X = cx; _botMove.Y = cy; _botX = cx; _botY = cy;   // sad / knocked out on the spot, not back at the start
