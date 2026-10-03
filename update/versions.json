@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.1.0",
+    "date": "2026-10-03",
+    "zip": "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/SkillGame-1.1.0.zip",
+    "sha256": "c8decd426a1829553f52c4cbf78c8776ba13ec85ad6681ff620d472e374523db",
+    "size": 2807977,
+    "notes": "SkillGame v1.1.0\n\n- 12 UI themes (Settings -> Theme) - each reskins the whole app AND the playfield.\n- Original wood playfield replaces the old board (same layout).\n- Updater: install ANY version, forward or back; unzip + copy + relaunch, no PC reboot.\n- Diagnostics: a board's hardware tests are disabled when that board is missing.\n- Warm maple marquee (no rainbow); fixed the boards-missing tombstone clipping."
+  },
+  {
     "version": "1.0.1",
     "date": "2026-10-01",
     "zip": "https://raw.githubusercontent.com/dlbuller/SkillGame/main/update/SkillGame-1.0.1.zip",
